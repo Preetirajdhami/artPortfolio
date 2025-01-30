@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/connectdb.js"; 
-import authRoutes from "./routes/authRoutes.js";
+import  adminRoutes from "./routes/adminRoutes.js"
 
 dotenv.config();
 const app = express();
@@ -11,10 +11,16 @@ const app = express();
 connectDB();
 
 app.use(express.json());
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+const corsOptions = {
+    origin: process.env.FRONTEND_HOST,
+    credentials: true,
+    optionsSuccessStatus: 200,
+  };
+  app.use(cors(corsOptions));
+
 app.use(cookieParser());
 
-app.use("/api/auth", authRoutes);
+app.use("/api/admin", adminRoutes);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
