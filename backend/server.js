@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/connectdb.js"; 
 import  adminRoutes from "./routes/adminRoutes.js"
+import galleryRoutes from "./routes/galleryRoutes.js"
 
 dotenv.config();
 const app = express();
@@ -19,8 +20,15 @@ const corsOptions = {
   app.use(cors(corsOptions));
 
 app.use(cookieParser());
+app.use((req, res, next) => {
+    console.log(`Incoming Request: ${req.method} ${req.url}`);
+    next();
+});
+
 
 app.use("/api/admin", adminRoutes);
+app.use("/api/gallery", galleryRoutes);
+
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
