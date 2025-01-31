@@ -39,22 +39,21 @@ class GalleryController {
         }
     }
 
-    // Get All Images (With Optional Filtering by Category)
+    
     static async getAllImages(req, res) {
         try {
             const { category, medium } = req.query;
             const filter = {};
 
-            // Filter by category if provided
             if (category) {
                 filter.category = category;
             }
-            // Filter by medium if provided
+           
             if (medium) {
                 filter.medium = medium;
             }
 
-            const images = await GalleryModel.find(filter); // Find images based on filters
+            const images = await GalleryModel.find(filter);
             res.status(200).json(images);
         } catch (error) {
             res.status(500).json({ error: error.message });
