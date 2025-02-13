@@ -2,6 +2,8 @@
 import Image from 'next/image';
 import { useState, useRef } from 'react';
 import { FaArrowLeft, FaArrowRight, FaTimes } from 'react-icons/fa';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useGesture } from '@use-gesture/react'; // For swipe gestures
 
 type ImageType = {
   src: string;
@@ -55,6 +57,46 @@ const Gallery = () => {
     }
   };
 
+  // Handle swipe gestures
+  const bindSwipe = useGesture({
+    onDragEnd: ({ direction: [dx] }) => {
+      if (selectedImage) {
+        const totalImages = galleryData[selectedImage.categoryIndex].images.length;
+        if (dx > 0) {
+          // Swipe right: go to previous image
+          setSelectedImage((prev) => ({
+            ...prev!,
+            imageIndex: (prev!.imageIndex - 1 + totalImages) % totalImages,
+          }));
+        } else if (dx < 0) {
+          // Swipe left: go to next image
+          setSelectedImage((prev) => ({
+            ...prev!,
+            imageIndex: (prev!.imageIndex + 1) % totalImages,
+          }));
+        }
+      }
+    },
+  });
+
+  // Animation variants
+  const lightboxVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+    exit: { opacity: 0 },
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, x: 100 },
+    visible: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -100 },
+  };
+
+  const captionVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
     <div className="bg-[#F6F1EB] min-h-screen py-12">
       <div className="container mx-auto px-4">
@@ -75,7 +117,7 @@ const Gallery = () => {
               {/* Image Row (Scrollable) */}
               <div
                 ref={(el) => (scrollRefs.current[sectionIndex] = el)}
-                className="flex overflow-x-auto space-x-4 scrollbar-hide scroll-smooth px-12" // Added padding for scroll buttons
+                className="flex overflow-x-auto space-x-4 scrollbar-hide scroll-smooth px-12"
               >
                 {section.images.map((image, imageIndex) => (
                   <div
@@ -105,68 +147,96 @@ const Gallery = () => {
           </section>
         ))}
 
-        {/* Lightbox (Fullscreen Image Viewer) */}
-        {selectedImage && (
-          <div className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center">
-            <div className="relative w-full h-full flex items-center justify-center">
-              {/* Close Button */}
-              <button
-                className="absolute top-4 right-4 text-white text-2xl hover:text-gray-300"
-                onClick={() => setSelectedImage(null)}
-              >
-                <FaTimes />
-              </button>
+        {/* Lightbox with Animations */}
+        <AnimatePresence>
+          {selectedImage && (
+            <motion.div
+              className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center"
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={lightboxVariants}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="relative w-full h-full flex items-center justify-center">
+                {/* Close Button */}
+                <button
+                  className="absolute top-4 right-4 text-white text-2xl hover:text-gray-300 z-50"
+                  onClick={() => setSelectedImage(null)}
+                >
+                  <FaTimes />
+                </button>
 
-              {/* Navigation Arrows */}
-              <button
-                className="absolute left-4 text-white text-4xl hover:text-gray-300"
-                onClick={() =>
-                  setSelectedImage((prev) => {
-                    if (!prev) return prev;
-                    const totalImages = galleryData[prev.categoryIndex].images.length;
-                    return { ...prev, imageIndex: (prev.imageIndex - 1 + totalImages) % totalImages };
-                  })
-                }
-              >
-                <FaArrowLeft />
-              </button>
+                {/* Navigation Arrows */}
+                <button
+                  className="absolute left-4 text-white text-4xl hover:text-gray-300 z-50"
+                  onClick={() =>
+                    setSelectedImage((prev) => {
+                      if (!prev) return prev;
+                      const totalImages = galleryData[prev.categoryIndex].images.length;
+                      return { ...prev, imageIndex: (prev.imageIndex - 1 + totalImages) % totalImages };
+                    })
+                  }
+                >
+                  <FaArrowLeft />
+                </button>
 
-              <button
-                className="absolute right-4 text-white text-4xl hover:text-gray-300"
-                onClick={() =>
-                  setSelectedImage((prev) => {
-                    if (!prev) return prev;
-                    const totalImages = galleryData[prev.categoryIndex].images.length;
-                    return { ...prev, imageIndex: (prev.imageIndex + 1) % totalImages };
-                  })
-                }
-              >
-                <FaArrowRight />
-              </button>
+                <button
+                  className="absolute right-4 text-white text-4xl hover:text-gray-300 z-50"
+                  onClick={() =>
+                    setSelectedImage((prev) => {
+                      if (!prev) return prev;
+                      const totalImages = galleryData[prev.categoryIndex].images.length;
+                      return { ...prev, imageIndex: (prev.imageIndex + 1) % totalImages };
+                    })
+                  }
+                >
+                  <FaArrowRight />
+                </button>
 
-              {/* Image Display */}
-              <div className="max-w-4xl w-full h-full flex flex-col items-center justify-center">
-                <Image
-                  src={galleryData[selectedImage.categoryIndex].images[selectedImage.imageIndex].src}
-                  alt={galleryData[selectedImage.categoryIndex].images[selectedImage.imageIndex].title}
-                  width={1200}
-                  height={800}
-                  className="max-w-full max-h-[80vh] object-contain"
-                />
+                {/* Responsive Image & Caption Container */}
+                <motion.div
+                  className="max-w-6xl w-full h-full flex flex-col md:flex-row items-center justify-center p-4 md:p-8 gap-6 md:gap-8"
+                  variants={captionVariants}
+                >
+                  {/* Image with Animation and Swipe Gestures */}
+                  <motion.div
+                    key={selectedImage.imageIndex}
+                    className="flex-1 flex items-center justify-center"
+                    variants={imageVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    transition={{ duration: 0.3 }}
+                    {...bindSwipe()} // Add swipe gestures here
+                  >
+                    <Image
+                      src={galleryData[selectedImage.categoryIndex].images[selectedImage.imageIndex].src}
+                      alt={galleryData[selectedImage.categoryIndex].images[selectedImage.imageIndex].title}
+                      width={800}
+                      height={600}
+                      className="max-w-full max-h-[60vh] md:max-h-[80vh] object-contain"
+                    />
+                  </motion.div>
 
-                {/* Caption */}
-                <div className="mt-4 text-center text-white">
-                  <h3 className="text-2xl font-bold">
-                    {galleryData[selectedImage.categoryIndex].images[selectedImage.imageIndex].title}
-                  </h3>
-                  <p className="text-lg mt-2">
-                    {galleryData[selectedImage.categoryIndex].images[selectedImage.imageIndex].description}
-                  </p>
-                </div>
+                  {/* Scrollable Caption */}
+                  <motion.div
+                    className="flex-1 p-4 md:p-8 text-white overflow-y-auto max-h-[40vh] md:max-h-[70vh]"
+                    variants={captionVariants}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                      {galleryData[selectedImage.categoryIndex].images[selectedImage.imageIndex].title}
+                    </h3>
+                    <p className="text-base md:text-lg">
+                      {galleryData[selectedImage.categoryIndex].images[selectedImage.imageIndex].description}
+                    </p>
+                  </motion.div>
+                </motion.div>
               </div>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
