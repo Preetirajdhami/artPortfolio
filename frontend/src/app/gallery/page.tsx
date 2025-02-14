@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useState, useRef } from 'react';
 import { FaArrowLeft, FaArrowRight, FaTimes } from 'react-icons/fa';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useGesture } from '@use-gesture/react'; // For swipe gestures
+import { useDrag } from '@use-gesture/react'; // For swipe gestures
 
 type ImageType = {
   src: string;
@@ -58,26 +58,23 @@ const Gallery = () => {
   };
 
   // Handle swipe gestures
-  const bindSwipe = useGesture({
-    onDragEnd: ({ direction: [dx] }) => {
-      if (selectedImage) {
-        const totalImages = galleryData[selectedImage.categoryIndex].images.length;
-        if (dx > 0) {
-          // Swipe right: go to previous image
-          setSelectedImage((prev) => ({
-            ...prev!,
-            imageIndex: (prev!.imageIndex - 1 + totalImages) % totalImages,
-          }));
-        } else if (dx < 0) {
-          // Swipe left: go to next image
-          setSelectedImage((prev) => ({
-            ...prev!,
-            imageIndex: (prev!.imageIndex + 1) % totalImages,
-          }));
-        }
+  const bindSwipe = useDrag(({ swipe: [swipeX] }) => {
+    if (selectedImage) {
+      const totalImages = galleryData[selectedImage.categoryIndex].images.length;
+      if (swipeX > 0) {
+        setSelectedImage((prev) => ({
+          ...prev!,
+          imageIndex: (prev!.imageIndex - 1 + totalImages) % totalImages,
+        }));
+      } else if (swipeX < 0) {
+        setSelectedImage((prev) => ({
+          ...prev!,
+          imageIndex: (prev!.imageIndex + 1) % totalImages,
+        }));
       }
-    },
+    }
   });
+  
 
   // Animation variants
   const lightboxVariants = {
