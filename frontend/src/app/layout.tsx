@@ -9,9 +9,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-custom-bg">
+      <body className="bg-background text-primary min-h-screen flex flex-col">
         <Navbar />
-        {children}
+        <main className="flex-grow">{children}</main>
         <Footer /> 
       </body>
     </html>

@@ -7,8 +7,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'custom-bg': '#F6F1EB', // Your custom background color
-        'custom-accent': '#DAC0A3', // Your custom accent color
+        'primary': '#354259',    // Deep navy
+        'accent': '#CDC2AE',     // Warm taupe
+        'background': '#FAF0E6', // Light linen
+        'text': '#B2B2B2',      // Soft gray
       },
     },
   },

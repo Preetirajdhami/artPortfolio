@@ -19,17 +19,17 @@ const Navbar = () => {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <nav className="bg-[#F6F1EB] shadow-md relative">
+    <nav className="bg-primary shadow-md relative">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo or Brand Name */}
-        <Link href="/" className="text-xl font-bold text-gray-600">
+        <Link href="/" className="text-xl font-bold text-background hover:text-accent transition-colors">
           Preeti Arts
         </Link>
 
         {/* Hamburger Menu Icon (for small screens) */}
         <button
           onClick={toggleMenu}
-          className="block md:hidden text-gray-800 focus:outline-none"
+          className="block md:hidden text-background hover:text-accent focus:outline-none transition-colors"
         >
           <svg
             className="w-6 h-6"
@@ -60,25 +60,25 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-6">
           <Link 
             href="/" 
-            className={`${isActive('/') ? 'text-[#DAC0A3] font-bold' : 'text-[#2B391F] font-bold'} hover:text-gray-900`}
+            className={`${isActive('/') ? 'text-accent' : 'text-background'} font-bold hover:text-accent transition-colors`}
           >
             Home
           </Link>
           <Link 
             href="/gallery" 
-            className={`${isActive('/gallery') ? 'text-[#DAC0A3] font-bold' : 'text-[#2B391F] font-bold'} hover:text-gray-900`}
+            className={`${isActive('/gallery') ? 'text-accent' : 'text-background'} font-bold hover:text-accent transition-colors`}
           >
             Gallery
           </Link>
           <Link 
             href="/commission" 
-            className={`${isActive('/commission') ? 'text-[#DAC0A3] font-bold' : 'text-[#2B391F] font-bold'} hover:text-gray-900`}
+            className={`${isActive('/commission') ? 'text-accent' : 'text-background'} font-bold hover:text-accent transition-colors`}
           >
             Commission 
           </Link>
           <Link 
             href="/contact" 
-            className={`${isActive('/contact') ? 'text-[#DAC0A3] font-bold' : 'text-[#2B391F] font-bold'} hover:text-gray-900`}
+            className={`${isActive('/contact') ? 'text-accent' : 'text-background'} font-bold hover:text-accent transition-colors`}
           >
             Contact
           </Link>
