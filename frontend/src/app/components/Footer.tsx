@@ -3,7 +3,7 @@ import { FaInstagram, FaFacebook, FaTiktok, FaEnvelope } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="bg-primary py-8">
+    <footer className="bg-[#F6F1EB] py-8 border-t border-gray-400">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center space-y-4">
           {/* Social Media Icons */}
@@ -48,7 +48,7 @@ const Footer = () => {
           </div>
 
           {/* Footer Text */}
-          <p className="text-sm text-background">
+          <p className="text-sm text-gray-600">
             Copyright &copy; 2025 Preeti Arts. All Rights Reserved.
           </p>
         </div>
