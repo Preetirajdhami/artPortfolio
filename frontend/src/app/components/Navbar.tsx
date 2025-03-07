@@ -19,10 +19,10 @@ const Navbar = () => {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <nav className="bg-primary shadow-md relative">
+    <nav className="bg-white shadow-md relative">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo or Brand Name */}
-        <Link href="/" className="text-xl font-bold text-background hover:text-accent transition-colors">
+        <Link href="/" className="text-xl font-bold text-gray-600">
           Preeti Arts
         </Link>
 
@@ -60,25 +60,25 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-6">
           <Link 
             href="/" 
-            className={`${isActive('/') ? 'text-accent' : 'text-background'} font-bold hover:text-accent transition-colors`}
+            className={`${isActive('/') ? 'text-[#DAC0A3] font-bold' : 'text-[#2B391F] font-bold'} hover:text-[#DAC0A3]`}
           >
             Home
           </Link>
           <Link 
             href="/gallery" 
-            className={`${isActive('/gallery') ? 'text-accent' : 'text-background'} font-bold hover:text-accent transition-colors`}
+            className={`${isActive('/gallery') ? 'text-[#DAC0A3] font-bold' : 'text-[#2B391F] font-bold'} hover:text-[#DAC0A3]`}
           >
             Gallery
           </Link>
           <Link 
             href="/commission" 
-            className={`${isActive('/commission') ? 'text-accent' : 'text-background'} font-bold hover:text-accent transition-colors`}
+            className={`${isActive('/commission') ? 'text-[#DAC0A3] font-bold' : 'text-[#2B391F] font-bold'} hover:text-[#DAC0A3]`}
           >
             Commission 
           </Link>
           <Link 
             href="/contact" 
-            className={`${isActive('/contact') ? 'text-accent' : 'text-background'} font-bold hover:text-accent transition-colors`}
+            className={`${isActive('/contact') ? 'text-[#DAC0A3] font-bold' : 'text-[#2B391F] font-bold'} hover:text-[#DAC0A3]`}
           >
             Contact
           </Link>
