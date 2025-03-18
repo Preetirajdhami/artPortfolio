@@ -31,7 +31,7 @@ const CommissionSchema = new mongoose.Schema(
       type: String,
       required: true,
       enum: ["A5", "A4", "A3", "A2"]
-    },
+    }, 
     shippingDestination: {
       type: String,
       required: true,

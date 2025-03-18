@@ -8,6 +8,7 @@ build/
 
 # Environment files
 .env
+.DS_Store
 
 # Logs
 npm-debug.log

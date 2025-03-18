@@ -1,18 +1,22 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 
-export default {
+const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/**/*.{js,ts,jsx,tsx,mdx}', // Adjust this based on your project structure
   ],
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        'primary': '#354259',    // Deep navy
+        'accent': '#CDC2AE',     // Warm taupe
+        'background': '#FAF0E6', // Light linen
+        'text': '#B2B2B2',      // Soft gray
       },
     },
   },
-  plugins: [],
-} satisfies Config;
+  plugins: [
+    require('tailwind-scrollbar'), // Add the scrollbar plugin
+  ],
+};
+
+export default config;
