@@ -1,5 +1,5 @@
 import v2 from "cloudinary";
-import fs from "fs"
+
 
 const cloudinary = v2.v2
 

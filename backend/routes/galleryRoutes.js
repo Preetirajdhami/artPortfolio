@@ -13,8 +13,8 @@ router.post("/upload", (req, res, next) => {
             console.error("Multer Error:", err.message);
             return res.status(400).json({ error: err.message });
         }
-        console.log(" Multer upload successful");
-        next();
+        console.log("Multer upload successful");
+        return res.status(200).json({ message: "Image uploaded successfully!", file: req.file });
     });
 }, GalleryController.uploadImage);
 
