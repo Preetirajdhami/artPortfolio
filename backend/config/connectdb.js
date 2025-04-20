@@ -5,23 +5,15 @@ import dotenv from "dotenv";
 dotenv.config(); 
 
 const connectDB = async () => {
-    try {
-        const DATABASE_URL = process.env.DATABASE_URL;
-        if (!DATABASE_URL) {
-            throw new Error(" DATABASE_URL is not defined in .env file");
-        }
-
-        const DB_OPTIONS = {
-            dbName: "artPortfolio"
-           
-        };
-
-        await mongoose.connect(DATABASE_URL, DB_OPTIONS);
-        console.log("MongoDB Connected Successfully");
-    } catch (error) {
-        console.error("MongoDB Connection Error:", error.message);
-        process.exit(1);
+    try{
+        console.log(process.env.DATABASE_URL);
+       const connectionInstance = await mongoose.connect(`${process.env.DATABASE_URL}/Preeti`);
+       console.log(`MONGODB connected !! DB HOST ${connectionInstance}`);
     }
+    catch(error){
+        console.log("MONGO DB connection failed:  ",error);
+        process.exit(1);
+    }   
 };
 
 export default connectDB;
