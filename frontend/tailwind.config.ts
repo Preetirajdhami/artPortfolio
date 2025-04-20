@@ -7,10 +7,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'primary': '#354259',    // Deep navy
+        'primary': '#4F6F52',    // Deep green
         'accent': '#CDC2AE',     // Warm taupe
-        'background': '#FAF0E6', // Light linen
-        'text': '#B2B2B2',      // Soft gray
+        'background': '#ECE3CE', // Light linen
+        'text': '#3A4D39',      // Soft gray
       },
     },
   },
