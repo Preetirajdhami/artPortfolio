@@ -8,7 +8,7 @@ const config: Config = {
     extend: {
       colors: {
         'primary': '#4F6F52',    // Deep green
-        'accent': '#CDC2AE',     // Warm taupe
+        // 'accent': '#CDC2AE',     // Warm taupe
         'background': '#ECE3CE', // Light linen
         'text': '#3A4D39',      // Soft gray
       },
