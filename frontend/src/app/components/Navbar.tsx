@@ -20,7 +20,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-primary shadow-md relative">
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div className=" mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo or Brand Name */}
         <Link href="/" className="text-xl font-bold text-background hover:text-accent transition-colors">
           Preeti Arts
@@ -60,13 +60,13 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-6">
           <Link 
             href="/" 
-            className={`${isActive('/') ? 'text-accent' : 'text-background'} font-bold hover:text-accent transition-colors`}
+            className={`${isActive('/') ? '' : 'text-background'} font-bold hover:text-accent transition-colors`}
           >
             Home
           </Link>
           <Link 
             href="/gallery" 
-            className={`${isActive('/gallery') ? 'text-accent' : 'text-background'} font-bold hover:text-accent transition-colors`}
+            className={`${isActive('/gallery') ? '' : 'text-background'} font-bold hover:text-accent transition-colors`}
           >
             Gallery
           </Link>
