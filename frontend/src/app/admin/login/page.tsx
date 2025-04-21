@@ -1,12 +1,14 @@
-"use client"; // Ensure it's a Client Component if using Next.js App Router
-
+"use client"
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,9 +27,10 @@ const AdminLogin = () => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log("Login Successful:", data); // Debugging purpose
+        console.log("Login Successful:", data); 
         localStorage.setItem("adminToken", data.token);
         alert("Login Successful!");
+        router.push("/admin/dashboard");
       } else {
         setError(data.message || "Something went wrong. Please try again.");
       }
