@@ -19,8 +19,10 @@ const Navbar = () => {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <nav className="bg-white shadow-md relative">
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+
+    <nav className="bg-primary shadow-md relative">
+      <div className=" mx-auto px-4 py-3 flex justify-between items-center">
+
         {/* Logo or Brand Name */}
         <Link href="/" className="text-xl font-bold text-gray-600">
           Preeti Arts
@@ -60,13 +62,18 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-6">
           <Link 
             href="/" 
+
             className={`${isActive('/') ? 'text-[#DAC0A3] font-bold' : 'text-[#2B391F] font-bold'} hover:text-[#DAC0A3]`}
+
           >
             Home
           </Link>
           <Link 
             href="/gallery" 
-            className={`${isActive('/gallery') ? 'text-[#DAC0A3] font-bold' : 'text-[#2B391F] font-bold'} hover:text-[#DAC0A3]`}
+
+            className={`${isActive('/gallery') ? '' : 'text-background'} font-bold hover:text-accent transition-colors`}
+
+
           >
             Gallery
           </Link>
