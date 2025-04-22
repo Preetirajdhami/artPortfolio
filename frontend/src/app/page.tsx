@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 export default function Home() {
   return (
     <div className="bg-background">
-      {/* Full-Screen Image Section */}
+     
       <div className="relative h-screen w-full">
-        {/* Background Image */}
+        
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url('/hero1.jpeg')" }}
@@ -15,7 +15,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-text bg-opacity-50"></div>
         </div>
 
-        {/* Animated hero content */}
+        
         <motion.div 
           className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white"
           initial={{ opacity: 0, y: 20 }}
@@ -41,10 +41,10 @@ export default function Home() {
         </motion.div>
       </div>
 
-      {/* About Me, Skills, and Mission Section */}
+
       <div className="container mx-auto px-4 py-12">
         <div className="flex flex-col gap-8">
-          {/* About Me */}
+        
           <motion.div 
             className="bg- p-6 rounded-lg shadow-lg flex flex-col md:flex-row items-center"
             initial={{ opacity: 0, x: -50 }}
@@ -52,14 +52,14 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            {/* Image first on small screens; text first on md screens */}
+            
             <motion.div 
               className="md:w-1/2 flex justify-center md:justify-end mt-6 md:mt-0 order-1 md:order-2"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             >
               <img
-                src="/preeti.jpg" // Replace with your image path
+                src="/preeti.jpg"
                 alt="About Me"
                 className="w-[300px] h-auto rounded-lg"
               />
@@ -88,7 +88,7 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Skills */}
+          
           <motion.div 
             className="bg-[#DAC0A3] p-6 rounded-lg shadow-lg flex flex-col md:flex-row items-center"
             initial={{ opacity: 0, x: 50 }}
@@ -102,7 +102,7 @@ export default function Home() {
               transition={{ duration: 0.3 }}
             >
               <img
-                src="/skills.jpg" // Replace with your image path
+                src="/skills.jpg" 
                 alt="Skills"
                 className="w-[300px] h-auto rounded-lg"
               />
@@ -131,7 +131,7 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Mission */}
+          
           <motion.div 
             className="bg-[#DAC0A3] p-6 rounded-lg shadow-lg flex flex-col md:flex-row items-center"
             initial={{ opacity: 0, x: -50 }}
@@ -139,7 +139,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            {/* Image first on small screens; text first on md screens */}
+
             <motion.div 
               className="md:w-1/2 flex justify-center md:justify-end mt-6 md:mt-0 order-1 md:order-2"
               whileHover={{ scale: 1.05 }}
