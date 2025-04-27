@@ -1,121 +1,142 @@
 "use client";
 import Link from 'next/link';
-import { useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const Navbar: React.FC = () => {
   const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const isActive = (path: string) => pathname === path;
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-
-  // Function to check active path
-  const isActive = (path: string) => pathname === path;
-
   return (
-    <nav className="bg-white shadow-md relative">
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        {/* Logo or Brand Name */}
-        <Link href="/" className="text-xl font-bold text-gray-600">
-          Preeti Arts
+    <nav className="bg-gray-50 py-4">
+      <div className="container mx-auto px-4 flex justify-between items-center">
+        <Link href="/" className="text-3xl font-serif text-gray-900">
+          PREETI ARTS
         </Link>
 
-        {/* Hamburger Menu Icon (for small screens) */}
-        <button
+        {/* Hamburger menu for mobile */}
+        <button 
+          className="md:hidden focus:outline-none" 
           onClick={toggleMenu}
-          className="block md:hidden text-background hover:text-accent focus:outline-none transition-colors"
+          aria-label="Toggle menu"
         >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+          <svg 
+            className="w-6 h-6 text-gray-900" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24" 
             xmlns="http://www.w3.org/2000/svg"
           >
             {isMenuOpen ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M6 18L18 6M6 6l12 12" 
               />
             ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M4 6h16M4 12h16M4 18h16" 
               />
             )}
           </svg>
         </button>
 
-        {/* Navigation Links (for larger screens) */}
-        <div className="hidden md:flex space-x-6">
-          <Link 
-            href="/" 
-            className={`${isActive('/') ? 'text-[#DAC0A3] font-bold' : 'text-[#2B391F] font-bold'} hover:text-[#DAC0A3]`}
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex space-x-8 items-center">
+          <Link
+            href="/"
+            className={`text-sm uppercase tracking-wider font-medium relative ${
+              isActive('/') 
+                ? 'text-gray-900 after:content-[""] after:absolute after:left-0 after:bottom-[-6px] after:h-0.5 after:w-full after:bg-gray-900' 
+                : 'text-gray-600 hover:text-gray-900'
+            } transition-colors`}
           >
             Home
           </Link>
-          <Link 
-            href="/gallery" 
-            className={`${isActive('/gallery') ? 'text-[#DAC0A3] font-bold' : 'text-[#2B391F] font-bold'} hover:text-[#DAC0A3]`}
+          <Link
+            href="/gallery"
+            className={`text-sm uppercase tracking-wider font-medium relative ${
+              isActive('/gallery') 
+                ? 'text-gray-900 after:content-[""] after:absolute after:left-0 after:bottom-[-6px] after:h-0.5 after:w-full after:bg-gray-900' 
+                : 'text-gray-600 hover:text-gray-900'
+            } transition-colors`}
           >
             Gallery
           </Link>
-          <Link 
-            href="/commission" 
-            className={`${isActive('/commission') ? 'text-[#DAC0A3] font-bold' : 'text-[#2B391F] font-bold'} hover:text-[#DAC0A3]`}
+          <Link
+            href="/commission"
+            className={`text-sm uppercase tracking-wider font-medium relative ${
+              isActive('/commission') 
+                ? 'text-gray-900 after:content-[""] after:absolute after:left-0 after:bottom-[-6px] after:h-0.5 after:w-full after:bg-gray-900' 
+                : 'text-gray-600 hover:text-gray-900'
+            } transition-colors`}
           >
-            Commission 
+            Commission
           </Link>
-          <Link 
-            href="/contact" 
-            className={`${isActive('/contact') ? 'text-[#DAC0A3] font-bold' : 'text-[#2B391F] font-bold'} hover:text-[#DAC0A3]`}
+          <Link
+            href="/contact"
+            className={`text-sm uppercase tracking-wider font-medium relative ${
+              isActive('/contact') 
+                ? 'text-gray-900 after:content-[""] after:absolute after:left-0 after:bottom-[-6px] after:h-0.5 after:w-full after:bg-gray-900' 
+                : 'text-gray-600 hover:text-gray-900'
+            } transition-colors`}
           >
             Contact
           </Link>
         </div>
       </div>
 
-      {/* Mobile Menu (for small screens) */}
+      {/* Mobile menu dropdown */}
       {isMenuOpen && (
-        <div className="md:hidden absolute right-0 top-12 bg-[#F6F1EB] shadow-lg rounded-lg m-2 z-50">
-          <Link 
-            href="/" 
-            onClick={closeMenu}
-            className={`block px-6 py-3 ${isActive('/') ? 'text-[#DAC0A3] font-bold' : 'text-gray-700 font-bold'} hover:bg-gray-100`}
-          >
-            Home
-          </Link>
-          <Link 
-            href="/gallery" 
-            onClick={closeMenu}
-            className={`block px-6 py-3 ${isActive('/gallery') ? 'text-[#DAC0A3] font-bold' : 'text-gray-700 font-bold'} hover:bg-gray-100`}
-          >
-            Gallery
-          </Link>
-          <Link 
-            href="/commission" 
-            onClick={closeMenu}
-            className={`block px-6 py-3 ${isActive('/commission') ? 'text-[#DAC0A3] font-bold' : 'text-gray-700 font-bold'} hover:bg-gray-100`}
-          >
-            Commission 
-          </Link>
-          <Link 
-            href="/contact" 
-            onClick={closeMenu}
-            className={`block px-6 py-3 ${isActive('/contact') ? 'text-[#DAC0A3] font-bold' : 'text-gray-700 font-bold'} hover:bg-gray-100`}
-          >
-            Contact
-          </Link>
+        <div className="md:hidden bg-gray-50 pt-2 pb-4 px-4">
+          <div className="flex flex-col space-y-4">
+            <Link
+              href="/"
+              className={`text-sm uppercase tracking-wider font-medium py-2 ${
+                isActive('/') ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-600'
+              }`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              href="/gallery"
+              className={`text-sm uppercase tracking-wider font-medium py-2 ${
+                isActive('/gallery') ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-600'
+              }`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Gallery
+            </Link>
+            <Link
+              href="/commission"
+              className={`text-sm uppercase tracking-wider font-medium py-2 ${
+                isActive('/commission') ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-600'
+              }`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Commission
+            </Link>
+            <Link
+              href="/contact"
+              className={`text-sm uppercase tracking-wider font-medium py-2 ${
+                isActive('/contact') ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-600'
+              }`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Contact
+            </Link>
+          </div>
         </div>
       )}
     </nav>
