@@ -14,13 +14,12 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-gray-50 py-4">
-      <div className="container mx-auto px-4 flex justify-between items-center">
-        <Link href="/" className="text-3xl font-serif text-gray-900">
+    <nav className="bg-background py-4 mt-8 w-full sticky top-0 z-10">
+      <div className="w-full flex justify-between items-center px-2 sm:px-4 lg:px-6 max-w-[1920px] mx-auto">
+        <Link href="/" className="ml-10 text-4xl font-serif text-gray-700">
           PREETI ARTS
         </Link>
 
-        {/* Hamburger menu for mobile */}
         <button 
           className="md:hidden focus:outline-none" 
           onClick={toggleMenu}
@@ -51,8 +50,7 @@ const Navbar: React.FC = () => {
           </svg>
         </button>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-8 items-center">
+        <div className="hidden md:flex space-x-12 items-center mr-10">
           <Link
             href="/"
             className={`text-sm uppercase tracking-wider font-medium relative ${
@@ -96,9 +94,8 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile menu dropdown */}
       {isMenuOpen && (
-        <div className="md:hidden bg-gray-50 pt-2 pb-4 px-4">
+        <div className="md:hidden bg-gray-50 pt-2 pb-4 px-2">
           <div className="flex flex-col space-y-4">
             <Link
               href="/"

@@ -9,7 +9,7 @@ const config: Config = {
       colors: {
         'primary': '#4F6F52',// mid green   
              
-        'background': '#ECE3CE', //light beige
+        'background': '#f5f4f0', //light beige
         'text': '#3A4D39',     // dark green  
       },
     },

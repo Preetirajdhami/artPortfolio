@@ -3,16 +3,12 @@ import Image from "next/image";
 
 const AboutSection: React.FC = () => {
   return (
-    <section className="h-screen flex flex-col justify-center px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
+    <section className="mt-10 h-screen flex flex-col justify-center px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
       {/* Heading Section */}
       <div className="text-center mb-8">
         <h2 className="text-4xl md:text-5xl font-light text-gray-800 max-w-4xl mx-auto leading-tight">
-          You're here because dolor lacus cubilia morbi porttitor eros accumsan orci.
-        </h2>
-        <p className="text-gray-600 mt-4 max-w-3xl mx-auto text-center">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim 
-          ad minim veniam, quis nostrud exercitation ullamco re magna aliqua.
-        </p>
+About Me        </h2>
+
       </div>
 
       {/* Content Section */}
