@@ -7,6 +7,7 @@ const AboutSection: React.FC = () => {
       {/* Heading Section */}
       <div className="text-center mb-8">
         <h2 className="text-4xl md:text-5xl font-light text-gray-800 max-w-4xl mx-auto leading-tight">
+
 About Me        </h2>
 
       </div>
