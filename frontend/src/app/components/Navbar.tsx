@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-gray-50 py-4">
+    <nav className=" py-4">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="/" className="text-3xl font-serif text-gray-900">
           PREETI ARTS
