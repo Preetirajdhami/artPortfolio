@@ -14,9 +14,9 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-background py-4 mt-8 w-full sticky top-0 z-10">
-      <div className="w-full flex justify-between items-center px-2 sm:px-4 lg:px-6 max-w-[1920px] mx-auto">
-        <Link href="/" className="ml-10 text-4xl font-serif text-gray-700">
+    <nav className="py-4">
+      <div className="container mx-auto flex justify-between items-center">
+        <Link href="/" className="text-3xl font-serif text-primary">
           PREETI ARTS
         </Link>
 
@@ -50,89 +50,101 @@ const Navbar: React.FC = () => {
           </svg>
         </button>
 
-        <div className="hidden md:flex space-x-12 items-center mr-10">
-          <Link
-            href="/"
-            className={`text-sm uppercase tracking-wider font-medium relative ${
-              isActive('/') 
-                ? 'text-gray-900 after:content-[""] after:absolute after:left-0 after:bottom-[-6px] after:h-0.5 after:w-full after:bg-gray-900' 
-                : 'text-gray-600 hover:text-gray-900'
-            } transition-colors`}
-          >
-            Home
-          </Link>
-          <Link
-            href="/gallery"
-            className={`text-sm uppercase tracking-wider font-medium relative ${
-              isActive('/gallery') 
-                ? 'text-gray-900 after:content-[""] after:absolute after:left-0 after:bottom-[-6px] after:h-0.5 after:w-full after:bg-gray-900' 
-                : 'text-gray-600 hover:text-gray-900'
-            } transition-colors`}
-          >
-            Gallery
-          </Link>
-          <Link
-            href="/commission"
-            className={`text-sm uppercase tracking-wider font-medium relative ${
-              isActive('/commission') 
-                ? 'text-gray-900 after:content-[""] after:absolute after:left-0 after:bottom-[-6px] after:h-0.5 after:w-full after:bg-gray-900' 
-                : 'text-gray-600 hover:text-gray-900'
-            } transition-colors`}
-          >
-            Commission
-          </Link>
-          <Link
-            href="/contact"
-            className={`text-sm uppercase tracking-wider font-medium relative ${
-              isActive('/contact') 
-                ? 'text-gray-900 after:content-[""] after:absolute after:left-0 after:bottom-[-6px] after:h-0.5 after:w-full after:bg-gray-900' 
-                : 'text-gray-600 hover:text-gray-900'
-            } transition-colors`}
-          >
-            Contact
-          </Link>
-        </div>
-      </div>
-
-      {isMenuOpen && (
-        <div className="md:hidden bg-gray-50 pt-2 pb-4 px-2">
-          <div className="flex flex-col space-y-4">
+        <div className="hidden md:flex items-center">
+          <div className="bg-primary rounded-3xl px-6 py-3 flex justify-center gap-14 w-[550px]">
             <Link
               href="/"
-              className={`text-sm uppercase tracking-wider font-medium py-2 ${
-                isActive('/') ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-600'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
+              className={`text-base font-medium relative ${
+                isActive('/')
+                  ? 'text-white after:content-["."] after:block after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-12px] after:text-white after:text-2xl'
+                  : 'text-white hover:text-gray-200'
+              } transition-colors`}
             >
               Home
             </Link>
             <Link
               href="/gallery"
-              className={`text-sm uppercase tracking-wider font-medium py-2 ${
-                isActive('/gallery') ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-600'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
+              className={`text-base font-medium relative ${
+                isActive('/gallery')
+                  ? 'text-white after:content-["."] after:block after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-12px] after:text-white after:text-2xl'
+                  : 'text-white hover:text-gray-200'
+              } transition-colors`}
             >
               Gallery
             </Link>
             <Link
               href="/commission"
-              className={`text-sm uppercase tracking-wider font-medium py-2 ${
-                isActive('/commission') ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-600'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
+              className={`text-base font-medium relative ${
+                isActive('/commission')
+                  ? 'text-white after:content-["."] after:block after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-12px] after:text-white after:text-2xl'
+                  : 'text-white hover:text-gray-200'
+              } transition-colors`}
             >
               Commission
             </Link>
             <Link
               href="/contact"
-              className={`text-sm uppercase tracking-wider font-medium py-2 ${
-                isActive('/contact') ? 'text-gray-900 border-b-2 border-gray-900' : 'text-gray-600'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
+              className={`text-base font-medium relative ${
+                isActive('/contact')
+                  ? 'text-white after:content-["."] after:block after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-12px] after:text-white after:text-2xl'
+                  : 'text-white hover:text-gray-200'
+              } transition-colors`}
             >
               Contact
             </Link>
+          </div>
+        </div>
+      </div>
+
+      {isMenuOpen && (
+        <div className="md:hidden bg-gray-50 pt-2 pb-4 px-2">
+          <div className="bg-primary rounded-3xl px-4 py-2">
+            <div className="flex flex-col space-y-4 items-center">
+              <Link
+                href="/"
+                className={`text-base font-medium py-2 relative ${
+                  isActive('/') 
+                    ? 'text-white after:content-["."] after:block after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-6px] after:text-white after:text-2xl' 
+                    : 'text-white'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link
+                href="/gallery"
+                className={`text-base font-medium py-2 relative ${
+                  isActive('/gallery') 
+                    ? 'text-white after:content-["."] after:block after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-6px] after:text-white after:text-2xl' 
+                    : 'text-white'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Gallery
+              </Link>
+              <Link
+                href="/commission"
+                className={`text-base font-medium py-2 relative ${
+                  isActive('/commission') 
+                    ? 'text-white after:content-["."] after:block after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-6px] after:text-white after:text-2xl' 
+                    : 'text-white'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Commission
+              </Link>
+              <Link
+                href="/contact"
+                className={`text-base font-medium py-2 relative ${
+                  isActive('/contact') 
+                    ? 'text-white after:content-["."] after:block after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-6px] after:text-white after:text-2xl' 
+                    : 'text-white'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
+              </Link>
+            </div>
           </div>
         </div>
       )}

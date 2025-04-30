@@ -1,39 +1,43 @@
-import type React from "react";
+import type { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const Hero: React.FC = () => {
+const Hero: FC = () => {
   return (
-    <section className="bg-background h-screen flex flex-col md:flex-row items-center mt-16 md:mt-[-60px] px-4 md:px-0">
-      <div className="w-full flex flex-col-reverse md:flex-row items-center max-w-[1920px] mx-auto">
+    <section className="bg-background flex h-[650px] flex-col items-center px-4 pt-0 mt-0 md:flex-row md:px-0">
+      <div className="mx-auto flex w-full max-w-[1920px] flex-col-reverse items LIS-center md:flex-row">
         {/* Left Content */}
-        <div className="px-4 md:ml-80 md:w-2/5 md:px-8 lg:px-12 space-y-6 text-center md:text-left mt-8 md:mt-0">
-          <p className="text-xs md:text-sm uppercase tracking-wider text-gray-600">
-            Online Art Portfolio Showcase
-          </p>
-          <h1 className="text-3xl md:text-4xl font-serif leading-tight text-gray-900">
+        <div className="mt-24 space-y-4 px-4 text-center md:w-1/2 md:px-6 md:text-left lg:px-12">
+          <span className="inline-block rounded-full border bg-primary/25 px-4 py-1 text-sm font-medium">
+            Art
+          </span>
+          <h1 className="text-4xl font-serif leading-tight text-gray-900 md:text-5xl">
             Unveil Your Vision: <br />
             Embrace Creation, <br />
             Embrace You
           </h1>
+          <p className="text-gray-600">
+            An artist exploring beauty through graphite, watercolor, acrylic, and pastel. Let my art speak where words fall
+            short.
+          </p>
           <Link
-            href="/gallery"
-            className="uppercase tracking-wider inline-block bg-primary text-white font-medium py-2 px-4 md:py-3 md:px-6 rounded-full hover:bg-teal-800 transition-colors"
+            href="/schedule"
+            className="inline-block rounded-full bg-primary px-6 py-3 font-medium text-white transition-colors hover:bg-teal-800"
           >
             View Gallery
           </Link>
         </div>
 
         {/* Right Image */}
-        <div className="w-full md:w-3/5 h-[60vh] md:h-[80vh] flex items-center justify-center">
-          <div className="relative w-full h-full md:h-[80%] pr-6 md:pr-6">
+        <div className="h-[50vh] md:h-[60vh] md:w-1/2 ml-32">
+          <div className="relative h-full w-[600px] pr-6 md:pr-6">
             <Image
               src="/hero1.jpeg"
               alt="Artist sitting on a chair"
-              width={1200}
-              height={900}
-              className="rounded-[50px] object-cover w-full h-full"
+              fill
+              className="rounded-[60px] object-cover"
               priority
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         </div>
