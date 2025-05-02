@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="py-4">
+    <nav className="py-4 mt-3">
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/" className="text-3xl font-serif text-primary">
           PREETI ARTS
@@ -98,7 +98,7 @@ const Navbar: React.FC = () => {
 
       {isMenuOpen && (
         <div className="md:hidden bg-gray-50 pt-2 pb-4 px-2">
-          <div className="bg-primary rounded-3xl px-4 py-2">
+          <div className="bg-primary px-4 py-2">
             <div className="flex flex-col space-y-4 items-center">
               <Link
                 href="/"
