@@ -4,8 +4,8 @@ import Link from "next/link";
 
 const Hero: FC = () => {
   return (
-    <section className="bg-background relative flex flex-col min-h-screen sm:items-center md:flex-row md:items-center md:justify-center md:gap-12 px-4 md:px-8 lg:px-16">
-      <div className="flex flex-col-reverse md:flex-row md:justify-between md:items-center w-full max-w-7xl mx-auto">
+    <section className="  bg-background responsive-padding  flex flex-col  sm:items-center  md:items-center md:py-32 md:justify-center md:gap-12 ">
+      <div className="flex flex-col-reverse md:flex-row md:justify-between md:items-center  w-full  mx-auto">
         {/* Left Content */}
         <div className="flex-1 max-w-lg mx-auto text-center lg:text-left space-y-4 md:space-y-6 mt-6 md:mt-0  md:px-0">
           <span className="inline-block rounded-full border bg-primary/25 px-4 py-1 text-sm font-medium">
@@ -44,8 +44,8 @@ const Hero: FC = () => {
       </div>
 
       {/* Custom Art Section - Centered absolutely */}
-      <div className="absolute bottom-0 left-0 right-0 flex justify-center transform translate-y-1/2">
-        <section className="bg-primary py-5 sm:py-6 md:py-7 lg:py-8 w-[92%] sm:w-[85%] md:w-[75%] lg:w-[70%] xl:w-[65%] rounded-[25px] sm:rounded-[30px] md:rounded-[35px] shadow-xl">
+      <div className="absolute bottom-28 left-0 right-0 flex justify-center transform translate-y-1/2">
+        <section className="bg-primary py-5 sm:py-6 md:py-7 lg:py-8 w-[92%]  rounded-[25px]  shadow-xl">
           <div className="mx-auto px-3 sm:px-4 md:px-6 text-center">
             <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif text-white leading-snug sm:leading-normal">
               Custom Art That Tells Your Story
