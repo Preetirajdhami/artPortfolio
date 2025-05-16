@@ -16,8 +16,8 @@ const Navbar: React.FC = () => {
   }
 
   return (
-    <nav className="py-4 mt-3">
-      <div className="container mx-auto flex justify-between items-center">
+    <nav className="py-4 responsive-padding mt-3">
+      <div className=" mx-auto flex justify-between items-center">
         <Link href="/" className="text-3xl font-serif text-primary">
           PREETI ARTS
         </Link>
