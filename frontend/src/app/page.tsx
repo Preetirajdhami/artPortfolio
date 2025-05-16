@@ -12,8 +12,10 @@ export default function Home() {
      
      <Hero />
      <About />
+
      <Skills/>
      <MissionAndValues />
+
      <Testimonials />
     </div>
   );
