@@ -4,14 +4,10 @@ import Image from "next/image"
 const AboutSection: React.FC = () => {
   return (
     <section className="py-8 sm:py-12 md:py-16 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto mt-16 sm:mt-24 md:mt-36">
-      {/* Header */}
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center mb-8 sm:mb-12">About Me</h2>
 
-      {/* Content Section */}
       <div className="relative">
-        {/* Content Container with proper positioning */}
         <div className="flex flex-col md:flex-row items-center md:items-stretch">
-          {/* Left Image - positioned differently on mobile vs desktop */}
           <div className="w-full flex justify-center md:w-1/3 z-10 relative md:absolute md:left-0 md:top-1/2 md:transform md:-translate-y-1/2">
             <div className="relative w-[180px] h-[240px] sm:w-[200px] sm:h-[280px] md:w-[280px] md:h-[380px] lg:w-[320px] lg:h-[420px] shadow-lg">
               <Image
@@ -24,13 +20,12 @@ const AboutSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Content Green Background - full width on mobile */}
           <div
             className="bg-primary text-white rounded-2xl sm:rounded-3xl w-full md:w-5/6 p-6 sm:p-8 md:p-12 
                           mt-4 sm:mt-[-40px] md:mt-0 md:ml-auto"
           >
             <div className="md:pl-[calc(33%-30px)] lg:pl-[calc(33%-10px)]">
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-light mb-4 sm:mb-6 md:mb-8">Sound familiar?</h3>
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-light mb-4 sm:mb-6 md:mb-8">My Artistic Journey</h3>
 
               <div className="space-y-4 sm:space-y-6 md:space-y-8">
                 <div className="flex items-start">
@@ -53,8 +48,7 @@ const AboutSection: React.FC = () => {
                     </svg>
                   </div>
                   <p className="text-sm sm:text-base text-white/90">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam.
+                    With over 15 years of experience, I've developed a distinctive style that blends classical techniques with contemporary vision. My work has been featured in galleries across Europe and North America.
                   </p>
                 </div>
 
@@ -78,8 +72,7 @@ const AboutSection: React.FC = () => {
                     </svg>
                   </div>
                   <p className="text-sm sm:text-base text-white/90">
-                    Diam efficitur metus sociosqu nunc tincidunt fringilla taciti habitasse non. Scelerisque conubia
-                    pretium porttitor.
+                    I'm deeply inspired by the natural world and urban landscapes. My paintings capture fleeting moments of light and atmosphere, inviting viewers to experience familiar scenes with fresh perspective.
                   </p>
                 </div>
 
@@ -103,8 +96,7 @@ const AboutSection: React.FC = () => {
                     </svg>
                   </div>
                   <p className="text-sm sm:text-base text-white/90">
-                    Himenaeos cubilia tortor id ligula aenean maximus nec. Sem nam cubilia aliquet aliquet id varius
-                    fermentum.
+                    Every canvas begins with emotion rather than concept. I believe art should speak to both heart and mind, creating connections that transcend language and cultural boundaries.
                   </p>
                 </div>
 
@@ -128,8 +120,7 @@ const AboutSection: React.FC = () => {
                     </svg>
                   </div>
                   <p className="text-sm sm:text-base text-white/90">
-                    Fusce orci himenaeos commodo ultrices sagittis dictum mollis in. Tincidunt inceptos nostra himenaeos
-                    aptent.
+                    Besides creating, I'm passionate about teaching. Through workshops and mentoring, I help emerging artists find their authentic voice while mastering technical foundations.
                   </p>
                 </div>
               </div>

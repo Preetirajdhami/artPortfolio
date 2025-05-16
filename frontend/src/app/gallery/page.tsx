@@ -57,7 +57,6 @@ const Gallery = () => {
     }
   };
 
-  // Handle swipe gestures
   const bindSwipe = useDrag(({ swipe: [swipeX] }) => {
     if (selectedImage) {
       const totalImages = galleryData[selectedImage.categoryIndex].images.length;
@@ -75,7 +74,6 @@ const Gallery = () => {
     }
   });
 
-  // Animation variants with explicit types
   const lightboxVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
@@ -93,19 +91,17 @@ const Gallery = () => {
     visible: { opacity: 1, y: 0 },
   };
 
-  // Transition configuration with explicit type
   const transitionConfig: Transition = {
     duration: 0.3,
   };
 
   return (
-    <div className="bg-[#F6F1EB] min-h-screen py-12">
+    <div className="bg-background min-h-screen py-12">
       <div className="container mx-auto px-4">
         {galleryData.map((section, sectionIndex) => (
           <section key={sectionIndex} className="mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">{section.category}</h2>
+            <h2 className="text-3xl font-bold text-primary mb-4">{section.category}</h2>
 
-            {/* Scroll Buttons and Image Row */}
             <div className="relative">
               <button
                 className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-lg z-10 hover:bg-gray-700"
@@ -114,9 +110,8 @@ const Gallery = () => {
                 <FaArrowLeft />
               </button>
 
-              {/* Image Row (Scrollable) */}
               <div
-                ref={(el) => { scrollRefs.current[sectionIndex] = el; }} // Fixed ref assignment
+                ref={(el) => { scrollRefs.current[sectionIndex] = el; }} 
                 className="flex overflow-x-auto space-x-4 scrollbar-hide scroll-smooth px-12"
               >
                 {section.images.map((image, imageIndex) => (
@@ -136,7 +131,6 @@ const Gallery = () => {
                 ))}
               </div>
 
-              {/* Right Scroll Button */}
               <button
                 className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-lg z-10 hover:bg-gray-700"
                 onClick={() => scroll(sectionIndex, 'right')}
@@ -147,7 +141,6 @@ const Gallery = () => {
           </section>
         ))}
 
-        {/* Fixed Lightbox */}
         <AnimatePresence>
           {selectedImage && (
             <motion.div
@@ -156,7 +149,7 @@ const Gallery = () => {
               animate="visible"
               exit="exit"
               variants={lightboxVariants}
-              transition={transitionConfig as Transition} // Explicit type casting
+              transition={transitionConfig as Transition} 
             >
               <div className="relative w-full h-full flex items-center justify-center">
                 <button
