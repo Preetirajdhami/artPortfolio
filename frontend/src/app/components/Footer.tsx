@@ -6,7 +6,6 @@ const Footer = () => {
     <footer className="bg-[#F6F1EB] py-8 border-t border-gray-400">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center space-y-4">
-          {/* Social Media Icons */}
           <div className="flex space-x-6">
             {/* Instagram */}
             <Link
