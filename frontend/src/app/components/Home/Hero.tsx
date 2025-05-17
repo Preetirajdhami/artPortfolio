@@ -4,10 +4,10 @@ import Link from "next/link";
 
 const Hero: FC = () => {
   return (
-    <section className="  bg-background responsive-padding  flex flex-col  sm:items-center  md:items-center md:py-32 md:justify-center md:gap-12 ">
-      <div className="flex flex-col-reverse md:flex-row md:justify-between md:items-center  w-full  mx-auto">
+    <section className=" relative bg-background responsive-padding  flex flex-col  sm:items-center  md:items-center md:py-32 md:justify-center md:gap-12 ">
+      <div className="flex flex-col-reverse  md:flex-row md:-mt-12 md:items-center  w-full  mx-auto">
         {/* Left Content */}
-        <div className="flex-1 max-w-lg mx-auto text-center lg:text-left space-y-4 md:space-y-6 mt-6 md:mt-0  md:px-0">
+        <div className="flex-1 max-w-lg mx-auto text-center md:text-left space-y-4 md:space-y-6 mt-6 md:mt-0  md:px-0">
           <span className="inline-block rounded-full border bg-primary/25 px-4 py-1 text-sm font-medium">
             Art
           </span>
@@ -30,7 +30,7 @@ const Hero: FC = () => {
 
         {/* Right Image */}
         <div className="flex-1 flex justify-center md:justify-end px-4 md:px-0">
-          <div className="relative w-full max-w-[500px] h-[50vh] md:h-[50vh]  rounded-[50px]  overflow-hidden shadow-lg">
+          <div className="relative w-full max-w-[500px] h-[50vh] md:h-[50vh] lg:w- rounded-[50px] lg:max-w-[600px] overflow-hidden shadow-lg">
             <Image
               src="/hero1.jpeg"
               alt="Artist sitting on a chair"
@@ -44,7 +44,7 @@ const Hero: FC = () => {
       </div>
 
       {/* Custom Art Section - Centered absolutely */}
-      <div className="absolute bottom-28 left-0 right-0 flex justify-center transform translate-y-1/2">
+      <div className="md:absolute md:-bottom-28 lg:-bottom-44 md:left-0 md:right-0 flex justify-center mt-6 ">
         <section className="bg-primary py-5 sm:py-6 md:py-7 lg:py-8 w-[92%]  rounded-[25px]  shadow-xl">
           <div className="mx-auto px-3 sm:px-4 md:px-6 text-center">
             <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif text-white leading-snug sm:leading-normal">
