@@ -16,13 +16,13 @@ const Navbar: React.FC = () => {
   }
 
   return (
-    <nav className="py-4 mt-3">
-      <div className="container mx-auto flex justify-between items-center">
+    <nav className="py-4 responsive-padding mt-3">
+      <div className=" mx-auto flex justify-between items-center">
         <Link href="/" className="text-3xl font-serif text-primary">
           PREETI ARTS
         </Link>
 
-        <button className="md:hidden focus:outline-none" onClick={toggleMenu} aria-label="Toggle menu">
+        <button className="lg:hidden focus:outline-none" onClick={toggleMenu} aria-label="Toggle menu">
           <svg
             className="w-6 h-6 text-gray-900"
             fill="none"
@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
           </svg>
         </button>
 
-        <div className="hidden md:flex items-center">
+        <div className="hidden lg:flex items-center">
           <div className="bg-primary rounded-3xl px-6 py-3 flex justify-center gap-24 w-[700px]">
             <Link
               href="/"

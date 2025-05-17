@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .responsive-padding {
+    @apply px-8 sm:px-12 md:px-16 lg:px-20 xl:px-24 2xl:px-52;
+  }
+}
+
 html,
 body {
   -ms-overflow-style: none;
@@ -19,3 +25,4 @@ body::-webkit-scrollbar,
 * {
   scrollbar-width: none;
 }
+
