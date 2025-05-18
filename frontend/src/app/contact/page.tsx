@@ -1,5 +1,5 @@
 "use client";
-import Image from 'next/image';
+
 
 const Contact = () => {
   return (
@@ -26,15 +26,15 @@ const Contact = () => {
             </p>
 
             <p className="text-lg text-justify">
-              Availability of original work can be found in each item’s description in the gallery section. If you are interested in a particular original, or something you’ve seen on Preeti Arts’s social media, please reach out for more information.
+              Availability of original work can be found in each item&apos;s description in the gallery section. If you are interested in a particular original, or something you&apos;ve seen on Preeti Arts&apos;s social media, please reach out for more information.
             </p><br />
 
             <p className="text-lg text-justify">
-              Limited edition fine art prints of most of Preeti Arts's original work are available in the online store.
+              Limited edition fine art prints of most of Preeti Arts&apos;s original work are available in the online store.
             </p> <br />
 
             <p className="text-lg text-justify">
-              Commission information, including pet portraits, can be found on the commission page. If you have a question concerning commissions that is not answered here, please don’t hesitate to ask.
+              Commission information, including pet portraits, can be found on the commission page. If you have a question concerning commissions that is not answered here, please don&apos;t hesitate to ask.
             </p><br />
 
             <p className="text-lg text-justify">

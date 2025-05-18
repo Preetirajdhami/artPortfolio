@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
@@ -8,37 +8,37 @@ const AdminLogin = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
-    try {
-      const response = await fetch("http://localhost:8000/api/admin/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+    // try {
+    //   const response = await fetch("http://localhost:8000/api/admin/login", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ email, password }),
+    //   });
 
-      const data = await response.json();
+    //   const data = await response.json();
 
-      if (response.ok) {
-        console.log("Login Successful:", data); 
-        localStorage.setItem("adminToken", data.token);
-        alert("Login Successful!");
-        router.push("/admin/dashboard");
-      } else {
-        setError(data.message || "Something went wrong. Please try again.");
-      }
-    } catch (error) {
-      setError("Network error. Please try again.");
-    } finally {
-      setLoading(false);
-    }
+    //   if (response.ok) {
+    //     console.log("Login Successful:", data); 
+    //     localStorage.setItem("adminToken", data.token);
+    //     alert("Login Successful!");
+    //     router.push("/admin/dashboard");
+    //   } else {
+    //     setError(data.message || "Something went wrong. Please try again.");
+    //   }
+    // } catch (error) {
+    //   setError("Network error. Please try again.");
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   return (

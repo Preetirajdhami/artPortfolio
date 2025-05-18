@@ -48,7 +48,7 @@ const AboutSection: React.FC = () => {
                     </svg>
                   </div>
                   <p className="text-sm sm:text-base text-white/90">
-                    With over 15 years of experience, I've developed a distinctive style that blends classical techniques with contemporary vision. My work has been featured in galleries across Europe and North America.
+                    With over 15 years of experience, I&apos:ve developed a distinctive style that blends classical techniques with contemporary vision. My work has been featured in galleries across Europe and North America.
                   </p>
                 </div>
 

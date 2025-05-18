@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 
 const Gallery = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -45,20 +45,20 @@ const Gallery = () => {
     data.append("price", formData.price.toString());
     data.append("category", formData.category);
 
-    try {
-      const response = await axios.post("http://localhost:8000/api/gallery/upload", data,
-        {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        }
-      );
-      alert("Image uploaded successfully!");
-      // Handle the image data as needed
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      alert("Error uploading image.");
-    }
+    // try {
+    //   const response = await axios.post("http://localhost:8000/api/gallery/upload", data,
+    //     {
+    //         headers: {
+    //             "Content-Type": "multipart/form-data",
+    //         },
+    //     }
+    //   );
+    //   alert("Image uploaded successfully!");
+    //   // Handle the image data as needed
+    // } catch (error) {
+    //   console.error("Error uploading image:", error);
+    //   alert("Error uploading image.");
+    // }
   };
 
   return (
