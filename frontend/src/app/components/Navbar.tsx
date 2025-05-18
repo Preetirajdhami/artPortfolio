@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
 
         <button className="lg:hidden focus:outline-none" onClick={toggleMenu} aria-label="Toggle menu">
           <svg
-            className="w-6 h-6 text-gray-900"
+            className="w-8 h-8 text-gray-900"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
