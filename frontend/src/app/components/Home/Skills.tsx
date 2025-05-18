@@ -4,21 +4,26 @@ const Skills: React.FC = () => {
   const skillData = [
     {
       title: "Graphite & Charcoal Art",
-      description: "Known for their precision and depth, these mediums are ideal for capturing fine details and emotional expression.",
+      description:
+        "My journey began with graphite and charcoal, mastering precision and emotional depth to capture intricate details and expressive portraits.",
     },
     {
-      title: "Watercoor Painting",
-      description: "Known for their precision and depth, these mediums are ideal for capturing fine details and emotional expression.",
+      title: "Watercolor Painting",
+      description:
+        "I discovered the delicate and fluid qualities of watercolor, allowing me to explore light, transparency, and subtle atmospheric effects.",
     },
     {
       title: "Acrylic Painting",
-      description: "Known for their precision and depth, these mediums are ideal for capturing fine details and emotional expression.",
+      description:
+        "Acrylics introduced me to bold colors and dynamic textures, giving life to vibrant and modern compositions with versatile techniques.",
     },
   ];
 
   return (
     <div className="text-center p-4 sm:p-6 md:p-10">
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center mb-4 sm:mb-6 md:mb-8">Skills</h2>
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center mb-4 sm:mb-6 md:mb-8">
+        Skills
+      </h2>
       <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-4 md:gap-14">
         {skillData.map((skill, index) => (
           <div

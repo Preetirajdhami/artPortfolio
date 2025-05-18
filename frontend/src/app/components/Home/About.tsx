@@ -48,7 +48,7 @@ const AboutSection: React.FC = () => {
                     </svg>
                   </div>
                   <p className="text-sm sm:text-base text-white/90">
-                    With over 15 years of experience, I&apos:ve developed a distinctive style that blends classical techniques with contemporary vision. My work has been featured in galleries across Europe and North America.
+                   I&apos;ve been creating art since I was a child, and it has remained a meaningful part of my life ever since. I continue to explore, learn, and express myself through every piece I make.
                   </p>
                 </div>
 
@@ -72,7 +72,7 @@ const AboutSection: React.FC = () => {
                     </svg>
                   </div>
                   <p className="text-sm sm:text-base text-white/90">
-                     deeply inspired by the natural world and urban landscapes. My paintings capture fleeting moments of light and atmosphere, inviting viewers to experience familiar scenes with fresh perspective.
+                    I grew fond of portrait art early on, drawn to the challenge of capturing emotion and personality. Over time, I discovered the fluidity of watercolor and the richness of acrylic, both of which opened new creative paths for me to explore expression, texture, and depth
                   </p>
                 </div>
 
