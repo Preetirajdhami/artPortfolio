@@ -20,9 +20,10 @@ const MissionAndValues: React.FC = () => {
             Mission Values & Goal
           </h2>
           
-          <p className="mb-6 sm:mb-8 md:mb-10 text-xs sm:text-sm">
-            Our Team Of Professional Masseur Can Get You Relax Done Right And On Budget You Should Get One May Depend On Your Needs And The Type Of Massage.
-          </p>
+         <p className="mb-6 sm:mb-8 md:mb-10 text-xs sm:text-sm">
+  My mission is to express emotion, beauty, and personal stories through each piece I create. I value honesty in creativity, attention to detail, and the quiet power of visual art to connect with others. My goal is to grow as an artist while inspiring viewers through meaningful and thoughtfully crafted work.
+</p>
+
         </div>
       </div>
     </div>

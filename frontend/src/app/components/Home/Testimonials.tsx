@@ -21,7 +21,7 @@ const Testimonials: React.FC = () => {
     },
     {
       title: "Quality & Craftsmanship",
-      content: "The attention to detail in Preeti's work is remarkable. The painting I purchased is a masterpiece of technique and emotion.",
+      content: "The attention to detail in Preeti work is remarkable. The painting I purchased is a masterpiece of technique and emotion.",
       author: "Emma Rodriguez",
       image: "/hero1.jpeg"
     }
