@@ -85,7 +85,7 @@ const Navbar: React.FC = () => {
       </div>
 
       {isMenuOpen && (
-        <div className="md:hidden bg-primary mt-2">
+        <div className="lg:hidden bg-primary mt-2">
           <div className="px-4 py-2">
             <div className="flex flex-col space-y-4 items-center px-4">
               <Link

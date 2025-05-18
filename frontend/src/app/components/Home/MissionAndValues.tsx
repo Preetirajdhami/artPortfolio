@@ -9,7 +9,7 @@ const MissionAndValues: React.FC = () => {
           <div className="w-full h-full bg-green-800 rounded-full overflow-hidden">
            
             <Image
-              src="/api/placeholder/400/400"
+              src="/missionGoals/mission.jpg"
               alt=""
               width={400}
               height={400}
