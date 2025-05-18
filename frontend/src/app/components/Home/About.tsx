@@ -72,7 +72,7 @@ const AboutSection: React.FC = () => {
                     </svg>
                   </div>
                   <p className="text-sm sm:text-base text-white/90">
-                    I'm deeply inspired by the natural world and urban landscapes. My paintings capture fleeting moments of light and atmosphere, inviting viewers to experience familiar scenes with fresh perspective.
+                     deeply inspired by the natural world and urban landscapes. My paintings capture fleeting moments of light and atmosphere, inviting viewers to experience familiar scenes with fresh perspective.
                   </p>
                 </div>
 
@@ -120,7 +120,7 @@ const AboutSection: React.FC = () => {
                     </svg>
                   </div>
                   <p className="text-sm sm:text-base text-white/90">
-                    Besides creating, I'm passionate about teaching. Through workshops and mentoring, I help emerging artists find their authentic voice while mastering technical foundations.
+                    Besides creating,  passionate about teaching. Through workshops and mentoring, I help emerging artists find their authentic voice while mastering technical foundations.
                   </p>
                 </div>
               </div>
