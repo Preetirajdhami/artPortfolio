@@ -10,7 +10,7 @@ const MissionAndValues: React.FC = () => {
            
             <Image
               src="/api/placeholder/400/400"
-              alt="Woman with facial mask and plant leaf"
+              alt=""
               width={400}
               height={400}
               className="object-cover w-full h-full"
