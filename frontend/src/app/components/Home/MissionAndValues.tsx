@@ -1,5 +1,5 @@
-import React from 'react';
-import { Facebook, Twitter, Instagram } from 'lucide-react';
+import React from "react";
+import Image from "next/image";
 
 const MissionAndValues: React.FC = () => {
   return (
@@ -7,23 +7,29 @@ const MissionAndValues: React.FC = () => {
       <div className="bg-green-900 rounded-[30px] sm:rounded-[40px] md:rounded-[50px] p-6 sm:p-8 md:p-12 flex flex-col md:flex-row items-center w-full max-w-[300px] sm:max-w-[600px] md:max-w-[900px] lg:max-w-[1100px]">
         <div className="relative w-40 h-40 sm:w-52 sm:h-52 md:w-64 md:h-64 mb-6 md:mb-0">
           <div className="w-full h-full bg-green-800 rounded-full overflow-hidden">
-            <img 
-              src="/api/placeholder/400/400" 
-              alt="Woman with facial mask and plant leaf" 
-              className="w-full h-full object-cover"
+           
+            <Image
+              src="/api/placeholder/400/400"
+              alt="Woman with facial mask and plant leaf"
+              width={400}
+              height={400}
+              className="object-cover w-full h-full"
             />
           </div>
         </div>
-        
+
         <div className="md:ml-16 text-white max-w-xl text-center md:text-left">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif mb-4 sm:mb-6">
             Mission Values & Goal
           </h2>
-          
-         <p className="mb-6 sm:mb-8 md:mb-10 text-xs sm:text-sm">
-  My mission is to express emotion, beauty, and personal stories through each piece I create. I value honesty in creativity, attention to detail, and the quiet power of visual art to connect with others. My goal is to grow as an artist while inspiring viewers through meaningful and thoughtfully crafted work.
-</p>
 
+          <p className="mb-6 sm:mb-8 md:mb-10 text-xs sm:text-sm">
+            My mission is to express emotion, beauty, and personal stories
+            through each piece I create. I value honesty in creativity,
+            attention to detail, and the quiet power of visual art to connect
+            with others. My goal is to grow as an artist while inspiring viewers
+            through meaningful and thoughtfully crafted work.
+          </p>
         </div>
       </div>
     </div>

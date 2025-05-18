@@ -5,11 +5,7 @@ import { FaArrowLeft, FaArrowRight, FaTimes } from 'react-icons/fa';
 import { AnimatePresence, motion, Variants, Transition } from 'framer-motion';
 import { useDrag } from '@use-gesture/react';
 
-type ImageType = {
-  src: string;
-  title: string;
-  description: string;
-};
+
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<{ categoryIndex: number; imageIndex: number } | null>(null);
