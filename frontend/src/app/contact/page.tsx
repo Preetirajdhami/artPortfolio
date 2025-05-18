@@ -4,28 +4,21 @@ import Image from 'next/image';
 const Contact = () => {
   return (
     <div className="bg-[#F6F1EB]">
-      {/* Full-Screen Image Section */}
       <div className="relative h-screen w-full">
-        {/* Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url('/contact-hero.jpg')" }}
         >
-          {/* Overlay */}
           <div className="absolute inset-0 bg-black bg-opacity-30"></div>
         </div>
-
-        {/* Content on top of the image */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white">
           <h1 className="text-5xl md:text-6xl font-bold">Contact</h1>
           <p className="text-xl md:text-2xl mt-4">Get in Touch with Preeti Arts</p>
         </div>
       </div>
 
-      {/* Content & Form Section */}
       <div className="container mx-auto px-4 py-12">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 text-gray-800">
-          {/* Contact Info */}
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 text-primary">
           <div>
             <h2 className="text-3xl font-bold mb-6">CONTACT</h2>
             <p className="text-lg mb-6 text-justify">
@@ -71,7 +64,6 @@ const Contact = () => {
             </p><br />
           </div>
 
-          {/* Contact Form */}
           <div>
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -121,7 +113,7 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="w-full bg-[#DAC0A3] text-white py-4 px-8 rounded-lg hover:bg-[#c5ab8f] transition-colors text-lg font-semibold"
+                className="w-full bg-primary text-white py-4 px-8 rounded-lg hover:bg-[#c5ab8f] transition-colors text-lg font-semibold"
               >
                 SEND
               </button>

@@ -1,101 +1,135 @@
-import React from "react";
-import Image from "next/image";
+import type React from "react"
+import Image from "next/image"
 
 const AboutSection: React.FC = () => {
   return (
-    <section className="h-screen flex flex-col justify-center px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
-      {/* Heading Section */}
-      <div className="text-center mb-8">
-        <h2 className="text-4xl md:text-5xl font-light text-gray-800 max-w-4xl mx-auto leading-tight">
-          You're because dolor lacus cubilia morbi porttitor eros accumsan orci.
-        </h2>
-        <p className="text-gray-600 mt-4 max-w-3xl mx-auto text-center">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim 
-          ad minim veniam, quis nostrud exercitation ullamco re magna aliqua.
-        </p>
-      </div>
+    <section className="py-8 sm:py-12 md:py-16 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto mt-16 sm:mt-24 md:mt-36">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center mb-8 sm:mb-12">About Me</h2>
 
-      {/* Content Section */}
-      <div className="relative mt-10 flex-grow">
-        {/* Content Container - this needs to be positioned relative for absolute positioning inside */}
-        <div className="relative w-full h-full flex flex-col md:flex-row">
-          {/* Left space for image */}
-          <div className="md:w-2/5 lg:w-1/3"></div>
+      <div className="relative">
+        <div className="flex flex-col md:flex-row items-center md:items-stretch">
+          <div className="w-full flex justify-center md:w-1/3 z-10 relative md:absolute md:left-0 md:top-1/2 md:transform md:-translate-y-1/2">
+            <div className="relative w-[180px] h-[240px] sm:w-[200px] sm:h-[280px] md:w-[280px] md:h-[380px] lg:w-[320px] lg:h-[420px] shadow-lg">
+              <Image
+                src="/about.png"
+                alt="Artist portrait"
+                fill
+                className="rounded-2xl sm:rounded-3xl object-cover"
+                sizes="(max-width: 640px) 180px, (max-width: 768px) 200px, (max-width: 1024px) 280px, 320px"
+              />
+            </div>
+          </div>
 
-          {/* Right Content Green Background */}
-          <div className="bg-[#6b775a] text-white rounded-3xl md:w-3/5 lg:w-2/3 p-8 md:p-12 mt-20 md:mt-0">
-            <div className="md:pl-20 lg:pl-24">
-              <h3 className="text-3xl md:text-4xl font-light mb-6">Sound familiar?</h3>
-              
-              <div className="space-y-6">
-                <div className="flex">
-                  <div className="mr-3 mt-1 flex-shrink-0">
-                    <svg width="24" height="12" viewBox="0 0 24 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M23 6H1M23 6L18 1M23 6L18 11" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <div
+            className="bg-primary text-white rounded-2xl sm:rounded-3xl w-full md:w-5/6 p-6 sm:p-8 md:p-12 
+                          mt-4 sm:mt-[-40px] md:mt-0 md:ml-auto"
+          >
+            <div className="md:pl-[calc(33%-30px)] lg:pl-[calc(33%-10px)]">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-light mb-4 sm:mb-6 md:mb-8">My Artistic Journey</h3>
+
+              <div className="space-y-4 sm:space-y-6 md:space-y-8">
+                <div className="flex items-start">
+                  <div className="mr-3 sm:mr-4 mt-1 sm:mt-1.5 flex-shrink-0 text-white">
+                    <svg
+                      width="20"
+                      height="10"
+                      viewBox="0 0 24 12"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="sm:w-6 sm:h-3"
+                    >
+                      <path
+                        d="M23 6H1M23 6L18 1M23 6L18 11"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                     </svg>
                   </div>
-                  <p className="text-white/90 text-sm md:text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-                    exercitation ullamco.
+                  <p className="text-sm sm:text-base text-white/90">
+                    With over 15 years of experience, I've developed a distinctive style that blends classical techniques with contemporary vision. My work has been featured in galleries across Europe and North America.
                   </p>
                 </div>
 
-                <div className="flex">
-                  <div className="mr-3 mt-1 flex-shrink-0">
-                    <svg width="24" height="12" viewBox="0 0 24 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M23 6H1M23 6L18 1M23 6L18 11" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <div className="flex items-start">
+                  <div className="mr-3 sm:mr-4 mt-1 sm:mt-1.5 flex-shrink-0 text-white">
+                    <svg
+                      width="20"
+                      height="10"
+                      viewBox="0 0 24 12"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="sm:w-6 sm:h-3"
+                    >
+                      <path
+                        d="M23 6H1M23 6L18 1M23 6L18 11"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                     </svg>
                   </div>
-                  <p className="text-white/90 text-sm md:text-base">
-                    Diam efficitur metus sociosqu nunc tincidunt fringilla taciti habitasse non. 
-                    Scelerisque conubia pretium porttitor taciti condimentum.
+                  <p className="text-sm sm:text-base text-white/90">
+                    I'm deeply inspired by the natural world and urban landscapes. My paintings capture fleeting moments of light and atmosphere, inviting viewers to experience familiar scenes with fresh perspective.
                   </p>
                 </div>
 
-                <div className="flex">
-                  <div className="mr-3 mt-1 flex-shrink-0">
-                    <svg width="24" height="12" viewBox="0 0 24 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M23 6H1M23 6L18 1M23 6L18 11" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <div className="flex items-start">
+                  <div className="mr-3 sm:mr-4 mt-1 sm:mt-1.5 flex-shrink-0 text-white">
+                    <svg
+                      width="20"
+                      height="10"
+                      viewBox="0 0 24 12"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="sm:w-6 sm:h-3"
+                    >
+                      <path
+                        d="M23 6H1M23 6L18 1M23 6L18 11"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                     </svg>
                   </div>
-                  <p className="text-white/90 text-sm md:text-base">
-                    Himenaeos cubilia tortor id ligula aenean maximus nec. Sem nam cubilia aliquet 
-                    aliquet id varius fermentum varu.
+                  <p className="text-sm sm:text-base text-white/90">
+                    Every canvas begins with emotion rather than concept. I believe art should speak to both heart and mind, creating connections that transcend language and cultural boundaries.
                   </p>
                 </div>
 
-                <div className="flex">
-                  <div className="mr-3 mt-1 flex-shrink-0">
-                    <svg width="24" height="12" viewBox="0 0 24 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M23 6H1M23 6L18 1M23 6L18 11" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <div className="flex items-start">
+                  <div className="mr-3 sm:mr-4 mt-1 sm:mt-1.5 flex-shrink-0 text-white">
+                    <svg
+                      width="20"
+                      height="10"
+                      viewBox="0 0 24 12"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="sm:w-6 sm:h-3"
+                    >
+                      <path
+                        d="M23 6H1M23 6L18 1M23 6L18 11"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                     </svg>
                   </div>
-                  <p className="text-white/90 text-sm md:text-base">
-                    Fusce orci himenaeos commodo ultrices sagittis dictum mollis in. Tincidunt 
-                    inceptos nostra himenaeos aptent habitasse metus.
+                  <p className="text-sm sm:text-base text-white/90">
+                    Besides creating, I'm passionate about teaching. Through workshops and mentoring, I help emerging artists find their authentic voice while mastering technical foundations.
                   </p>
                 </div>
               </div>
             </div>
           </div>
-
-          {/* Image positioned absolutely to overlay on the green div */}
-          <div className="absolute z-10 left-0 md:left-10 lg:left-0 top-1/2 transform -translate-y-1/2">
-            <div className="relative w-full max-w-md">
-              <Image 
-                src="/hero1.jpeg" 
-                alt="Plant in terracotta pot and coffee cup" 
-                width={450} 
-                height={500}
-                className="rounded-3xl object-cover"
-              />
-            </div>
-          </div>
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default AboutSection;
+export default AboutSection

@@ -2,16 +2,19 @@
 import { motion } from "framer-motion";
 import Hero from "./components/Home/Hero";
 import About from "./components/Home/About";
-import MissionAndSkills from "./components/Home/MissionAndSkills";
+import MissionAndValues from "./components/Home/MissionAndValues";
 import Testimonials from "./components/Home/Testimonials";
-
+import Skills from "./components/Home/Skills";
 export default function Home() {
   return (
     <div className="bg-background ">
      
      <Hero />
      <About />
-     <MissionAndSkills />
+
+     <Skills/>
+     <MissionAndValues />
+
      <Testimonials />
     </div>
   );
