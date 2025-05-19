@@ -1,6 +1,8 @@
 "use client";
 import { useState } from 'react';
 import Image from 'next/image';
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
 
 const Testimonials: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -49,15 +51,7 @@ const Testimonials: React.FC = () => {
             className="absolute left-0 md:-left-10 z-10 bg-primary text-white p-2 sm:p-3 rounded-full shadow-lg hover:bg-primary transition-all duration-300 transform hover:scale-110 focus:outline-none"
             aria-label="Previous testimonial"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="w-5 h-5 sm:w-6 sm:h-6"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
+            <IoIosArrowBack className='text-xl'/>
           </button>
 
           {/* Slider Content */}
@@ -133,15 +127,7 @@ const Testimonials: React.FC = () => {
             className="absolute right-0 md:-right-10 z-10 bg-primary text-white p-2 sm:p-3 rounded-full shadow-lg hover:bg-primary transition-all duration-300 transform hover:scale-110 focus:outline-none"
             aria-label="Next testimonial"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="w-5 h-5 sm:w-6 sm:h-6"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
+            <IoIosArrowForward className='text-xl' />
           </button>
         </div>
 
