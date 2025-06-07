@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+
 import Hero from "./components/Home/Hero";
 import About from "./components/Home/About";
 import MissionAndValues from "./components/Home/MissionAndValues";

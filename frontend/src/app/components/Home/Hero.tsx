@@ -29,8 +29,8 @@ const Hero: FC = () => {
         </div>
 
         {/* Right Image */}
-        <div className="flex-1 flex justify-center md:justify-end px-4 md:px-0">
-          <div className="relative w-full max-w-[500px] h-[50vh] md:h-[50vh] lg:w- rounded-[50px] lg:max-w-[600px] overflow-hidden shadow-lg">
+        <div className="flex-1 flex justify-center md:justify-end  md:px-0">
+          <div className="relative w-full max-w-[500px] h-[50vh] md:h-[50vh]  rounded-[50px] lg:max-w-[600px] overflow-hidden shadow-lg">
             <Image
               src="/hero1.jpeg"
               alt="Artist sitting on a chair"

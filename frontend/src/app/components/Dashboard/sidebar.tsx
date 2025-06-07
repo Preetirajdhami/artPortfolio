@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaTachometerAlt } from "react-icons/fa"; 
-import { FaImages, FaBox, FaUsers, FaCog } from "react-icons/fa";
+import { FaImages, FaBox,  FaCog } from "react-icons/fa";
 import { IoIosLogOut } from "react-icons/io";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
