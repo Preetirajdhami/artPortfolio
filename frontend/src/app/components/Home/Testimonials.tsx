@@ -10,8 +10,8 @@ const Testimonials: React.FC = () => {
     {
       title: "Client Experience",
       content: "Preeti captured exactly what I envisioned for my home. Her artwork brings so much life and personality to our living space.",
-      author: "Sarah Johnson",
-      image: "/hero1.jpeg"
+      author: "Manoj Shrestha",
+      image: "/testimonials/ManojShrestha.png"
     },
     {
       title: "Commission Process",

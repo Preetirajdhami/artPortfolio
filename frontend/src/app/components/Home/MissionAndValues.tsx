@@ -9,7 +9,7 @@ const MissionAndValues: React.FC = () => {
           <div className="w-full h-full bg-green-800 rounded-full overflow-hidden">
             <img 
               src="/api/placeholder/400/400" 
-              alt="Woman with facial mask and plant leaf" 
+              alt="Mission and Values" 
               className="w-full h-full object-cover"
             />
           </div>
