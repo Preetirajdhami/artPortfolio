@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+
 
 const Commission = () => {
   return (
@@ -47,7 +47,7 @@ const Commission = () => {
           <h3 className="text-2xl mt-8 mb-4">MATERIALS</h3>
           <p className="text-lg mb-6">
             Preeti Arts works exclusively with the finest, professional quality
-            artist’s materials. Black and white works are completed with
+            artist&apos: materials. Black and white works are completed with
             graphite, charcoal and ink. Colour works are completed with
             graphite, watercolour, coloured pencil and ink. All works are
             completed on Fabriano Artistico hot-pressed watercolour paper, a
@@ -108,7 +108,7 @@ const Commission = () => {
               </h4>
               <p className="text-lg mb-4">
                 Whether you have a particular idea in mind, are seeking
-                something similar to a past work of Preeti Arts's or would like
+                something similar to a past work of Preeti Arts&apos:or would like
                 a recommendation based on the space where the artwork will be
                 displayed, think about how you would like the artwork to look.
                 All ideas and suggestions are welcome.
@@ -140,7 +140,7 @@ const Commission = () => {
               <p className="text-lg mb-4">
                 Following discussion and acceptance of the booking, a deposit of
                 30% of the commission price is required to start work. This is
-                to secure the time in Preeti Arts's diary and initial outlay of
+                to secure the time in Preeti Arts&apos:diary and initial outlay of
                 materials and is non-refundable. The balance is due by, or at
                 the time of completion, and paid prior to shipment.
               </p>
