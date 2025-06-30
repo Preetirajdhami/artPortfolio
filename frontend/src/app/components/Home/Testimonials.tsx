@@ -21,7 +21,7 @@ const Testimonials: React.FC = () => {
       content:
         "Working with Preeti was seamless from start to finish. She listened carefully to my ideas and delivered a piece that exceeded my expectations.",
       author: "Michael Chen",
-      image: "/testimonial/teNst2.jpg",
+      image: "/testimonial/test2.jpg",
     },
     {
       title: "Quality & Craftsmanship",

@@ -31,7 +31,7 @@ const Commission = () => {
           <p className="text-lg mb-6">
             Commissioning an original artwork is a personal and meaningful
             experience, and an opportunity to own a custom, one-of-a-kind piece
-            of art. Preeti Arts is pleased to be able to share his passion
+            of art. Preeti Arts is pleased to be able to share her passion
             professionally and accepts public and private commissions worldwide.
           </p>
 
@@ -47,11 +47,9 @@ const Commission = () => {
           <h3 className="text-2xl mt-8 mb-4">MATERIALS</h3>
           <p className="text-lg mb-6">
             Preeti Arts works exclusively with the finest, professional quality
-            artist&apos: materials. Black and white works are completed with
+            artist&apos;s materials. Black and white works are completed with
             graphite, charcoal and ink. Colour works are completed with
-            graphite, watercolour, coloured pencil and ink. All works are
-            completed on Fabriano Artistico hot-pressed watercolour paper, a
-            100% cotton, mould-made paper from Italy.
+            graphite and watercolor . 
           </p>
 
           <h3 className="text-2xl mt-8 mb-4">SIZE AND PRICE</h3>
@@ -93,11 +91,7 @@ const Commission = () => {
             the vision for a particular artwork or to capture the necessary
             detail and clarity of the subject(s).
           </p>
-          <p className="text-sm mt-2 text-gray-600">
-            ⁺For multiple subject portraits, please add on 10% of the listed
-            price per additional subject i.e. a double subject head and shoulder
-            A4 portrait would be 520 plus 10%, so 572.
-          </p>
+          
           <h3 className="text-2xl font-bold mt-12 mb-6">COMMISSION PROCESS</h3>
 
           <div className="space-y-8">
@@ -108,7 +102,7 @@ const Commission = () => {
               </h4>
               <p className="text-lg mb-4">
                 Whether you have a particular idea in mind, are seeking
-                something similar to a past work of Preeti Arts&apos:or would like
+                something similar to a past work of Preeti Arts or would like
                 a recommendation based on the space where the artwork will be
                 displayed, think about how you would like the artwork to look.
                 All ideas and suggestions are welcome.
@@ -140,16 +134,14 @@ const Commission = () => {
               <p className="text-lg mb-4">
                 Following discussion and acceptance of the booking, a deposit of
                 30% of the commission price is required to start work. This is
-                to secure the time in Preeti Arts&apos:diary and initial outlay of
+                to secure the time in Preeti Arts diary and initial outlay of
                 materials and is non-refundable. The balance is due by, or at
                 the time of completion, and paid prior to shipment.
               </p>
               <p className="text-lg">
                 Once the commission order is confirmed, you will receive an
                 email with an invoice for the deposit from which payment can be
-                made directly by either credit/debit card or PayPal. Direct bank
-                transfer/deposit is possible for clients within Australia.
-                Cheques are not accepted.
+                made directly
               </p>
             </div>
 
@@ -187,7 +179,7 @@ const Commission = () => {
               <h4 className="text-xl mb-4">6. COMPLETION AND DELIVERY</h4>
               <p className="text-lg mb-4">
                 The completed artwork will be sent flat, between sheets of
-                acid-free glassine paper and reinforced board, accompanied by a
+                acid-free  paper and reinforced board, accompanied by a
                 care instruction guide.
               </p>
             </div>
