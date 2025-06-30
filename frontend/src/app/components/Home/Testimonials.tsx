@@ -11,23 +11,23 @@ const Testimonials: React.FC = () => {
   const testimonials = [
     {
       title: "Client Experience",
-      content:
-        "Preeti captured exactly what I envisioned for my home. Her artwork brings so much life and personality to our living space.",
-      author: "Sarah Johnson",
-      image: "/testimonial/test1.jpg",
+      content: "Preeti captured exactly what I envisioned for my home. Her artwork brings so much life and personality to our living space.",
+      author: "Pratima Shrestha",
+      image: "/testimonial/test1.jpg"
     },
     {
       title: "Commission Process",
       content:
         "Working with Preeti was seamless from start to finish. She listened carefully to my ideas and delivered a piece that exceeded my expectations.",
-      author: "Michael Chen",
+     
+      author: "Ruth Kalikotey",
       image: "/testimonial/test2.jpg",
     },
     {
       title: "Quality & Craftsmanship",
       content:
         "The attention to detail in Preeti work is remarkable. The painting I purchased is a masterpiece of technique and emotion.",
-      author: "Emma Rodriguez",
+      author: "Drishya Giri",
       image: "/testimonial/test3.jpg",
     },
   ];
