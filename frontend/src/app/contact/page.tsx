@@ -3,7 +3,7 @@
 
 const Contact = () => {
   return (
-    <div className="bg-[#F6F1EB]">
+    <div className="bg-base">
       <div className="relative h-screen w-full">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -22,7 +22,7 @@ const Contact = () => {
           <div>
             <h2 className="text-3xl font-bold mb-6">CONTACT</h2>
             <p className="text-lg mb-6 text-justify">
-              Preeti Arts appreciates hearing from people all over the world who enjoy his work and welcomes any questions or enquiries.
+              Preeti Arts appreciates hearing from people all over the world who enjoy her work and welcomes any questions or enquiries.
             </p>
 
             <p className="text-lg text-justify">
