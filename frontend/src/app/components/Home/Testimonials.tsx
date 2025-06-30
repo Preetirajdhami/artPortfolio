@@ -19,6 +19,7 @@ const Testimonials: React.FC = () => {
       title: "Commission Process",
       content:
         "Working with Preeti was seamless from start to finish. She listened carefully to my ideas and delivered a piece that exceeded my expectations.",
+     
       author: "Ruth Kalikotey",
       image: "/testimonial/test2.jpg",
     },
