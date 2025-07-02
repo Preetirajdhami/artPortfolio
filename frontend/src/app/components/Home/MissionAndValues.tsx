@@ -8,7 +8,7 @@ const MissionAndValues: React.FC = () => {
         <div className="relative w-40 h-40 sm:w-52 sm:h-52 md:w-64 md:h-64 mb-6 md:mb-0">
           <div className="w-full h-full bg-green-800 rounded-full overflow-hidden">
             <Image
-              src="/api/placeholder/400/400"
+              src="/missionGoals/mission.jpg"
               alt="Mission and Values"
               width={400}
               height={400}
