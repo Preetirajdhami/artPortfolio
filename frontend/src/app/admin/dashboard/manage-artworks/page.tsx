@@ -22,7 +22,9 @@ const Gallery = () => {
 
   // Handle input changes
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -71,14 +73,14 @@ const Gallery = () => {
         price: 0,
         category: "",
       });
-    } catch (error: any) {
-      console.error("Error uploading image:", error);
-      alert(
-        error?.response?.data?.message ||
-          "Something went wrong while uploading image."
-      );
-    } finally {
-      setLoading(false);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.error("Axios error:", error.response?.data);
+        alert(error.response?.data?.message || "Upload failed.");
+      } else {
+        console.error("Unexpected error:", error);
+        alert("An unexpected error occurred.");
+      }
     }
   };
 
