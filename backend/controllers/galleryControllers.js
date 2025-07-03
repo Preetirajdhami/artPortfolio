@@ -40,6 +40,25 @@ class GalleryController{
 
     }
     //Get all imager (with optional filters)
+
+    static async getAllImages(req, res){
+        try{
+            const { category, medium } = req.body;
+            const filter = {};
+            if(category) filter.category = category;
+            if(medium) filter.medium = medium;
+
+            const images = await GalleryModel.find(filter);
+            res.status(200).json(images);
+
+
+        }
+        catch(error){
+            res.status(5000).json({message:"error.message"});
+
+        }
+
+    }
     //get image by id
     //update image info(not image file)
     //Delete image
