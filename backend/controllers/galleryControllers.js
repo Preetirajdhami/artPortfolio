@@ -72,12 +72,54 @@ class GalleryController{
 
         }
         catch(error){
+            res.status(500).json({error:"error.message"});
 
         }
     }
     //update image info(not image file)
-    
+
+    static async updateImage(req, res){
+        try{
+            const {title, description, medium, price, category} = req.body;
+
+            const updatedImage = await GalleryModel.findByIdAndUpdate(
+                req.params.id,
+                { title, description, medium, price, category },
+                { new: true }
+            );
+
+            if (!updatedImage) {
+                return res.status(404).json({message:"Image not found."});
+            }
+
+            res.status(200).json({
+                message: "Image updated successfully!",
+                image: updatedImage,
+            });
+
+        }
+        catch(error){
+            res.status(500).json({message:"Internal server error."});
+
+        }
+        
+    }
+
     //Delete image
+
+    static async deleteImage(req, res){
+        try{
+            const image = await GalleryModel.findByIdAndDelete(req.params.id);
+            if(!image){
+                return res.status(404).json({message:"Image not found."});
+            }
+             res.status(200).json({message:"Image deleted successfully!"});
+
+        }
+        catch(error){
+            res.status(500).json({message:"Internal server error."});
+        }
+    }
 
 }
 export default GalleryController;
