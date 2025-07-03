@@ -60,7 +60,23 @@ class GalleryController{
 
     }
     //get image by id
+
+    static async getImageById(req, res){
+        try{
+            const image = await GalleryModel.findById(req.params.id);
+            if(!image){
+                return res.status(404).json({error:"Image not found"})
+
+            }
+             res.status(200).json(image);
+
+        }
+        catch(error){
+
+        }
+    }
     //update image info(not image file)
+    
     //Delete image
 
 }
