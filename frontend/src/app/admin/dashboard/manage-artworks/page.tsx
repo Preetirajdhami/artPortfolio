@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-// import axios from "axios";
+import axios from "axios";
 
 const Gallery = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -11,6 +11,7 @@ const Gallery = () => {
     price: 0,
     category: "",
   });
+  const [loading, setLoading] = useState(false);
 
   // Handle file change
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +21,9 @@ const Gallery = () => {
   };
 
   // Handle input changes
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -37,28 +40,46 @@ const Gallery = () => {
       return;
     }
 
-    const data = new FormData();
-    data.append("image", file);
-    data.append("title", formData.title);
-    data.append("description", formData.description);
-    data.append("medium", formData.medium);
-    data.append("price", formData.price.toString());
-    data.append("category", formData.category);
+    try {
+      setLoading(true);
+      const data = new FormData();
+      data.append("image", file); // 🟢 This must match multer.single("image")
+      data.append("title", formData.title);
+      data.append("description", formData.description);
+      data.append("medium", formData.medium);
+      data.append("price", formData.price.toString());
+      data.append("category", formData.category);
 
-    // try {
-    //   const response = await axios.post("http://localhost:8000/api/gallery/upload", data,
-    //     {
-    //         headers: {
-    //             "Content-Type": "multipart/form-data",
-    //         },
-    //     }
-    //   );
-    //   alert("Image uploaded successfully!");
-    //   // Handle the image data as needed
-    // } catch (error) {
-    //   console.error("Error uploading image:", error);
-    //   alert("Error uploading image.");
-    // }
+      const response = await axios.post(
+        "http://localhost:8000/api/gallery/upload", // 🔁 Update if using a different port
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      alert("Image uploaded successfully!");
+      console.log("Uploaded image:", response.data.image);
+      // Optional: Clear the form
+      setFile(null);
+      setFormData({
+        title: "",
+        description: "",
+        medium: "",
+        price: 0,
+        category: "",
+      });
+    } catch (error: any) {
+      console.error("Error uploading image:", error);
+      alert(
+        error?.response?.data?.message ||
+          "Something went wrong while uploading image."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -71,9 +92,9 @@ const Gallery = () => {
         <form onSubmit={handleUpload} encType="multipart/form-data">
           <input
             type="file"
-            name="file"
+            name="image"
             onChange={handleFileChange}
-            className="mb-4 p-2"
+            className="mb-4 p-2 w-full"
             required
           />
           <input
@@ -91,6 +112,7 @@ const Gallery = () => {
             value={formData.description}
             onChange={handleInputChange}
             className="mb-4 p-2 w-full"
+            rows={3}
           />
           <input
             type="text"
@@ -99,6 +121,7 @@ const Gallery = () => {
             value={formData.medium}
             onChange={handleInputChange}
             className="mb-4 p-2 w-full"
+            required
           />
           <input
             type="number"
@@ -107,20 +130,27 @@ const Gallery = () => {
             value={formData.price}
             onChange={handleInputChange}
             className="mb-4 p-2 w-full"
+            required
           />
-          <input
-            type="text"
+          <select
             name="category"
-            placeholder="Category"
             value={formData.category}
             onChange={handleInputChange}
             className="mb-4 p-2 w-full"
-          />
+            required
+          >
+            <option value="">Select Category</option>
+            <option value="Graphite">Graphite</option>
+            <option value="Watercolor">Watercolor</option>
+            <option value="Acrylic">Acrylic</option>
+            <option value="Pastel">Pastel</option>
+          </select>
           <button
             type="submit"
-            className="bg-blue-600 text-white p-3 rounded"
+            className="bg-blue-600 text-white p-3 rounded w-full"
+            disabled={loading}
           >
-            Upload Image
+            {loading ? "Uploading..." : "Upload Image"}
           </button>
         </form>
       </div>
