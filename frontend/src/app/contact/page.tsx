@@ -7,7 +7,7 @@ const Contact = () => {
       <div className="relative h-screen w-full">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/contact-hero.jpg')" }}
+          style={{ backgroundImage: "url('/contact.jpg')" }}
         >
           <div className="absolute inset-0 bg-black bg-opacity-30"></div>
         </div>

@@ -1,7 +1,77 @@
 "use client";
-
+import { useState } from "react";
+import axios from "axios";
 
 const Commission = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    numberOfPortraits: 1,
+    size: "A4",
+    shippingDestination: "",
+    deadline: "",
+    additionalInfo: "",
+  });
+  const [portraitImage, setPortraitImage] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === "numberOfPortraits" ? parseInt(value) : value,
+    }));
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setPortraitImage(e.target.files[0]);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!portraitImage) return alert("Please upload a portrait image.");
+
+    const data = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      data.append(key, value as string);
+    });
+    data.append("portraitImage", portraitImage);
+
+    try {
+      setLoading(true);
+       await axios.post(
+        "http://localhost:8000/api/commissions",
+        data,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+      alert("Commission submitted successfully!");
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        numberOfPortraits: 1,
+        size: "A4",
+        shippingDestination: "",
+        deadline: "",
+        additionalInfo: "",
+      });
+      setPortraitImage(null);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to submit commission.");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="bg-background">
       {/* Full-Screen Image Section */}
@@ -9,7 +79,7 @@ const Commission = () => {
         {/* Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/commission-hero.jpg')" }}
+          style={{ backgroundImage: "url('/comission.JPG')" }}
         >
           {/* Overlay (optional) */}
           <div className="absolute inset-0 bg-black bg-opacity-30"></div>
@@ -48,8 +118,8 @@ const Commission = () => {
           <p className="text-lg mb-6">
             Preeti Arts works exclusively with the finest, professional quality
             artist&apos;s materials. Black and white works are completed with
-            graphite, charcoal and ink. Colour works are completed with
-            graphite and watercolor . 
+            graphite, charcoal and ink. Colour works are completed with graphite
+            and watercolor .
           </p>
 
           <h3 className="text-2xl mt-8 mb-4">SIZE AND PRICE</h3>
@@ -91,7 +161,7 @@ const Commission = () => {
             the vision for a particular artwork or to capture the necessary
             detail and clarity of the subject(s).
           </p>
-          
+
           <h3 className="text-2xl font-bold mt-12 mb-6">COMMISSION PROCESS</h3>
 
           <div className="space-y-8">
@@ -102,8 +172,8 @@ const Commission = () => {
               </h4>
               <p className="text-lg mb-4">
                 Whether you have a particular idea in mind, are seeking
-                something similar to a past work of Preeti Arts or would like
-                a recommendation based on the space where the artwork will be
+                something similar to a past work of Preeti Arts or would like a
+                recommendation based on the space where the artwork will be
                 displayed, think about how you would like the artwork to look.
                 All ideas and suggestions are welcome.
               </p>
@@ -179,8 +249,8 @@ const Commission = () => {
               <h4 className="text-xl mb-4">6. COMPLETION AND DELIVERY</h4>
               <p className="text-lg mb-4">
                 The completed artwork will be sent flat, between sheets of
-                acid-free  paper and reinforced board, accompanied by a
-                care instruction guide.
+                acid-free paper and reinforced board, accompanied by a care
+                instruction guide.
               </p>
             </div>
           </div>
@@ -198,76 +268,99 @@ const Commission = () => {
           </h3>
 
           {/* Commission Form */}
-          <form className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-lg mb-2">First name</label>
-                <input type="text" className="w-full p-3 border rounded-lg" />
-              </div>
-              <div>
-                <label className="block text-lg mb-2">Last name</label>
-                <input type="text" className="w-full p-3 border rounded-lg" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-lg mb-2">Email address</label>
-                <input type="number" className="w-full p-3 border rounded-lg" />
-              </div>
-              <div>
-                <label className="block text-lg mb-2">Number of subjects</label>
-                <input type="text" className="w-full p-3 border rounded-lg" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-lg mb-2">Size</label>
-                <select className="w-full p-3 border rounded-lg">
-                  <option>A5 (21 x 14.8 cm)</option>
-                  <option>A4 (29.7 x 21 cm)</option>
-                  <option>A3 (42 x 29.7 cm)</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-lg mb-2">Location</label>
-                <input type="text" className="w-full p-3 border rounded-lg" />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-lg mb-2">Ideal delivery date</label>
-              <input type="date" className="w-full p-3 border rounded-lg" />
-            </div>
-
-            <div>
-              <label className="block text-lg mb-2">
-                How did you find Preeti Arts?
-              </label>
-              <textarea className="w-full p-3 border rounded-lg h-32"></textarea>
-            </div>
-
-            <div>
-              <label className="block text-lg mb-2">
-                Additional commission information
-              </label>
-              <textarea className="w-full p-3 border rounded-lg h-48"></textarea>
-            </div>
-
-            <div>
-              <label className="block text-lg mb-2">
-                Upload file (max 15MB)
-              </label>
+          <form
+            onSubmit={handleSubmit}
+            encType="multipart/form-data"
+            className="bg-white rounded-lg shadow-lg p-6 space-y-4"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+                className="p-3 border rounded w-full"
+              />
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+                className="p-3 border rounded w-full"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="p-3 border rounded w-full"
+              />
+              <input
+                type="number"
+                name="numberOfPortraits"
+                min={1}
+                placeholder="Number of Portraits"
+                value={formData.numberOfPortraits}
+                onChange={handleChange}
+                required
+                className="p-3 border rounded w-full"
+              />
+              <select
+                name="size"
+                value={formData.size}
+                onChange={handleChange}
+                required
+                className="p-3 border rounded w-full"
+              >
+                <option value="A5">A5</option>
+                <option value="A4">A4</option>
+                <option value="A3">A3</option>
+                <option value="A2">A2</option>
+              </select>
+              <input
+                type="text"
+                name="shippingDestination"
+                placeholder="Shipping Destination"
+                value={formData.shippingDestination}
+                onChange={handleChange}
+                required
+                className="p-3 border rounded w-full"
+              />
+              <input
+                type="date"
+                name="deadline"
+                value={formData.deadline}
+                onChange={handleChange}
+                required
+                className="p-3 border rounded w-full"
+              />
               <input
                 type="file"
-                className="w-full p-3 border rounded-lg"
-                accept="image/*,.pdf"
+                accept="image/*"
+                onChange={handleFileChange}
+                required
+                className="p-3 border rounded w-full"
               />
             </div>
-
-            <button className="w-full bg-primary border-2 border-black text-white py-4 px-8 rounded-lg hover:bg-white hover:text-primary transition-colors text-lg font-semibold">
-              SEND
+            <textarea
+              name="additionalInfo"
+              placeholder="Additional Info (optional)"
+              value={formData.additionalInfo}
+              onChange={handleChange}
+              className="p-3 border rounded w-full h-32"
+            ></textarea>
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded hover:bg-blue-700 transition"
+              disabled={loading}
+            >
+              {loading ? "Submitting..." : "Submit Commission"}
             </button>
           </form>
         </div>
