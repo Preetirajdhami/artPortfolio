@@ -46,7 +46,7 @@ const Commission = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post(
+       await axios.post(
         "http://localhost:8000/api/commissions",
         data,
         {
