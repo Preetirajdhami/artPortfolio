@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import connectDB from "./config/connectdb.js"; 
 import  adminRoutes from "./routes/adminRoutes.js"
 import galleryRoutes from "./routes/galleryRoutes.js"
+import comissionRoutes from "./routes/comissionRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
 
 app.use("/api/admin", adminRoutes);
 app.use("/api/gallery", galleryRoutes);
+app.use("/api/comissions", comissionRoutes);
 
 
 const PORT = process.env.PORT || 8000;

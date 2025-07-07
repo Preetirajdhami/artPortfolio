@@ -47,7 +47,7 @@ const Commission = () => {
     try {
       setLoading(true);
        await axios.post(
-        "http://localhost:8000/api/commissions",
+        "http://localhost:8000/api/comissions",
         data,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -72,7 +72,7 @@ const Commission = () => {
       setLoading(false);
     }
   };
-  return (
+  return ( 
     <div className="bg-background">
       {/* Full-Screen Image Section */}
       <div className="relative h-screen w-full">

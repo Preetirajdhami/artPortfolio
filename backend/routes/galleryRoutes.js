@@ -7,16 +7,16 @@ const router = express.Router();
 // Gallery upload endpoint with error handling
 router.post("/upload", upload.single("image"), GalleryController.uploadImage );
 
-// // Get all images
-// router.get("/", GalleryController.getAllImages);
+//  Get all images
+router.get("/", GalleryController.getAllImages);
 
-// // Get image by ID
-// router.get("/:id", GalleryController.getImageById);
+//  Get image by ID
+ router.get("/:id", GalleryController.getImageById);
 
-// // Update image details
-// router.put("/:id", GalleryController.updateImage);
+//  Update image details
+ router.put("/:id", GalleryController.updateImage);
 
-// // Delete image
-// router.delete("/:id", GalleryController.deleteImage);
+//  Delete image
+ router.delete("/:id", GalleryController.deleteImage);
 
 export default router;
