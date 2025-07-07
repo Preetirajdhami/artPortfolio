@@ -357,7 +357,7 @@ const Commission = () => {
             ></textarea>
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded hover:bg-blue-700 transition"
+              className="w-full bg-primary text-white font-semibold py-3 px-6 rounded hover:bg-blue-700 transition"
               disabled={loading}
             >
               {loading ? "Submitting..." : "Submit Commission"}
