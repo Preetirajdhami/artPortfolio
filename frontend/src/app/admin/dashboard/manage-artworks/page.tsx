@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import axios from "axios";
+import AdminLayout from "../adminLayout";
 
 const Gallery = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -45,7 +46,7 @@ const Gallery = () => {
     try {
       setLoading(true);
       const data = new FormData();
-      data.append("image", file); // 🟢 This must match multer.single("image")
+      data.append("image", file); 
       data.append("title", formData.title);
       data.append("description", formData.description);
       data.append("medium", formData.medium);
@@ -53,7 +54,7 @@ const Gallery = () => {
       data.append("category", formData.category);
 
       const response = await axios.post(
-        "http://localhost:8000/api/gallery/upload", // 🔁 Update if using a different port
+        "http://localhost:8000/api/gallery/upload", 
         data,
         {
           headers: {
@@ -85,7 +86,9 @@ const Gallery = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
+    <AdminLayout>
+
+      <div className="container mx-auto p-6">
       <h1 className="text-3xl font-semibold text-center mb-8">Gallery</h1>
 
       {/* Image Upload Form */}
@@ -157,6 +160,8 @@ const Gallery = () => {
         </form>
       </div>
     </div>
+    </AdminLayout>
+    
   );
 };
 

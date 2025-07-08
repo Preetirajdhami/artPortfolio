@@ -73,7 +73,7 @@ const AdminSidebar = () => {
                 className="flex items-center py-2 px-4 hover:bg-popBlue"
               >
                 <FaCog className="mr-3 text-2xl" />
-                <span>Settings</span>
+                <span>Messages</span>
               </Link>
             </li>
             <li>
