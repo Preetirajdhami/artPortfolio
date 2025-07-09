@@ -10,4 +10,6 @@ router.post(
     ComissionController.createComission
 );
 
+router.get("/",ComissionController.getAllComissions);
+
 export default router;
