@@ -57,7 +57,7 @@ const AdminSidebar = () => {
             </li>
             <li>
               <Link
-                href="/admin/manage-orders"
+                href="/admin/dashboard/manage-orders"
                 className="flex items-center py-2 px-4 hover:bg-popBlue"
               >
                 <FaBox className="mr-3 text-2xl" />

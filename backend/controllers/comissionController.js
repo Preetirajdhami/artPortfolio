@@ -20,6 +20,23 @@ class ComissionController {
       });
     }
   }
+
+  static async getAllComissions(req, res)
+  
+  {
+    try{
+      const comissions = await Comission.find().sort({ createdAt: -1});
+      res.status(200).json(comissions);
+    
+  }
+    catch(error){
+      res.status(500).json({
+        message: "error.message"
+      });
+
+    }
+
+  }
 }
 
 export default ComissionController;

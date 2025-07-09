@@ -26,7 +26,8 @@ class ContactController {
     } catch (error) {
       res.status(500).json({
         message: "Error fetching messages",
-        error: error.message,
+        error: error.
+        message,
       });
     }
   }
