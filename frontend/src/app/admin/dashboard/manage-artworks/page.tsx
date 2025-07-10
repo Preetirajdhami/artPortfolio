@@ -46,7 +46,7 @@ const Gallery = () => {
     try {
       setLoading(true);
       const data = new FormData();
-      data.append("image", file); 
+      data.append("image", file);
       data.append("title", formData.title);
       data.append("description", formData.description);
       data.append("medium", formData.medium);
@@ -54,7 +54,7 @@ const Gallery = () => {
       data.append("category", formData.category);
 
       const response = await axios.post(
-        "http://localhost:8000/api/gallery/upload", 
+        "https://artportfolio-backend.onrender.com/api/gallery/upload",
         data,
         {
           headers: {
@@ -87,81 +87,79 @@ const Gallery = () => {
 
   return (
     <AdminLayout>
-
       <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-semibold text-center mb-8">Gallery</h1>
+        <h1 className="text-3xl font-semibold text-center mb-8">Gallery</h1>
 
-      {/* Image Upload Form */}
-      <div className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Upload Artwork</h2>
-        <form onSubmit={handleUpload} encType="multipart/form-data">
-          <input
-            type="file"
-            name="image"
-            onChange={handleFileChange}
-            className="mb-4 p-2 w-full"
-            required
-          />
-          <input
-            type="text"
-            name="title"
-            placeholder="Title"
-            value={formData.title}
-            onChange={handleInputChange}
-            className="mb-4 p-2 w-full"
-            required
-          />
-          <textarea
-            name="description"
-            placeholder="Description"
-            value={formData.description}
-            onChange={handleInputChange}
-            className="mb-4 p-2 w-full"
-            rows={3}
-          />
-          <input
-            type="text"
-            name="medium"
-            placeholder="Medium"
-            value={formData.medium}
-            onChange={handleInputChange}
-            className="mb-4 p-2 w-full"
-            required
-          />
-          <input
-            type="number"
-            name="price"
-            placeholder="Price"
-            value={formData.price}
-            onChange={handleInputChange}
-            className="mb-4 p-2 w-full"
-            required
-          />
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleInputChange}
-            className="mb-4 p-2 w-full"
-            required
-          >
-            <option value="">Select Category</option>
-            <option value="Graphite">Graphite</option>
-            <option value="Watercolor">Watercolor</option>
-            <option value="Acrylic">Acrylic</option>
-            <option value="Pastel">Pastel</option>
-          </select>
-          <button
-            type="submit"
-            className="bg-blue-600 text-white p-3 rounded w-full"
-            disabled={loading}
-          >
-            {loading ? "Uploading..." : "Upload Image"}
-          </button>
-        </form>
+        {/* Image Upload Form */}
+        <div className="mb-8">
+          <h2 className="text-xl font-semibold mb-4">Upload Artwork</h2>
+          <form onSubmit={handleUpload} encType="multipart/form-data">
+            <input
+              type="file"
+              name="image"
+              onChange={handleFileChange}
+              className="mb-4 p-2 w-full"
+              required
+            />
+            <input
+              type="text"
+              name="title"
+              placeholder="Title"
+              value={formData.title}
+              onChange={handleInputChange}
+              className="mb-4 p-2 w-full"
+              required
+            />
+            <textarea
+              name="description"
+              placeholder="Description"
+              value={formData.description}
+              onChange={handleInputChange}
+              className="mb-4 p-2 w-full"
+              rows={3}
+            />
+            <input
+              type="text"
+              name="medium"
+              placeholder="Medium"
+              value={formData.medium}
+              onChange={handleInputChange}
+              className="mb-4 p-2 w-full"
+              required
+            />
+            <input
+              type="number"
+              name="price"
+              placeholder="Price"
+              value={formData.price}
+              onChange={handleInputChange}
+              className="mb-4 p-2 w-full"
+              required
+            />
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleInputChange}
+              className="mb-4 p-2 w-full"
+              required
+            >
+              <option value="">Select Category</option>
+              <option value="Graphite">Graphite</option>
+              <option value="Watercolor">Watercolor</option>
+              <option value="Acrylic">Acrylic</option>
+              <option value="Pastel">Pastel</option>
+            </select>
+            <button
+              type="submit"
+              className="bg-blue-600 text-white p-3 rounded w-full"
+              disabled={loading}
+            >
+              {loading ? "Uploading..." : "Upload Image"}
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
     </AdminLayout>
-    
   );
 };
 
