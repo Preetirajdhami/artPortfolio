@@ -6,6 +6,15 @@
   .responsive-padding {
     @apply px-8 sm:px-12 md:px-16 lg:px-20 xl:px-24 2xl:px-52;
   }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
 }
 
 html,
@@ -13,15 +22,12 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   width: 100%;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-  width: 0;
-  height: 0;
+  display: none; /* Chrome, Safari */
 }
-
-/* * {
-  scrollbar-width: none;
-} */
 
