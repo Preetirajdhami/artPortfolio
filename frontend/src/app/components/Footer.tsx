@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { FaInstagram, FaFacebook, FaTiktok, FaEnvelope } from 'react-icons/fa';
+import Link from "next/link";
+import { FaInstagram, FaFacebook, FaTiktok, FaEnvelope } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -29,7 +29,7 @@ const Footer = () => {
 
             {/* TikTok */}
             <Link
-              href="https://www.tiktok.com/your-profile"
+              href="https://www.tiktok.com/@pretti.rajdhami?_t=ZS-8xuP7k6Ifbe&_r=1"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:text-accent transform hover:scale-110 transition-all duration-300"
@@ -38,12 +38,13 @@ const Footer = () => {
             </Link>
 
             {/* Gmail */}
-            <Link
-              href="mailto:your-email@gmail.com"
-              className="text-primary hover:text-accent transform hover:scale-110 transition-all duration-300"
-            >
-              <FaEnvelope className="w-6 h-6" />
-            </Link>
+            <a
+  href="mailto:preetirajdhami2@gmail.com"
+  className="text-primary hover:text-accent transform hover:scale-110 transition-all duration-300"
+>
+  <FaEnvelope className="w-6 h-6" />
+</a>
+
           </div>
 
           {/* Footer Text */}

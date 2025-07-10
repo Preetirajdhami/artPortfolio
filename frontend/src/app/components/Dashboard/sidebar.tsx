@@ -12,7 +12,7 @@ const AdminSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = async () => {
-    router.push("/admin/adminLogin");
+    router.push("/admin/login");
   };
 
   const toggleSidebar = () => setIsOpen(!isOpen);
@@ -40,7 +40,7 @@ const AdminSidebar = () => {
             <li>
               <Link
                 href="/admin/dashboard"
-                className="flex items-center py-2 px-4 hover:bg-popBlue"
+                className="flex items-center py-2 px-4 "
               >
                 <FaTachometerAlt className="mr-3 text-2xl" />
                 <span>Dashboard</span>
@@ -48,20 +48,20 @@ const AdminSidebar = () => {
             </li>
             <li>
               <Link
-                href="/admin/dashboard/manage-artworks"
-                className="flex items-center py-2 px-4 hover:bg-popBlue"
+                href="/admin/dashboard/gallery"
+                className="flex items-center py-2 px-4 "
               >
                 <FaImages className="mr-3 text-2xl" />
-                <span>Manage Artworks</span>
+                <span>Gallery</span>
               </Link>
             </li>
             <li>
               <Link
-                href="/admin/dashboard/manage-orders"
+                href="/admin/dashboard/comission"
                 className="flex items-center py-2 px-4 hover:bg-popBlue"
               >
                 <FaBox className="mr-3 text-2xl" />
-                <span>Manage Orders</span>
+                <span>Comission</span>
               </Link>
             </li>
             <li>
@@ -69,11 +69,11 @@ const AdminSidebar = () => {
             </li>
             <li>
               <Link
-                href="/admin/settings"
+                href="/admin/dashboard/contact"
                 className="flex items-center py-2 px-4 hover:bg-popBlue"
               >
                 <FaCog className="mr-3 text-2xl" />
-                <span>Messages</span>
+                <span>Contact</span>
               </Link>
             </li>
             <li>

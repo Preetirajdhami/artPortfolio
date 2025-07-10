@@ -1,7 +1,7 @@
-'use client';
-
+"use client";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import AdminLayout from "../adminLayout";
 
 interface Commission {
   _id: string;
@@ -24,7 +24,9 @@ const ManageOrders = () => {
   useEffect(() => {
     const fetchCommissions = async () => {
       try {
-        const response = await axios.get('/api/comissions');
+        const response = await axios.get(
+          'https://artportfolio-backend.onrender.com/api/comissions'
+        );
         setCommissions(response.data);
       } catch (error) {
         console.error('Error fetching commissions:', error);
@@ -37,7 +39,9 @@ const ManageOrders = () => {
   }, []);
 
   return (
-    <div className="p-6">
+
+    <AdminLayout>
+      <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Manage Orders</h1>
       {loading ? (
         <p>Loading...</p>
@@ -84,6 +88,8 @@ const ManageOrders = () => {
         </div>
       )}
     </div>
+    </AdminLayout>
+    
   );
 };
 
