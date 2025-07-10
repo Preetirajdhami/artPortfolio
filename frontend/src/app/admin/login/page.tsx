@@ -1,70 +1,77 @@
-"use client"
+"use client";
+
 import React, { useState } from "react";
-// import { useRouter } from "next/navigation";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const AdminLogin = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const router = useRouter();
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
   const [loading, setLoading] = useState(false);
 
-  // const router = useRouter();
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
+    try {
+      const res = await axios.post(
+        "https://artportfolio-backend.onrender.com/api/admin/login",
+        formData
+      );
 
-    // try {
-    //   const response = await fetch("http://localhost:8000/api/admin/login", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ email, password }),
-    //   });
+      // Optional: store token
+      localStorage.setItem("adminToken", res.data.token);
 
-    //   const data = await response.json();
+      // Redirect to dashboard
+      router.push("/admin/dashboard");
 
-    //   if (response.ok) {
-    //     console.log("Login Successful:", data); 
-    //     localStorage.setItem("adminToken", data.token);
-    //     alert("Login Successful!");
-    //     router.push("/admin/dashboard");
-    //   } else {
-    //     setError(data.message || "Something went wrong. Please try again.");
-    //   }
-    // } catch (error) {
-    //   setError("Network error. Please try again.");
-    // } finally {
-    //   setLoading(false);
-    // }
+    } catch (error) {
+      console.error("Login failed:", error);
+      alert("Invalid credentials");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <form onSubmit={handleLogin} className="p-6 bg-white rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold mb-4">Admin Login</h2>
-        {error && <p className="text-red-500 mb-2">{error}</p>}
+    <div className="max-w-md mx-auto py-10">
+      <h1 className="text-2xl font-bold mb-4 text-center">Admin Login</h1>
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="border p-2 mb-2 w-full"
+          name="email"
+          placeholder="Admin Email"
+          value={formData.email}
+          onChange={handleChange}
           required
+          className="w-full p-2 border rounded"
         />
         <input
           type="password"
+          name="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="border p-2 mb-2 w-full"
+          value={formData.password}
+          onChange={handleChange}
           required
+          className="w-full p-2 border rounded"
         />
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded w-full"
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
           disabled={loading}
         >
           {loading ? "Logging in..." : "Login"}
