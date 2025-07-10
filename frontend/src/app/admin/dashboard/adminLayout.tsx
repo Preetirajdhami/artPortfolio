@@ -1,15 +1,13 @@
-
-import AdminSidebar from '@/app/components/Dashboard/sidebar';
-import React from 'react';
-
+import AdminSidebar from "../../components/Dashboard/sidebar"
+import type React from "react"
 
 const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="flex">
+    <div className="min-h-screen bg-[#ECE3CE]">
       <AdminSidebar />
-      <main className="flex-1 ">{children}</main>
+      <main className="lg:ml-72">{children}</main>
     </div>
-  );
-};
+  )
+}
 
-export default AdminLayout;
+export default AdminLayout
