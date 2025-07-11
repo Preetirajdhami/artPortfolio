@@ -46,7 +46,7 @@ const Commission = () => {
 
     try {
       setLoading(true);
-       await axios.post(
+      await axios.post(
         "http://localhost:8000/api/comissions",
         data,
         {
@@ -72,7 +72,8 @@ const Commission = () => {
       setLoading(false);
     }
   };
-  return ( 
+
+  return (
     <div className="bg-background">
       {/* Full-Screen Image Section */}
       <div className="relative h-screen w-full">
@@ -81,7 +82,7 @@ const Commission = () => {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url('/comission.JPG')" }}
         >
-          {/* Overlay (optional) */}
+          {/* Overlay */}
           <div className="absolute inset-0 bg-black bg-opacity-30"></div>
         </div>
 
@@ -117,9 +118,9 @@ const Commission = () => {
           <h3 className="text-2xl mt-8 mb-4">MATERIALS</h3>
           <p className="text-lg mb-6">
             Preeti Arts works exclusively with the finest, professional quality
-            artist&apos;s materials. Black and white works are completed with
+            artist's materials. Black and white works are completed with
             graphite, charcoal and ink. Colour works are completed with graphite
-            and watercolor .
+            and watercolor.
           </p>
 
           <h3 className="text-2xl mt-8 mb-4">SIZE AND PRICE</h3>
@@ -271,93 +272,141 @@ const Commission = () => {
           <form
             onSubmit={handleSubmit}
             encType="multipart/form-data"
-            className="bg-white rounded-lg shadow-lg p-6 space-y-4"
+            className="bg-white rounded-lg shadow-lg p-6 space-y-6"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input
-                type="text"
-                name="firstName"
-                placeholder="First Name"
-                value={formData.firstName}
-                onChange={handleChange}
-                required
-                className="p-3 border rounded w-full"
-              />
-              <input
-                type="text"
-                name="lastName"
-                placeholder="Last Name"
-                value={formData.lastName}
-                onChange={handleChange}
-                required
-                className="p-3 border rounded w-full"
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="p-3 border rounded w-full"
-              />
-              <input
-                type="number"
-                name="numberOfPortraits"
-                min={1}
-                placeholder="Number of Portraits"
-                value={formData.numberOfPortraits}
-                onChange={handleChange}
-                required
-                className="p-3 border rounded w-full"
-              />
-              <select
-                name="size"
-                value={formData.size}
-                onChange={handleChange}
-                required
-                className="p-3 border rounded w-full"
-              >
-                <option value="A5">A5</option>
-                <option value="A4">A4</option>
-                <option value="A3">A3</option>
-                <option value="A2">A2</option>
-              </select>
-              <input
-                type="text"
-                name="shippingDestination"
-                placeholder="Shipping Destination"
-                value={formData.shippingDestination}
-                onChange={handleChange}
-                required
-                className="p-3 border rounded w-full"
-              />
-              <input
-                type="date"
-                name="deadline"
-                value={formData.deadline}
-                onChange={handleChange}
-                required
-                className="p-3 border rounded w-full"
-              />
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-                required
-                className="p-3 border rounded w-full"
-              />
+              <div className="flex flex-col">
+                <label htmlFor="firstName" className="text-lg mb-2">
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  required
+                  className="p-3 border rounded w-full"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="lastName" className="text-lg mb-2">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  required
+                  className="p-3 border rounded w-full"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="email" className="text-lg mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="p-3 border rounded w-full"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="numberOfPortraits" className="text-lg mb-2">
+                  Number of Portraits
+                </label>
+                <input
+                  type="number"
+                  id="numberOfPortraits"
+                  name="numberOfPortraits"
+                  min={1}
+                  value={formData.numberOfPortraits}
+                  onChange={handleChange}
+                  required
+                  className="p-3 border rounded w-full"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="size" className="text-lg mb-2">
+                  Size
+                </label>
+                <select
+                  id="size"
+                  name="size"
+                  value={formData.size}
+                  onChange={handleChange}
+                  required
+                  className="p-3 border rounded w-full"
+                >
+                  <option value="A5">A5</option>
+                  <option value="A4">A4</option>
+                  <option value="A3">A3</option>
+                  <option value="A2">A2</option>
+                </select>
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="shippingDestination" className="text-lg mb-2">
+                  Shipping Destination
+                </label>
+                <input
+                  type="text"
+                  id="shippingDestination"
+                  name="shippingDestination"
+                  value={formData.shippingDestination}
+                  onChange={handleChange}
+                  required
+                  className="p-3 border rounded w-full"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="deadline" className="text-lg mb-2">
+                  Deadline
+                </label>
+                <input
+                  type="date"
+                  id="deadline"
+                  name="deadline"
+                  value={formData.deadline}
+                  onChange={handleChange}
+                  required
+                  className="p-3 border rounded w-full"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="portraitImage" className="text-lg mb-2">
+                  Portrait Image
+                </label>
+                <input
+                  type="file"
+                  id="portraitImage"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  required
+                  className="p-3 border rounded w-full"
+                />
+              </div>
             </div>
-            <textarea
-              name="additionalInfo"
-              placeholder="Additional Info (optional)"
-              value={formData.additionalInfo}
-              onChange={handleChange}
-              className="p-3 border rounded w-full h-32"
-            ></textarea>
+            <div className="flex flex-col">
+              <label htmlFor="additionalInfo" className="text-lg mb-2">
+                Additional Information (Optional)
+              </label>
+              <textarea
+                id="additionalInfo"
+                name="additionalInfo"
+                value={formData.additionalInfo}
+                onChange={handleChange}
+                className="p-3 border rounded w-full h-32"
+              ></textarea>
+            </div>
             <button
               type="submit"
-              className="w-full bg-primary text-white font-semibold py-3 px-6 rounded transition"
+              className="w-full bg-primary text-white py-3 px-6 rounded transition"
               disabled={loading}
             >
               {loading ? "Submitting..." : "Submit Commission"}
