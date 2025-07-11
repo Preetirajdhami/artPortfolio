@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-
 import type React from "react";
 
 const Navbar: React.FC = () => {
@@ -13,13 +12,8 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 20);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -27,7 +21,7 @@ const Navbar: React.FC = () => {
   const isActive = (path: string) => pathname === path;
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen((prev) => !prev);
   };
 
   return (
@@ -79,15 +73,16 @@ const Navbar: React.FC = () => {
             </svg>
           </button>
 
+          {/* Desktop Menu */}
           <div className="hidden lg:flex items-center">
             <div
-              className={`rounded-3xl px-6 py-3 flex justify-center gap-24 w-[700px] ${
+              className={`rounded-3xl px-6  flex justify-center gap-24 w-[700px] ${
                 isScrolled ? "" : "bg-primary"
               }`}
             >
               <Link
                 href="/"
-                className={`text-base font-medium relative ${
+                className={`text-base py-3 font-medium relative ${
                   isActive("/")
                     ? 'text-white after:content-["."] after:block after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-12px] after:text-white after:text-2xl'
                     : "text-white hover:text-gray-200"
@@ -95,19 +90,45 @@ const Navbar: React.FC = () => {
               >
                 Home
               </Link>
-              <Link
-                href="/gallery"
-                className={`text-base font-medium relative ${
-                  isActive("/gallery")
-                    ? 'text-white after:content-["."] after:block after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-12px] after:text-white after:text-2xl'
-                    : "text-white hover:text-gray-200"
-                } transition-colors`}
-              >
-                Gallery
-              </Link>
+
+              {/* Gallery with Dropdown */}
+              <div className="relative group">
+                <div
+                  className={`cursor-pointer py-3 text-base font-medium relative ${
+                    isActive("/gallery")
+                      ? 'text-white after:content-["."] after:block after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-12px] after:text-white after:text-2xl'
+                      : "text-white hover:text-gray-200"
+                  } transition-colors`}
+                >
+                  Gallery
+                </div>
+
+                {/* Dropdown */}
+                <div className="absolute left-1/2 -translate-x-1/2  hidden group-hover:flex flex-col bg-white shadow-lg rounded-md min-w-[200px] z-50 py-2 transition duration-200 ease-in-out group-hover:transition-delay-300">
+                  <Link
+                    href="/gallery/graphite-and-charcoal"
+                    className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Graphite & Charcoal
+                  </Link>
+                  <Link
+                    href="/gallery/watercolor"
+                    className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Watercolor
+                  </Link>
+                  <Link
+                    href="/gallery/acrylic"
+                    className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Acrylic
+                  </Link>
+                </div>
+              </div>
+
               <Link
                 href="/commission"
-                className={`text-base font-medium relative ${
+                className={`text-base py-3 font-medium relative ${
                   isActive("/commission")
                     ? 'text-white after:content-["."] after:block after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-12px] after:text-white after:text-2xl'
                     : "text-white hover:text-gray-200"
@@ -117,7 +138,7 @@ const Navbar: React.FC = () => {
               </Link>
               <Link
                 href="/contact"
-                className={`text-base font-medium relative ${
+                className={`text-base py-3 font-medium relative ${
                   isActive("/contact")
                     ? 'text-white after:content-["."] after:block after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-12px] after:text-white after:text-2xl'
                     : "text-white hover:text-gray-200"
@@ -130,12 +151,11 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="lg:hidden bg-primary mt-2">
           <div className="px-4 py-2">
             <div className="flex flex-col space-y-4 items-center px-4">
-              {/* Removed the logo/name from here */}
-              
               <Link
                 href="/"
                 className={`text-base font-medium py-2 relative ${
