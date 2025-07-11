@@ -73,7 +73,7 @@ const Gallery = () => {
           "Content-Type": "multipart/form-data",
         },
       })
-
+      console.log("Upload response:", response.data);
       alert("Artwork uploaded successfully!")
       setFile(null)
       setFormData({

@@ -5,7 +5,6 @@ import Image from "next/image";
 
 type ImageType = {
   src: string;
-
 };
 
 const categoriesData: Record<string, { title: string; images: ImageType[] }> = {
@@ -13,17 +12,17 @@ const categoriesData: Record<string, { title: string; images: ImageType[] }> = {
     title: "Graphite and Charcoal Art",
     images: [
       { src: "/graphite1.jpg" },
-      { src: "/graphite2.jpg"},
-      { src: "/graphite3.jpg"},
-      { src: "/graphite4.jpg"},
-      { src: "/graphite1.jpg"},
       { src: "/graphite2.jpg" },
       { src: "/graphite3.jpg" },
       { src: "/graphite4.jpg" },
-      { src: "/graphite1.jpg"},
-      { src: "/graphite2.jpg"},
+      { src: "/graphite1.jpg" },
+      { src: "/graphite2.jpg" },
       { src: "/graphite3.jpg" },
-      { src: "/graphite4.jpg"},
+      { src: "/graphite4.jpg" },
+      { src: "/graphite1.jpg" },
+      { src: "/graphite2.jpg" },
+      { src: "/graphite3.jpg" },
+      { src: "/graphite4.jpg" },
       { src: "/graphite1.jpg" },
       { src: "/graphite2.jpg" },
       { src: "/graphite3.jpg" },
@@ -35,8 +34,8 @@ const categoriesData: Record<string, { title: string; images: ImageType[] }> = {
     images: [
       { src: "/watercolor1.jpg" },
       { src: "/watercolor2.jpg" },
-      { src: "/watercolor3.jpg"},
-      { src: "/watercolor4.jpg"},
+      { src: "/watercolor3.jpg" },
+      { src: "/watercolor4.jpg" },
     ],
   },
   acrylic: {
@@ -44,7 +43,7 @@ const categoriesData: Record<string, { title: string; images: ImageType[] }> = {
     images: [
       { src: "/acrylic1.jpg" },
       { src: "/acrylic2.jpg" },
-      { src: "/acrylic3.jpg"},
+      { src: "/acrylic3.jpg" },
       { src: "/acrylic4.jpg" },
     ],
   },
@@ -103,16 +102,26 @@ const GalleryByCategory = ({ params }: { params: Promise<{ category: string }> }
                 key={i}
                 className="relative flex-none w-full h-[400px] snap-center overflow-hidden"
               >
-                <Image
-                  src={image.src || "/placeholder.svg"}
-                  alt={`Gallery image ${i + 1}`}
-                  fill
-                  sizes="100vw"
-                  className="object-cover"
-                  onLoad={() => handleImageLoad(image.src)}
-                  onError={() => handleImageError(image.src)}
-                  priority={i === 0}
-                />
+                {imageLoaded[image.src] === false ? (
+                  <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                    <p className="text-red-500">Failed to load image</p>
+                  </div>
+                ) : imageLoaded[image.src] ? (
+                  <Image
+                    src={image.src || "/placeholder.svg"}
+                    alt={`Gallery image ${i + 1}`}
+                    fill
+                    sizes="100vw"
+                    className="object-cover"
+                    onLoad={() => handleImageLoad(image.src)}
+                    onError={() => handleImageError(image.src)}
+                    priority={i === 0}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                    <p>Loading...</p>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -128,21 +137,28 @@ const GalleryByCategory = ({ params }: { params: Promise<{ category: string }> }
       <div className="hidden lg:block">
         <div className="grid grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
           {data.images.map((image, i) => (
-            <div
-              key={i}
-              className="overflow-hidden rounded-lg shadow-lg"
-            >
+            <div key={i} className="overflow-hidden rounded-lg shadow-lg">
               <div className="relative w-full h-[400px]">
-                <Image
-                  src={image.src || "/placeholder.svg"}
-                  alt={`Gallery image ${i + 1}`}
-                  fill
-                  sizes="(max-width: 1280px) 50vw, (max-width: 1536px) 33vw, 25vw"
-                  className="object-cover"
-                  onLoad={() => handleImageLoad(image.src)}
-                  onError={() => handleImageError(image.src)}
-                  priority={i < 4}
-                />
+                {imageLoaded[image.src] === false ? (
+                  <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                    <p className="text-red-500">Failed to load image</p>
+                  </div>
+                ) : imageLoaded[image.src] ? (
+                  <Image
+                    src={image.src || "/placeholder.svg"}
+                    alt={`Gallery image ${i + 1}`}
+                    fill
+                    sizes="(max-width: 1280px) 50vw, (max-width: 1536px) 33vw, 25vw"
+                    className="object-cover"
+                    onLoad={() => handleImageLoad(image.src)}
+                    onError={() => handleImageError(image.src)}
+                    priority={i < 4}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                    <p>Loading...</p>
+                  </div>
+                )}
               </div>
             </div>
           ))}

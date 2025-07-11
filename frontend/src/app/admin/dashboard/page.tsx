@@ -41,10 +41,8 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate fetching dashboard data
     const fetchDashboardData = async () => {
       try {
-        // In a real app, you'd fetch this from your API
         setStats({
           totalArtworks: 24,
           totalCommissions: 8,
@@ -137,7 +135,7 @@ const AdminDashboard = () => {
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-[#3A4D39] mb-2">Dashboard Overview</h1>
-            <p className="text-[#3A4D39]/70">Welcome back! Here's what's happening with your art portfolio.</p>
+            <p className="text-[#3A4D39]/70">Welcome back! Here&apos;s what&apos;s happening with your art portfolio.</p>
           </div>
 
           {/* Stats Grid */}
