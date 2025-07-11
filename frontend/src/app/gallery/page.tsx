@@ -5,8 +5,6 @@ import { FaArrowLeft, FaArrowRight, FaTimes } from 'react-icons/fa';
 import { AnimatePresence, motion, Variants, Transition } from 'framer-motion';
 import { useDrag } from '@use-gesture/react';
 
-
-
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<{ categoryIndex: number; imageIndex: number } | null>(null);
   const scrollRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -49,7 +47,10 @@ const Gallery = () => {
   const scroll = (index: number, direction: 'left' | 'right') => {
     if (scrollRefs.current[index]) {
       const scrollAmount = scrollRefs.current[index].clientWidth / 2;
-      scrollRefs.current[index].scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+      scrollRefs.current[index].scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
     }
   };
 
@@ -87,40 +88,42 @@ const Gallery = () => {
     visible: { opacity: 1, y: 0 },
   };
 
-  const transitionConfig: Transition = {
-    duration: 0.3,
-  };
+  const transitionConfig: Transition = { duration: 0.3 };
 
   return (
-    <div className="bg-background min-h-screen py-12">
-      <div className="container mx-auto px-4">
+    <div className="bg-background min-h-screen">
+      <div className="mx-auto px-4">
         {galleryData.map((section, sectionIndex) => (
           <section key={sectionIndex} className="mb-12">
             <h2 className="text-3xl font-bold text-primary mb-4">{section.category}</h2>
 
             <div className="relative">
+              {/* Arrows only visible on larger screens */}
               <button
-                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-lg z-10 hover:bg-gray-700"
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-primary text-white p-2 rounded-full shadow-lg z-10 hidden sm:flex"
                 onClick={() => scroll(sectionIndex, 'left')}
               >
                 <FaArrowLeft />
               </button>
 
+              {/* Swipeable scroll container */}
               <div
-                ref={(el) => { scrollRefs.current[sectionIndex] = el; }} 
-                className="flex overflow-x-auto space-x-4 scrollbar-hide scroll-smooth px-12"
+                ref={(el) => {
+                  scrollRefs.current[sectionIndex] = el;
+                }}
+                className="flex overflow-x-auto snap-x snap-mandatory space-x-0 sm:space-x-4 scrollbar-hide scroll-smooth"
               >
                 {section.images.map((image, imageIndex) => (
                   <div
                     key={imageIndex}
-                    className="relative flex-none w-48 h-48 sm:w-64 sm:h-64 overflow-hidden rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
+                    className="relative flex-none w-full h-[22rem] sm:w-64 sm:h-64 snap-center overflow-hidden rounded-none sm:rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
                     onClick={() => setSelectedImage({ categoryIndex: sectionIndex, imageIndex })}
                   >
                     <Image
                       src={image.src}
                       alt={image.title}
-                      width={256}
-                      height={256}
+                      width={512}
+                      height={512}
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -128,7 +131,7 @@ const Gallery = () => {
               </div>
 
               <button
-                className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-lg z-10 hover:bg-gray-700"
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-primary text-white p-2 rounded-full shadow-lg z-10 hidden sm:flex"
                 onClick={() => scroll(sectionIndex, 'right')}
               >
                 <FaArrowRight />
@@ -137,6 +140,7 @@ const Gallery = () => {
           </section>
         ))}
 
+        {/* Lightbox */}
         <AnimatePresence>
           {selectedImage && (
             <motion.div
@@ -145,7 +149,7 @@ const Gallery = () => {
               animate="visible"
               exit="exit"
               variants={lightboxVariants}
-              transition={transitionConfig as Transition} 
+              transition={transitionConfig}
             >
               <div className="relative w-full h-full flex items-center justify-center">
                 <button
@@ -161,7 +165,10 @@ const Gallery = () => {
                     setSelectedImage((prev) => {
                       if (!prev) return prev;
                       const totalImages = galleryData[prev.categoryIndex].images.length;
-                      return { ...prev, imageIndex: (prev.imageIndex - 1 + totalImages) % totalImages };
+                      return {
+                        ...prev,
+                        imageIndex: (prev.imageIndex - 1 + totalImages) % totalImages,
+                      };
                     })
                   }
                 >
@@ -174,7 +181,10 @@ const Gallery = () => {
                     setSelectedImage((prev) => {
                       if (!prev) return prev;
                       const totalImages = galleryData[prev.categoryIndex].images.length;
-                      return { ...prev, imageIndex: (prev.imageIndex + 1) % totalImages };
+                      return {
+                        ...prev,
+                        imageIndex: (prev.imageIndex + 1) % totalImages,
+                      };
                     })
                   }
                 >
@@ -191,8 +201,12 @@ const Gallery = () => {
                     className="flex justify-center w-full max-w-xl"
                   >
                     <Image
-                      src={galleryData[selectedImage.categoryIndex].images[selectedImage.imageIndex].src}
-                      alt={galleryData[selectedImage.categoryIndex].images[selectedImage.imageIndex].title}
+                      src={
+                        galleryData[selectedImage.categoryIndex].images[selectedImage.imageIndex].src
+                      }
+                      alt={
+                        galleryData[selectedImage.categoryIndex].images[selectedImage.imageIndex].title
+                      }
                       width={800}
                       height={800}
                       className="object-contain max-h-[80vh] w-auto"
@@ -220,4 +234,4 @@ const Gallery = () => {
   );
 };
 
-export default Gallery;
+export default Gallery; 
