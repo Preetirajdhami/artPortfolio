@@ -46,8 +46,8 @@ const Commission = () => {
 
     try {
       setLoading(true);
-      await axios.post(
-        "http://localhost:8000/api/comissions",
+       await axios.post(
+        "https://artportfolio-backend.onrender.com/api/comissions",
         data,
         {
           headers: { "Content-Type": "multipart/form-data" },
