@@ -1,7 +1,7 @@
 "use client"
 import type React from "react"
 import { useState } from "react"
-import axios from "axios"
+import axios, { AxiosError } from "axios" 
 import { useRouter } from "next/navigation"
 import { Palette, Loader2, Mail, Lock, Eye, EyeOff, AlertCircle, CheckCircle, X } from "lucide-react"
 
@@ -49,11 +49,15 @@ const AdminLogin = () => {
     setShowPassword((prev) => !prev)
   }
 
-  const getErrorMessage = (error: any) => {
+  const getErrorMessage = (error: AxiosError) => {
     if (error.response) {
       // Server responded with error status
       const status = error.response.status
-      const message = error.response.data?.message || error.response.data?.error
+      const data = error.response.data
+      const message =
+        data && typeof data === "object"
+          ? (data as { message?: string; error?: string }).message || (data as { message?: string; error?: string }).error
+          : undefined
 
       switch (status) {
         case 401:
@@ -114,14 +118,18 @@ const AdminLogin = () => {
       localStorage.setItem("adminToken", res.data.token)
       showAlert("success", "Login Successful", "Welcome back! Redirecting to dashboard...")
 
-      // Delay redirect to show success message
+
       setTimeout(() => {
         router.push("/admin/dashboard")
       }, 1500)
-    } catch (error: any) {
+    } catch (error: unknown) { 
       console.error("Login failed:", error)
-      const { title, message } = getErrorMessage(error)
-      showAlert("error", title, message)
+      if (axios.isAxiosError(error)) {
+        const { title, message } = getErrorMessage(error)
+        showAlert("error", title, message)
+      } else {
+        showAlert("error", "Login Failed", "An unexpected error occurred. Please try again.")
+      }
     } finally {
       setLoading(false)
     }

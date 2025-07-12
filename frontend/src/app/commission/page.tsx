@@ -118,7 +118,7 @@ const Commission = () => {
           <h3 className="text-2xl mt-8 mb-4">MATERIALS</h3>
           <p className="text-lg mb-6">
             Preeti Arts works exclusively with the finest, professional quality
-            artist's materials. Black and white works are completed with
+            artist&apos;s materials. Black and white works are completed with
             graphite, charcoal and ink. Colour works are completed with graphite
             and watercolor.
           </p>

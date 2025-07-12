@@ -1,6 +1,7 @@
 "use client"
 import Image from "next/image"
 import { useState, useRef, useEffect } from "react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const Gallery = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: number]: number }>({})
@@ -88,7 +89,8 @@ const Gallery = () => {
       initialIndices[index] = 0
     })
     setCurrentImageIndex(initialIndices)
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []) // Empty dependency array is intentional
 
   return (
     <div className="bg-background min-h-screen">
@@ -109,18 +111,44 @@ const Gallery = () => {
                 >
                   {section.images.map((image, imageIndex) => (
                     <div key={imageIndex} className="relative flex-none w-full h-[400px] snap-center overflow-hidden">
-                      <Image
-                        src={image.src || "/placeholder.svg"}
-                        alt={`Gallery image ${imageIndex + 1}`}
-                        fill
-                        className="object-cover"
-                        onLoad={() => handleImageLoad(image.src)}
-                        onError={() => handleImageError(image.src)}
-                        priority={imageIndex === 0}
-                      />
+                      {imageLoaded[image.src] === false ? (
+                        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                          <p className="text-red-500">Failed to load image</p>
+                        </div>
+                      ) : imageLoaded[image.src] ? (
+                        <Image
+                          src={image.src || "/placeholder.svg"}
+                          alt={`Gallery image ${imageIndex + 1}`}
+                          fill
+                          className="object-cover"
+                          onLoad={() => handleImageLoad(image.src)}
+                          onError={() => handleImageError(image.src)}
+                          priority={imageIndex === 0}
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                          <p>Loading...</p>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
+
+                {/* Navigation Buttons */}
+                <button
+                  onClick={() => scroll(sectionIndex, "left")}
+                  className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 text-white p-2 rounded-full"
+                  disabled={(currentImageIndex[sectionIndex] || 0) === 0}
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+                <button
+                  onClick={() => scroll(sectionIndex, "right")}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 text-white p-2 rounded-full"
+                  disabled={(currentImageIndex[sectionIndex] || 0) === section.images.length - 1}
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
 
                 {/* Page Indicator */}
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-60 text-white px-3 py-1 rounded-full text-sm">
@@ -138,15 +166,25 @@ const Gallery = () => {
                     className="group overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
                   >
                     <div className="relative aspect-[4/5] overflow-hidden">
-                      <Image
-                        src={image.src || "/placeholder.svg"}
-                        alt={`Gallery image ${imageIndex + 1}`}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        onLoad={() => handleImageLoad(image.src)}
-                        onError={() => handleImageError(image.src)}
-                        priority={imageIndex < 4}
-                      />
+                      {imageLoaded[image.src] === false ? (
+                        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                          <p className="text-red-500">Failed to load image</p>
+                        </div>
+                      ) : imageLoaded[image.src] ? (
+                        <Image
+                          src={image.src || "/placeholder.svg"}
+                          alt={`Gallery image ${imageIndex + 1}`}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          onLoad={() => handleImageLoad(image.src)}
+                          onError={() => handleImageError(image.src)}
+                          priority={imageIndex < 4}
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                          <p>Loading...</p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
