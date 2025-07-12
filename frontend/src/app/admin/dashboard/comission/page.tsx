@@ -26,7 +26,7 @@ const ManageOrders = () => {
   useEffect(() => {
     const fetchCommissions = async () => {
       try {
-        const response = await axios.get("/api/comissions")
+        const response = await axios.get("https://artportfolio-backend.onrender.com/api/comissions")
         setCommissions(response.data)
       } catch (error) {
         console.error("Error fetching commissions:", error)

@@ -2,6 +2,7 @@
 import Image from "next/image"
 import { useState, useRef, useEffect } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+
 const Gallery = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: number]: number }>({})
   const [imageLoaded, setImageLoaded] = useState<{ [key: string]: boolean }>({})
@@ -88,7 +89,8 @@ const Gallery = () => {
       initialIndices[index] = 0
     })
     setCurrentImageIndex(initialIndices)
-  }, []) 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []) // Empty dependency array is intentional
 
   return (
     <div className="bg-background min-h-screen">
@@ -111,9 +113,8 @@ const Gallery = () => {
                     <div key={imageIndex} className="relative flex-none w-full h-[400px] snap-center overflow-hidden">
                       {imageLoaded[image.src] === false ? (
                         <div className="w-full h-full bg-gray-200 flex items-center justify-center">
- MOUSEOVER
-                        <p className="text-red-500">Failed to load image</p>
-                      </div>
+                          <p className="text-red-500">Failed to load image</p>
+                        </div>
                       ) : imageLoaded[image.src] ? (
                         <Image
                           src={image.src || "/placeholder.svg"}
