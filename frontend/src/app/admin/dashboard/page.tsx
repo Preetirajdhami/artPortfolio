@@ -1,7 +1,8 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import AdminSidebar from "../../components/Dashboard/sidebar"
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import AdminSidebar from "../../components/Dashboard/sidebar";
 import {
   BarChart3,
   Package,
@@ -14,19 +15,19 @@ import {
   Star,
   ArrowUpRight,
   Activity,
-} from "lucide-react"
+} from "lucide-react";
 
 interface DashboardStats {
-  totalArtworks: number
-  totalCommissions: number
-  totalMessages: number
-  totalRevenue: number
+  totalArtworks: number;
+  totalCommissions: number;
+  totalMessages: number;
+  totalRevenue: number;
   recentActivity: Array<{
-    id: string
-    type: "commission" | "message" | "artwork"
-    title: string
-    time: string
-  }>
+    id: string;
+    type: "commission" | "message" | "artwork";
+    title: string;
+    time: string;
+  }>;
 }
 
 const AdminDashboard = () => {
@@ -36,14 +37,12 @@ const AdminDashboard = () => {
     totalMessages: 0,
     totalRevenue: 0,
     recentActivity: [],
-  })
-  const [loading, setLoading] = useState(true)
+  });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate fetching dashboard data
     const fetchDashboardData = async () => {
       try {
-        // In a real app, you'd fetch this from your API
         setStats({
           totalArtworks: 24,
           totalCommissions: 8,
@@ -56,16 +55,16 @@ const AdminDashboard = () => {
             { id: "4", type: "commission", title: "Commission completed for Emma Davis", time: "2 days ago" },
             { id: "5", type: "message", title: "Inquiry about custom painting", time: "3 days ago" },
           ],
-        })
+        });
       } catch (error) {
-        console.error("Error fetching dashboard data:", error)
+        console.error("Error fetching dashboard data:", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchDashboardData()
-  }, [])
+    fetchDashboardData();
+  }, []);
 
   const statCards = [
     {
@@ -100,33 +99,33 @@ const AdminDashboard = () => {
       change: "+15%",
       changeType: "positive",
     },
-  ]
+  ];
 
   const getActivityIcon = (type: string) => {
     switch (type) {
       case "commission":
-        return Package
+        return Package;
       case "message":
-        return MessageSquare
+        return MessageSquare;
       case "artwork":
-        return BarChart3
+        return BarChart3;
       default:
-        return Activity
+        return Activity;
     }
-  }
+  };
 
   const getActivityColor = (type: string) => {
     switch (type) {
       case "commission":
-        return "text-green-600 bg-green-100"
+        return "text-green-600 bg-green-100";
       case "message":
-        return "text-blue-600 bg-blue-100"
+        return "text-blue-600 bg-blue-100";
       case "artwork":
-        return "text-purple-600 bg-purple-100"
+        return "text-purple-600 bg-purple-100";
       default:
-        return "text-gray-600 bg-gray-100"
+        return "text-gray-600 bg-gray-100";
     }
-  }
+  };
 
   return (
     <div className="flex min-h-screen">
@@ -136,13 +135,13 @@ const AdminDashboard = () => {
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-[#3A4D39] mb-2">Dashboard Overview</h1>
-            <p className="text-[#3A4D39]/70">Welcome back! Here's what's happening with your art portfolio.</p>
+            <p className="text-[#3A4D39]/70">Welcome back! Here&apos;s what&apos;s happening with your art portfolio.</p>
           </div>
 
           {/* Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {statCards.map((card, index) => {
-              const Icon = card.icon
+              const Icon = card.icon;
               return (
                 <div
                   key={index}
@@ -162,7 +161,7 @@ const AdminDashboard = () => {
                     <p className="text-[#3A4D39]/60 text-sm">{card.title}</p>
                   </div>
                 </div>
-              )
+              );
             })}
           </div>
 
@@ -173,10 +172,10 @@ const AdminDashboard = () => {
               <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-xl p-6">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-xl font-semibold text-[#3A4D39]">Recent Activity</h2>
-                  <button className="text-[#154930] hover:text-[#154930]/80 text-sm font-medium flex items-center">
+                  <Link href="/admin/activities" className="text-[#154930] hover:text-[#154930]/80 text-sm font-medium flex items-center">
                     View All
                     <ArrowUpRight className="h-4 w-4 ml-1" />
-                  </button>
+                  </Link>
                 </div>
 
                 {loading ? (
@@ -194,7 +193,7 @@ const AdminDashboard = () => {
                 ) : (
                   <div className="space-y-4">
                     {stats.recentActivity.map((activity) => {
-                      const Icon = getActivityIcon(activity.type)
+                      const Icon = getActivityIcon(activity.type);
                       return (
                         <div
                           key={activity.id}
@@ -211,7 +210,7 @@ const AdminDashboard = () => {
                             </p>
                           </div>
                         </div>
-                      )
+                      );
                     })}
                   </div>
                 )}
@@ -224,18 +223,33 @@ const AdminDashboard = () => {
               <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-xl p-6">
                 <h2 className="text-xl font-semibold text-[#3A4D39] mb-4">Quick Actions</h2>
                 <div className="space-y-3">
-                  <button className="w-full bg-[#154930] hover:bg-[#154930]/90 text-[#ECE3CE] py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center">
-                    <Package className="h-4 w-4 mr-2" />
-                    New Commission
-                  </button>
-                  <button className="w-full border border-[#154930]/20 text-[#154930] hover:bg-[#154930]/5 py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center">
-                    <BarChart3 className="h-4 w-4 mr-2" />
-                    Upload Artwork
-                  </button>
-                  <button className="w-full border border-[#154930]/20 text-[#154930] hover:bg-[#154930]/5 py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center">
-                    <MessageSquare className="h-4 w-4 mr-2" />
-                    View Messages
-                  </button>
+                  <Link href="/admin/dashboard/comission" passHref>
+                    <button
+                      className="w-full bg-[#154930] hover:bg-[#154930]/90 text-[#ECE3CE] py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center"
+                      aria-label="Create new commission"
+                    >
+                      <Package className="h-4 w-4 mr-2" />
+                      New Commission
+                    </button>
+                  </Link>
+                  <Link href="/admin/dashboard/gallery" passHref>
+                    <button
+                      className="w-full border border-[#154930]/20 text-[#154930] hover:bg-[#154930]/5 py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center"
+                      aria-label="Upload new artwork"
+                    >
+                      <BarChart3 className="h-4 w-4 mr-2" />
+                      Upload Artwork
+                    </button>
+                  </Link>
+                  <Link href="/admin/dashboard/contact" passHref>
+                    <button
+                      className="w-full border border-[#154930]/20 text-[#154930] hover:bg-[#154930]/5 py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center"
+                      aria-label="View messages"
+                    >
+                      <MessageSquare className="h-4 w-4 mr-2" />
+                      View Messages
+                    </button>
+                  </Link>
                 </div>
               </div>
 
@@ -271,7 +285,7 @@ const AdminDashboard = () => {
         </div>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default AdminDashboard
+export default AdminDashboard;
