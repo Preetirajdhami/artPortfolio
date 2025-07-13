@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+
 import GalleryClientWrapper from "./GalleryClientWrapper";
 
 interface PageProps {
