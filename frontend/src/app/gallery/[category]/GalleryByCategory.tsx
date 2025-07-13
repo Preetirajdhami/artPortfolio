@@ -16,11 +16,11 @@ const GalleryByCategory = ({ category }: { category: string }) => {
   const [title, setTitle] = useState("");
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
-  const formattedCategory = category
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (l) => l.toUpperCase());
-
   useEffect(() => {
+    const formattedCategory = category
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (l) => l.toUpperCase());
+
     const fetchGallery = async () => {
       try {
         const res = await fetch(
