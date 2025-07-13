@@ -1,18 +1,15 @@
-"use server";
-
+import { Metadata } from "next";
 import GalleryClientWrapper from "./GalleryClientWrapper";
 
-interface Props {
+interface PageProps {
   params: {
     category: string;
   };
 }
 
-const Page = async ({ params }: Props) => {
-  // Await params to satisfy Next.js requirement:
-  const { category } = await Promise.resolve(params);
+const Page = ({ params }: PageProps) => {
+  const { category } = params;
 
-  // Now pass category to the client wrapper:
   return <GalleryClientWrapper category={category} />;
 };
 
