@@ -45,16 +45,7 @@ const Gallery = () => {
     fetchGallery();
   }, []);
 
-  const scroll = (category: string, direction: "left" | "right") => {
-    const container = scrollRefs.current[category];
-    if (container) {
-      const scrollAmount = container.clientWidth;
-      container.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
+  
 
   const handleScroll = (category: string) => {
     const container = scrollRefs.current[category];
@@ -102,7 +93,7 @@ const Gallery = () => {
                   ))}
                 </div>
 
-                {/* Arrows */}
+               
                 
                 
 
