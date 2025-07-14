@@ -41,6 +41,40 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const verifyAdmin = async () => {
+      const token = localStorage.getItem("adminToken");
+
+      if (!token) {
+        // No token, redirect to login
+        window.location.href = "/admin/login";
+        return;
+      }
+
+      try {
+        // Verify token with backend
+        await fetch(
+          "https://artportfolio-backend.onrender.com/api/admin/dashboard",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        ).then((res) => {
+          if (!res.ok) {
+            throw new Error("Invalid token");
+          }
+        });
+      } catch (err) {
+        console.error("Unauthorized or token expired", err);
+        localStorage.removeItem("adminToken");
+        window.location.href = "/admin/login";
+      }
+    };
+
+    verifyAdmin();
+  }, []);
+
+  useEffect(() => {
     const fetchDashboardData = async () => {
       try {
         setStats({
@@ -49,11 +83,36 @@ const AdminDashboard = () => {
           totalMessages: 12,
           totalRevenue: 3250,
           recentActivity: [
-            { id: "1", type: "commission", title: "New commission from Sarah Johnson", time: "2 hours ago" },
-            { id: "2", type: "message", title: "Contact message from Mike Chen", time: "4 hours ago" },
-            { id: "3", type: "artwork", title: 'Uploaded "Sunset Portrait"', time: "1 day ago" },
-            { id: "4", type: "commission", title: "Commission completed for Emma Davis", time: "2 days ago" },
-            { id: "5", type: "message", title: "Inquiry about custom painting", time: "3 days ago" },
+            {
+              id: "1",
+              type: "commission",
+              title: "New commission from Sarah Johnson",
+              time: "2 hours ago",
+            },
+            {
+              id: "2",
+              type: "message",
+              title: "Contact message from Mike Chen",
+              time: "4 hours ago",
+            },
+            {
+              id: "3",
+              type: "artwork",
+              title: 'Uploaded "Sunset Portrait"',
+              time: "1 day ago",
+            },
+            {
+              id: "4",
+              type: "commission",
+              title: "Commission completed for Emma Davis",
+              time: "2 days ago",
+            },
+            {
+              id: "5",
+              type: "message",
+              title: "Inquiry about custom painting",
+              time: "3 days ago",
+            },
           ],
         });
       } catch (error) {
@@ -134,8 +193,13 @@ const AdminDashboard = () => {
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-[#3A4D39] mb-2">Dashboard Overview</h1>
-            <p className="text-[#3A4D39]/70">Welcome back! Here&apos;s what&apos;s happening with your art portfolio.</p>
+            <h1 className="text-3xl font-bold text-[#3A4D39] mb-2">
+              Dashboard Overview
+            </h1>
+            <p className="text-[#3A4D39]/70">
+              Welcome back! Here&apos;s what&apos;s happening with your art
+              portfolio.
+            </p>
           </div>
 
           {/* Stats Grid */}
@@ -157,7 +221,9 @@ const AdminDashboard = () => {
                     </div>
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-[#3A4D39] mb-1">{card.value}</p>
+                    <p className="text-2xl font-bold text-[#3A4D39] mb-1">
+                      {card.value}
+                    </p>
                     <p className="text-[#3A4D39]/60 text-sm">{card.title}</p>
                   </div>
                 </div>
@@ -171,8 +237,13 @@ const AdminDashboard = () => {
             <div className="lg:col-span-2">
               <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-xl p-6">
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-semibold text-[#3A4D39]">Recent Activity</h2>
-                  <Link href="/admin/activities" className="text-[#154930] hover:text-[#154930]/80 text-sm font-medium flex items-center">
+                  <h2 className="text-xl font-semibold text-[#3A4D39]">
+                    Recent Activity
+                  </h2>
+                  <Link
+                    href="/admin/activities"
+                    className="text-[#154930] hover:text-[#154930]/80 text-sm font-medium flex items-center"
+                  >
                     View All
                     <ArrowUpRight className="h-4 w-4 ml-1" />
                   </Link>
@@ -181,7 +252,10 @@ const AdminDashboard = () => {
                 {loading ? (
                   <div className="space-y-4">
                     {[...Array(5)].map((_, i) => (
-                      <div key={i} className="animate-pulse flex items-center space-x-4">
+                      <div
+                        key={i}
+                        className="animate-pulse flex items-center space-x-4"
+                      >
                         <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
                         <div className="flex-1 space-y-2">
                           <div className="h-4 bg-gray-200 rounded w-3/4"></div>
@@ -199,11 +273,17 @@ const AdminDashboard = () => {
                           key={activity.id}
                           className="flex items-center space-x-4 p-3 hover:bg-[#ECE3CE]/20 rounded-lg transition-colors"
                         >
-                          <div className={`p-2 rounded-full ${getActivityColor(activity.type)}`}>
+                          <div
+                            className={`p-2 rounded-full ${getActivityColor(
+                              activity.type
+                            )}`}
+                          >
                             <Icon className="h-4 w-4" />
                           </div>
                           <div className="flex-1">
-                            <p className="text-[#3A4D39] font-medium">{activity.title}</p>
+                            <p className="text-[#3A4D39] font-medium">
+                              {activity.title}
+                            </p>
                             <p className="text-[#3A4D39]/60 text-sm flex items-center">
                               <Clock className="h-3 w-3 mr-1" />
                               {activity.time}
@@ -221,7 +301,9 @@ const AdminDashboard = () => {
             <div className="space-y-6">
               {/* Quick Actions */}
               <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-xl p-6">
-                <h2 className="text-xl font-semibold text-[#3A4D39] mb-4">Quick Actions</h2>
+                <h2 className="text-xl font-semibold text-[#3A4D39] mb-4">
+                  Quick Actions
+                </h2>
                 <div className="space-y-3">
                   <Link href="/admin/dashboard/comission" passHref>
                     <button
@@ -255,26 +337,34 @@ const AdminDashboard = () => {
 
               {/* Performance Summary */}
               <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-xl p-6">
-                <h2 className="text-xl font-semibold text-[#3A4D39] mb-4">This Month</h2>
+                <h2 className="text-xl font-semibold text-[#3A4D39] mb-4">
+                  This Month
+                </h2>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
                       <Eye className="h-4 w-4 text-[#154930] mr-2" />
-                      <span className="text-[#3A4D39] text-sm">Portfolio Views</span>
+                      <span className="text-[#3A4D39] text-sm">
+                        Portfolio Views
+                      </span>
                     </div>
                     <span className="font-semibold text-[#3A4D39]">1,234</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
                       <Star className="h-4 w-4 text-[#154930] mr-2" />
-                      <span className="text-[#3A4D39] text-sm">New Followers</span>
+                      <span className="text-[#3A4D39] text-sm">
+                        New Followers
+                      </span>
                     </div>
                     <span className="font-semibold text-[#3A4D39]">89</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
                       <Calendar className="h-4 w-4 text-[#154930] mr-2" />
-                      <span className="text-[#3A4D39] text-sm">Completed Works</span>
+                      <span className="text-[#3A4D39] text-sm">
+                        Completed Works
+                      </span>
                     </div>
                     <span className="font-semibold text-[#3A4D39]">6</span>
                   </div>
