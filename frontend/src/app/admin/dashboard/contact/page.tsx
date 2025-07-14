@@ -10,7 +10,6 @@ import {
   Search,
   Filter,
   Reply,
-  Archive,
   Trash2,
   Clock,
   Loader2,
@@ -24,6 +23,7 @@ interface ContactMessage {
   subject: string
   message: string
   createdAt: string
+  archived: boolean
 }
 
 const ManageContacts = () => {
@@ -128,10 +128,6 @@ const ManageContacts = () => {
                   <Filter className="h-4 w-4 mr-2" />
                   Filter
                 </button>
-                <button className="flex items-center px-4 py-3 bg-[#154930] hover:bg-[#154930]/90 text-[#ECE3CE] rounded-lg font-medium transition-colors">
-                  <Archive className="h-4 w-4 mr-2" />
-                  Archive All Read
-                </button>
               </div>
             </div>
           </div>
@@ -222,13 +218,6 @@ const ManageContacts = () => {
                           Reply
                         </button>
                         <button
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex items-center px-4 py-2 border border-[#154930]/20 text-[#154930] hover:bg-[#154930]/5 rounded-lg text-sm font-medium transition-colors"
-                        >
-                          <Archive className="h-4 w-4 mr-1" />
-                          Archive
-                        </button>
-                        <button
                           onClick={(e) => {
                             e.stopPropagation()
                             handleDelete(message._id)
@@ -289,10 +278,6 @@ const ManageContacts = () => {
                     >
                       <Reply className="h-4 w-4 mr-2" />
                       Reply
-                    </button>
-                    <button className="flex items-center px-6 py-3 border border-[#154930]/20 text-[#154930] hover:bg-[#154930]/5 rounded-lg font-medium transition-colors">
-                      <Archive className="h-4 w-4 mr-2" />
-                      Archive
                     </button>
                     <button
                       onClick={() => handleDelete(selectedMessage._id)}
