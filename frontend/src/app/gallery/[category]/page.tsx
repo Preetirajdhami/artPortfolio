@@ -1,19 +1,8 @@
-"use server";
-
 import GalleryClientWrapper from "./GalleryClientWrapper";
 
-interface Props {
-  params: {
-    category: string;
-  };
+export default async function Page(props: unknown) {
+  // Force cast props to correct shape to bypass type errors:
+  const { params } = props as { params: { category: string } };
+
+  return <GalleryClientWrapper category={params.category} />;
 }
-
-const Page = async ({ params }: Props) => {
-  // Await params to satisfy Next.js requirement:
-  const { category } = await Promise.resolve(params);
-
-  // Now pass category to the client wrapper:
-  return <GalleryClientWrapper category={category} />;
-};
-
-export default Page;
