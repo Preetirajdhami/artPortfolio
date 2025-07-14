@@ -3,7 +3,17 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import AdminSidebar from "../../../components/Dashboard/sidebar"
-import { Mail, Calendar, MessageSquare, Search, Filter, Reply, Archive, Trash2, Clock, Loader2 } from "lucide-react"
+import {
+  Mail,
+  Calendar,
+  MessageSquare,
+  Search,
+  Filter,
+  Reply,
+  Trash2,
+  Clock,
+  Loader2,
+} from "lucide-react"
 
 interface ContactMessage {
   _id: string
@@ -13,6 +23,7 @@ interface ContactMessage {
   subject: string
   message: string
   createdAt: string
+  archived: boolean
 }
 
 const ManageContacts = () => {
@@ -49,6 +60,21 @@ const ManageContacts = () => {
     )
     setFilteredMessages(filtered)
   }, [searchTerm, messages])
+
+  const handleDelete = async (id: string) => {
+    const confirmDelete = confirm("Are you sure you want to delete this message?")
+    if (!confirmDelete) return
+
+    try {
+      await axios.delete(`https://artportfolio-backend.onrender.com/api/contact/${id}`)
+      alert("Message deleted successfully")
+      setMessages((prev) => prev.filter((msg) => msg._id !== id))
+      setSelectedMessage(null)
+    } catch (error) {
+      console.error("Failed to delete message:", error)
+      alert("Failed to delete message")
+    }
+  }
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
@@ -102,14 +128,11 @@ const ManageContacts = () => {
                   <Filter className="h-4 w-4 mr-2" />
                   Filter
                 </button>
-                <button className="flex items-center px-4 py-3 bg-[#154930] hover:bg-[#154930]/90 text-[#ECE3CE] rounded-lg font-medium transition-colors">
-                  <Archive className="h-4 w-4 mr-2" />
-                  Archive All Read
-                </button>
               </div>
             </div>
           </div>
 
+          {/* Content */}
           {loading ? (
             <div className="flex items-center justify-center py-12">
               <Loader2 className="h-8 w-8 animate-spin text-[#154930]" />
@@ -141,7 +164,7 @@ const ManageContacts = () => {
                     className="bg-white/80 backdrop-blur-sm rounded-lg shadow-xl hover:shadow-2xl transition-all duration-200 p-6 cursor-pointer"
                     onClick={() => setSelectedMessage(message)}
                   >
-                    {/* Message Header */}
+                    {/* Header */}
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center space-x-4">
                         <div className="h-12 w-12 bg-[#154930] text-[#ECE3CE] rounded-full flex items-center justify-center font-semibold">
@@ -169,7 +192,7 @@ const ManageContacts = () => {
                       </div>
                     </div>
 
-                    {/* Subject */}
+                    {/* Body */}
                     <div className="mb-4">
                       <h4 className="text-[#3A4D39] font-medium text-lg mb-2">{message.subject}</h4>
                       <p className="text-[#3A4D39]/80 line-clamp-3">{message.message}</p>
@@ -195,14 +218,10 @@ const ManageContacts = () => {
                           Reply
                         </button>
                         <button
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex items-center px-4 py-2 border border-[#154930]/20 text-[#154930] hover:bg-[#154930]/5 rounded-lg text-sm font-medium transition-colors"
-                        >
-                          <Archive className="h-4 w-4 mr-1" />
-                          Archive
-                        </button>
-                        <button
-                          onClick={(e) => e.stopPropagation()}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            handleDelete(message._id)
+                          }}
                           className="flex items-center px-3 py-2 border border-red-200 text-red-600 hover:bg-red-50 rounded-lg text-sm font-medium transition-colors"
                         >
                           <Trash2 className="h-4 w-4" />
@@ -215,7 +234,7 @@ const ManageContacts = () => {
             </div>
           )}
 
-          {/* Message Detail Modal */}
+          {/* Modal */}
           {selectedMessage && (
             <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
               <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
@@ -241,7 +260,8 @@ const ManageContacts = () => {
                       </h3>
                       <p className="text-[#3A4D39]/70">{selectedMessage.email}</p>
                       <p className="text-[#3A4D39]/60 text-sm">
-                        {formatDate(selectedMessage.createdAt).date} at {formatDate(selectedMessage.createdAt).time}
+                        {formatDate(selectedMessage.createdAt).date} at{" "}
+                        {formatDate(selectedMessage.createdAt).time}
                       </p>
                     </div>
                   </div>
@@ -259,9 +279,12 @@ const ManageContacts = () => {
                       <Reply className="h-4 w-4 mr-2" />
                       Reply
                     </button>
-                    <button className="flex items-center px-6 py-3 border border-[#154930]/20 text-[#154930] hover:bg-[#154930]/5 rounded-lg font-medium transition-colors">
-                      <Archive className="h-4 w-4 mr-2" />
-                      Archive
+                    <button
+                      onClick={() => handleDelete(selectedMessage._id)}
+                      className="flex items-center px-6 py-3 border border-red-200 text-red-600 hover:bg-red-50 rounded-lg font-medium transition-colors"
+                    >
+                      <Trash2 className="h-4 w-4 mr-2" />
+                      Delete
                     </button>
                   </div>
                 </div>
