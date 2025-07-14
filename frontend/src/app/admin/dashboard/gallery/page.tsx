@@ -1,10 +1,10 @@
-"use client";
-import type React from "react";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import type { AxiosResponse } from "axios";
-import Image from "next/image";
-import AdminSidebar from "../../../components/Dashboard/sidebar";
+"use client"
+import type React from "react"
+import { useState, useEffect } from "react"
+import axios from "axios"
+import type { AxiosResponse } from "axios"
+import Image from "next/image"
+import AdminSidebar from "../../../components/Dashboard/sidebar"
 import {
   Upload,
   ImageIcon,
@@ -14,242 +14,289 @@ import {
   Trash2,
   X,
   Replace,
-  AlertCircle,
-  CheckCircle,
   AlertTriangle,
-} from "lucide-react";
+  CheckCircle,
+  XCircle,
+} from "lucide-react"
+
+interface AlertState {
+  isOpen: boolean
+  type: "confirm" | "success" | "error"
+  title: string
+  message: string
+  onConfirm?: () => void
+  onCancel?: () => void
+}
 
 const Gallery = () => {
-  const [file, setFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null)
+  const [imagePreview, setImagePreview] = useState<string | null>(null)
   const [formData, setFormData] = useState({
     title: "",
     category: "",
-  });
-  const [loading, setLoading] = useState(false);
-  const [dragActive, setDragActive] = useState(false);
-  const [showUploadForm, setShowUploadForm] = useState(false);
-  const [editingArtwork, setEditingArtwork] = useState<Artwork | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
+  })
+  const [loading, setLoading] = useState(false)
+  const [dragActive, setDragActive] = useState(false)
+  const [showUploadForm, setShowUploadForm] = useState(false)
+  const [editingArtwork, setEditingArtwork] = useState<Artwork | null>(null)
   const [deleteConfirm, setDeleteConfirm] = useState<{
-    show: boolean;
-    artwork: Artwork | null;
+    show: boolean
+    artwork: Artwork | null
   }>({
     show: false,
     artwork: null,
-  });
-  const [deleting, setDeleting] = useState(false);
+  })
+  const [deleting, setDeleting] = useState(false)
+  const [alert, setAlert] = useState<AlertState>({
+    isOpen: false,
+    type: "success",
+    title: "",
+    message: "",
+  })
 
   type Artwork = {
-    _id: string;
-    url: string;
-    title: string;
-    category: string;
-  };
+    _id: string
+    url: string
+    title: string
+    category: string
+  }
 
-  const [artworks, setArtworks] = useState<Artwork[]>([]);
+  const [artworks, setArtworks] = useState<Artwork[]>([])
 
-  // Clear messages after 5 seconds
-  useEffect(() => {
-    if (error || success) {
-      const timer = setTimeout(() => {
-        setError(null);
-        setSuccess(null);
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [error, success]);
+  const showAlert = (alertConfig: Omit<AlertState, "isOpen">) => {
+    setAlert({ ...alertConfig, isOpen: true })
+  }
+
+  const hideAlert = () => {
+    setAlert((prev) => ({ ...prev, isOpen: false }))
+  }
 
   // Fetch all artworks on page load
   useEffect(() => {
     const fetchArtworks = async () => {
       try {
-        const response = await axios.get(
-          "https://artportfolio-backend.onrender.com/api/gallery"
-        );
-        setArtworks(response.data);
+        const response = await axios.get("https://artportfolio-backend.onrender.com/api/gallery")
+        setArtworks(response.data)
       } catch (error) {
-        console.error("Failed to fetch artworks", error);
-        setError("Failed to load artworks. Please refresh the page.");
+        console.error("Failed to fetch artworks", error)
+        showAlert({
+          type: "error",
+          title: "Load Failed",
+          message: "Failed to load artworks. Please refresh the page.",
+          onConfirm: hideAlert,
+        })
       }
-    };
+    }
 
-    fetchArtworks();
-  }, []);
+    fetchArtworks()
+  }, [])
 
   // Create image preview when file is selected
   useEffect(() => {
     if (file) {
-      const reader = new FileReader();
+      const reader = new FileReader()
       reader.onload = (e) => {
-        setImagePreview(e.target?.result as string);
-      };
-      reader.readAsDataURL(file);
+        setImagePreview(e.target?.result as string)
+      }
+      reader.readAsDataURL(file)
     } else {
-      setImagePreview(null);
+      setImagePreview(null)
     }
-  }, [file]);
+  }, [file])
 
   // Show delete confirmation
   const handleDeleteClick = (artwork: Artwork) => {
-    setDeleteConfirm({ show: true, artwork });
-  };
+    setDeleteConfirm({ show: true, artwork })
+  }
 
   // Cancel delete
   const handleDeleteCancel = () => {
-    setDeleteConfirm({ show: false, artwork: null });
-  };
+    setDeleteConfirm({ show: false, artwork: null })
+  }
 
   // Confirm delete
   const handleDeleteConfirm = async () => {
-    if (!deleteConfirm.artwork) return;
+    if (!deleteConfirm.artwork) return
 
     try {
-      setDeleting(true);
-      await axios.delete(
-        `https://artportfolio-backend.onrender.com/api/gallery/${deleteConfirm.artwork._id}`
-      );
-      setArtworks((prev) =>
-        prev.filter((art) => art._id !== deleteConfirm.artwork!._id)
-      );
-      setSuccess("Artwork deleted successfully!");
-      setDeleteConfirm({ show: false, artwork: null });
+      setDeleting(true)
+      await axios.delete(`https://artportfolio-backend.onrender.com/api/gallery/${deleteConfirm.artwork._id}`)
+      setArtworks((prev) => prev.filter((art) => art._id !== deleteConfirm.artwork!._id))
+      setDeleteConfirm({ show: false, artwork: null })
+      showAlert({
+        type: "success",
+        title: "Artwork Deleted",
+        message: "The artwork has been successfully deleted.",
+        onConfirm: hideAlert,
+      })
     } catch (error) {
-      console.error("Delete failed", error);
-      setError("Failed to delete artwork. Please try again.");
+      console.error("Delete failed", error)
+      showAlert({
+        type: "error",
+        title: "Delete Failed",
+        message: "Failed to delete artwork. Please try again.",
+        onConfirm: hideAlert,
+      })
     } finally {
-      setDeleting(false);
+      setDeleting(false)
     }
-  };
+  }
 
   // Open edit form with artwork data
   const handleEdit = (artwork: Artwork) => {
-    setEditingArtwork(artwork);
+    setEditingArtwork(artwork)
     setFormData({
       title: artwork.title,
       category: artwork.category,
-    });
-    setFile(null);
-    setImagePreview(null);
-    setError(null);
-    setSuccess(null);
-    setShowUploadForm(true);
-  };
+    })
+    setFile(null)
+    setImagePreview(null)
+    setShowUploadForm(true)
+  }
 
-  // Delete image in edit mode
-  const handleDeleteImage = () => {
-    setEditingArtwork(null);
-    setFile(null);
-    setImagePreview(null);
-  };
+  // Remove selected image (but keep editing mode)
+  const handleRemoveSelectedImage = () => {
+    setFile(null)
+    setImagePreview(null)
+  }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
+    const selectedFile = e.target.files?.[0]
     if (selectedFile) {
       // Validate file type
       if (!selectedFile.type.startsWith("image/")) {
-        setError("Please select a valid image file (PNG, JPG, GIF, etc.)");
-        return;
+        showAlert({
+          type: "error",
+          title: "Invalid File",
+          message: "Please select a valid image file (PNG, JPG, GIF, etc.)",
+          onConfirm: hideAlert,
+        })
+        return
       }
 
       // Validate file size (10MB limit)
       if (selectedFile.size > 10 * 1024 * 1024) {
-        setError("File size must be less than 10MB");
-        return;
+        showAlert({
+          type: "error",
+          title: "File Too Large",
+          message: "File size must be less than 10MB",
+          onConfirm: hideAlert,
+        })
+        return
       }
 
-      setFile(selectedFile);
-      setError(null);
+      setFile(selectedFile)
     }
-  };
+  }
 
   const handleDrag = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+    e.preventDefault()
+    e.stopPropagation()
     if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true);
+      setDragActive(true)
     } else if (e.type === "dragleave") {
-      setDragActive(false);
+      setDragActive(false)
     }
-  };
+  }
 
   const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
+    e.preventDefault()
+    e.stopPropagation()
+    setDragActive(false)
 
-    const droppedFile = e.dataTransfer.files?.[0];
+    const droppedFile = e.dataTransfer.files?.[0]
     if (droppedFile) {
       // Validate file type
       if (!droppedFile.type.startsWith("image/")) {
-        setError("Please select a valid image file (PNG, JPG, GIF, etc.)");
-        return;
+        showAlert({
+          type: "error",
+          title: "Invalid File",
+          message: "Please select a valid image file (PNG, JPG, GIF, etc.)",
+          onConfirm: hideAlert,
+        })
+        return
       }
 
       // Validate file size (10MB limit)
       if (droppedFile.size > 10 * 1024 * 1024) {
-        setError("File size must be less than 10MB");
-        return;
+        showAlert({
+          type: "error",
+          title: "File Too Large",
+          message: "File size must be less than 10MB",
+          onConfirm: hideAlert,
+        })
+        return
       }
 
-      setFile(droppedFile);
-      setError(null);
+      setFile(droppedFile)
     }
-  };
+  }
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const closeForm = () => {
-    setShowUploadForm(false);
-    setEditingArtwork(null);
-    setFile(null);
-    setImagePreview(null);
+    setShowUploadForm(false)
+    setEditingArtwork(null)
+    setFile(null)
+    setImagePreview(null)
     setFormData({
       title: "",
       category: "",
-    });
-    setError(null);
-    setSuccess(null);
-  };
+    })
+  }
 
   const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError(null);
+    e.preventDefault()
 
     if (!file && !editingArtwork) {
-      setError("Please select a file to upload.");
-      return;
+      showAlert({
+        type: "error",
+        title: "Missing Image",
+        message: "Please select a file to upload.",
+        onConfirm: hideAlert,
+      })
+      return
     }
 
     if (!formData.title.trim()) {
-      setError("Please enter a title for your artwork.");
-      return;
+      showAlert({
+        type: "error",
+        title: "Missing Title",
+        message: "Please enter a title for your artwork.",
+        onConfirm: hideAlert,
+      })
+      return
     }
 
     if (!formData.category) {
-      setError("Please select a category for your artwork.");
-      return;
+      showAlert({
+        type: "error",
+        title: "Missing Category",
+        message: "Please select a category for your artwork.",
+        onConfirm: hideAlert,
+      })
+      return
     }
 
     try {
-      setLoading(true);
-      const data = new FormData();
+      setLoading(true)
+      const data = new FormData()
 
+      // Only append image if a new file is selected
       if (file) {
-        data.append("image", file);
+        data.append("image", file)
       }
-      data.append("title", formData.title.trim());
-      data.append("category", formData.category);
-      let response: AxiosResponse<Artwork>;
+      data.append("title", formData.title.trim())
+      data.append("category", formData.category)
+
+      let response: AxiosResponse<Artwork>
+
       if (editingArtwork) {
         // Update existing artwork
         response = await axios.put<Artwork>(
@@ -259,87 +306,146 @@ const Gallery = () => {
             headers: {
               "Content-Type": "multipart/form-data",
             },
-          }
-        );
+          },
+        )
         // Update the artwork in the state
-        setArtworks((prev) =>
-          prev.map((art) =>
-            art._id === editingArtwork._id ? response.data : art
-          )
-        );
-        setSuccess("Artwork updated successfully!");
+        setArtworks((prev) => prev.map((art) => (art._id === editingArtwork._id ? response.data : art)))
+
+        showAlert({
+          type: "success",
+          title: "Artwork Updated",
+          message: "Your artwork has been successfully updated!",
+          onConfirm: () => {
+            hideAlert()
+            closeForm()
+          },
+        })
       } else {
         // Create new artwork
-        response = await axios.post<Artwork>(
-          "https://artportfolio-backend.onrender.com/api/gallery/upload",
-          data,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+        response = await axios.post<Artwork>("https://artportfolio-backend.onrender.com/api/gallery/upload", data, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
         // Add the new artwork to the state
-        setArtworks((prev) => [...prev, response.data]);
-        setSuccess("Artwork uploaded successfully!");
-      }
+        setArtworks((prev) => [...prev, response.data])
 
-      closeForm();
+        showAlert({
+          type: "success",
+          title: "Artwork Uploaded",
+          message: "Your artwork has been successfully uploaded!",
+          onConfirm: () => {
+            hideAlert()
+            closeForm()
+          },
+        })
+      }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.error("Axios error:", error.response?.data);
-        setError(
-          error.response?.data?.message || "Operation failed. Please try again."
-        );
+        console.error("Axios error:", error.response?.data)
+        showAlert({
+          type: "error",
+          title: editingArtwork ? "Update Failed" : "Upload Failed",
+          message: error.response?.data?.message || "Operation failed. Please try again.",
+          onConfirm: hideAlert,
+        })
       } else {
-        console.error("Unexpected error:", error);
-        setError("An unexpected error occurred. Please try again.");
+        console.error("Unexpected error:", error)
+        showAlert({
+          type: "error",
+          title: "Unexpected Error",
+          message: "An unexpected error occurred. Please try again.",
+          onConfirm: hideAlert,
+        })
       }
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
+
+  const CustomAlert = () => {
+    if (!alert.isOpen) return null
+
+    // For confirmation dialog (delete), use the gallery-style layout
+    if (alert.type === "confirm") {
+      return (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg shadow-2xl w-full max-w-md">
+            <div className="p-6">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="flex-shrink-0">
+                  <AlertTriangle className="h-8 w-8 text-red-600" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-[#3A4D39]">{alert.title}</h3>
+                  <p className="text-[#3A4D39]/70 text-sm">This action cannot be undone</p>
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <p className="text-[#3A4D39]">{alert.message}</p>
+              </div>
+
+              <div className="flex space-x-3">
+                <button
+                  onClick={alert.onCancel}
+                  className="flex-1 bg-gray-100 hover:bg-gray-200 text-[#3A4D39] font-medium py-2 px-4 rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={alert.onConfirm}
+                  className="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center"
+                >
+                  <Trash2 className="mr-2 h-4 w-4" />
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    // For success/error messages, use the toast-style layout
+    return (
+      <div className="fixed top-4 right-4 z-[60] max-w-md">
+        <div
+          className={`${
+            alert.type === "success" ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"
+          } border rounded-lg p-4 mb-4 flex items-start space-x-3`}
+        >
+          {alert.type === "success" ? (
+            <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+          ) : (
+            <XCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+          )}
+          <div>
+            <p className={`${alert.type === "success" ? "text-green-800" : "text-red-800"} font-medium`}>
+              {alert.title}
+            </p>
+            <p className={`${alert.type === "success" ? "text-green-700" : "text-red-700"} text-sm`}>{alert.message}</p>
+          </div>
+          <button
+            onClick={alert.onConfirm}
+            className={`${
+              alert.type === "success" ? "text-green-400 hover:text-green-600" : "text-red-400 hover:text-red-600"
+            }`}
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="flex min-h-screen">
       <AdminSidebar />
       <main className="flex-1 p-6">
         <div className="max-w-6xl mx-auto">
-          {/* Error/Success Messages */}
-          {(error || success) && (
-            <div className="fixed top-4 right-4 z-50 max-w-md">
-              {error && (
-                <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4 flex items-start space-x-3">
-                  <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-red-800 font-medium">Error</p>
-                    <p className="text-red-700 text-sm">{error}</p>
-                  </div>
-                  <button
-                    onClick={() => setError(null)}
-                    className="text-red-400 hover:text-red-600"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                </div>
-              )}
-              {success && (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4 flex items-start space-x-3">
-                  <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-green-800 font-medium">Success</p>
-                    <p className="text-green-700 text-sm">{success}</p>
-                  </div>
-                  <button
-                    onClick={() => setSuccess(null)}
-                    className="text-green-400 hover:text-green-600"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
+          {/* Custom Alert Component */}
+          <CustomAlert />
 
           {/* Delete Confirmation Modal */}
           {deleteConfirm.show && (
@@ -351,28 +457,21 @@ const Gallery = () => {
                       <AlertTriangle className="h-8 w-8 text-red-600" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-[#3A4D39]">
-                        Delete Artwork
-                      </h3>
-                      <p className="text-[#3A4D39]/70 text-sm">
-                        This action cannot be undone
-                      </p>
+                      <h3 className="text-lg font-semibold text-[#3A4D39]">Delete Artwork</h3>
+                      <p className="text-[#3A4D39]/70 text-sm">This action cannot be undone</p>
                     </div>
                   </div>
 
                   <div className="mb-6">
                     <p className="text-[#3A4D39] mb-3">
-                      Are you sure you want to delete{" "}
-                      <strong>&quot;{deleteConfirm.artwork?.title}&quot;</strong>?
+                      Are you sure you want to delete <strong>&quot;{deleteConfirm.artwork?.title}&quot;</strong>?
                     </p>
 
                     {deleteConfirm.artwork && (
                       <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
                         <div className="relative w-12 h-12 flex-shrink-0 bg-gray-100 rounded overflow-hidden">
                           <Image
-                            src={
-                              deleteConfirm.artwork.url || "/placeholder.svg"
-                            }
+                            src={deleteConfirm.artwork.url || "/placeholder.svg"}
                             alt={deleteConfirm.artwork.title}
                             fill
                             className="object-cover"
@@ -380,12 +479,8 @@ const Gallery = () => {
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="font-medium text-[#3A4D39] truncate">
-                            {deleteConfirm.artwork.title}
-                          </p>
-                          <p className="text-sm text-[#3A4D39]/60">
-                            {deleteConfirm.artwork.category}
-                          </p>
+                          <p className="font-medium text-[#3A4D39] truncate">{deleteConfirm.artwork.title}</p>
+                          <p className="text-sm text-[#3A4D39]/60">{deleteConfirm.artwork.category}</p>
                         </div>
                       </div>
                     )}
@@ -425,12 +520,8 @@ const Gallery = () => {
           {/* Header with Upload Button */}
           <div className="flex justify-between items-center mb-8">
             <div>
-              <h1 className="text-3xl font-bold text-[#3A4D39] mb-2">
-                Gallery Management
-              </h1>
-              <p className="text-[#3A4D39]/70">
-                Upload and manage your artwork collection
-              </p>
+              <h1 className="text-3xl font-bold text-[#3A4D39] mb-2">Gallery Management</h1>
+              <p className="text-[#3A4D39]/70">Upload and manage your artwork collection</p>
             </div>
             <button
               onClick={() => setShowUploadForm(true)}
@@ -458,10 +549,7 @@ const Gallery = () => {
                           : "Upload a new piece to your gallery collection"}
                       </p>
                     </div>
-                    <button
-                      onClick={closeForm}
-                      className="text-[#3A4D39]/60 hover:text-[#3A4D39] transition-colors"
-                    >
+                    <button onClick={closeForm} className="text-[#3A4D39]/60 hover:text-[#3A4D39] transition-colors">
                       <X className="h-6 w-6" />
                     </button>
                   </div>
@@ -469,9 +557,7 @@ const Gallery = () => {
                   <form onSubmit={handleUpload} className="space-y-6">
                     {/* Image Upload/Display Area */}
                     <div className="space-y-2">
-                      <label className="block text-[#3A4D39] font-medium text-sm">
-                        Artwork Image
-                      </label>
+                      <label className="block text-[#3A4D39] font-medium text-sm">Artwork Image</label>
 
                       {/* Show image preview or existing image */}
                       {(imagePreview || (editingArtwork && !file)) && (
@@ -479,11 +565,7 @@ const Gallery = () => {
                           <div className="relative w-full max-w-md mx-auto bg-gray-50 rounded-lg overflow-hidden">
                             <div className="relative w-full h-64">
                               <Image
-                                src={
-                                  imagePreview ||
-                                  editingArtwork?.url ||
-                                  "/placeholder.svg"
-                                }
+                                src={imagePreview || editingArtwork?.url || "/placeholder.svg" || "/placeholder.svg"}
                                 alt="Preview"
                                 fill
                                 className="object-contain"
@@ -497,21 +579,8 @@ const Gallery = () => {
                               <label className="bg-[#154930] hover:bg-[#154930]/90 text-[#ECE3CE] font-medium py-2 px-4 rounded-lg transition-all duration-200 cursor-pointer flex items-center">
                                 <Replace className="mr-2 h-4 w-4" />
                                 Replace Image
-                                <input
-                                  type="file"
-                                  onChange={handleFileChange}
-                                  className="hidden"
-                                  accept="image/*"
-                                />
+                                <input type="file" onChange={handleFileChange} className="hidden" accept="image/*" />
                               </label>
-                              <button
-                                type="button"
-                                onClick={handleDeleteImage}
-                                className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 flex items-center"
-                              >
-                                <Trash2 className="mr-2 h-4 w-4" />
-                                Remove Image
-                              </button>
                             </div>
                           )}
 
@@ -519,10 +588,7 @@ const Gallery = () => {
                             <div className="flex justify-center mt-4">
                               <button
                                 type="button"
-                                onClick={() => {
-                                  setFile(null);
-                                  setImagePreview(null);
-                                }}
+                                onClick={handleRemoveSelectedImage}
                                 className="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 flex items-center"
                               >
                                 <X className="mr-2 h-4 w-4" />
@@ -557,12 +623,8 @@ const Gallery = () => {
                           <div className="space-y-4">
                             <Upload className="h-12 w-12 text-[#154930]/50 mx-auto" />
                             <div>
-                              <p className="text-[#3A4D39] font-medium">
-                                Drop your image here, or click to browse
-                              </p>
-                              <p className="text-sm text-[#3A4D39]/60 mt-1">
-                                PNG, JPG, GIF up to 10MB
-                              </p>
+                              <p className="text-[#3A4D39] font-medium">Drop your image here, or click to browse</p>
+                              <p className="text-sm text-[#3A4D39]/60 mt-1">PNG, JPG, GIF up to 10MB</p>
                             </div>
                           </div>
                         </div>
@@ -572,10 +634,7 @@ const Gallery = () => {
                     {/* Form Fields */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label
-                          htmlFor="title"
-                          className="block text-[#3A4D39] font-medium text-sm"
-                        >
+                        <label htmlFor="title" className="block text-[#3A4D39] font-medium text-sm">
                           Title *
                         </label>
                         <input
@@ -591,10 +650,7 @@ const Gallery = () => {
                       </div>
 
                       <div className="space-y-2">
-                        <label
-                          htmlFor="category"
-                          className="block text-[#3A4D39] font-medium text-sm"
-                        >
+                        <label htmlFor="category" className="block text-[#3A4D39] font-medium text-sm">
                           Category *
                         </label>
                         <select
@@ -639,19 +695,13 @@ const Gallery = () => {
 
           {/* Artwork List */}
           <div>
-            <h2 className="text-2xl font-semibold text-[#3A4D39] mb-6">
-              Your Artworks ({artworks.length})
-            </h2>
+            <h2 className="text-2xl font-semibold text-[#3A4D39] mb-6">Your Artworks ({artworks.length})</h2>
 
             {artworks.length === 0 ? (
               <div className="text-center py-12">
                 <ImageIcon className="h-16 w-16 text-[#3A4D39]/30 mx-auto mb-4" />
-                <p className="text-[#3A4D39]/60 text-lg">
-                  No artworks uploaded yet
-                </p>
-                <p className="text-[#3A4D39]/50 text-sm">
-                  Click &quot;Upload Artwork&quot; to add your first piece
-                </p>
+                <p className="text-[#3A4D39]/60 text-lg">No artworks uploaded yet</p>
+                <p className="text-[#3A4D39]/50 text-sm">Click &quot;Upload Artwork&quot; to add your first piece</p>
               </div>
             ) : (
               <div className="space-y-4">
@@ -674,9 +724,7 @@ const Gallery = () => {
 
                       {/* Artwork Details */}
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-lg font-semibold text-[#3A4D39] truncate">
-                          {art.title}
-                        </h3>
+                        <h3 className="text-lg font-semibold text-[#3A4D39] truncate">{art.title}</h3>
                         <span className="inline-block bg-[#154930]/10 text-[#154930] text-sm px-3 py-1 rounded-full font-medium mt-1">
                           {art.category}
                         </span>
@@ -708,7 +756,7 @@ const Gallery = () => {
         </div>
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default Gallery;
+export default Gallery
