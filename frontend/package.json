@@ -14,7 +14,7 @@
     "cloudinary": "^2.6.0",
     "framer-motion": "^12.7.4",
     "lucide-react": "^0.475.0",
-    "next": "^15.1.6",
+    "next": "^15.3.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
