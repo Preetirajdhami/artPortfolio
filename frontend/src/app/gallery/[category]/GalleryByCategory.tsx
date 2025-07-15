@@ -61,7 +61,7 @@ const GalleryByCategory = ({ category }: { category: string }) => {
   }
 
   return (
-    <div className="bg-background min-h-screen px-4 py-8">
+    <div className="bg-background min-h-screen responsive-padding">
       <h2 className="text-3xl font-bold text-primary mb-8">{title}</h2>
 
       {/* Mobile Layout */}
@@ -97,27 +97,28 @@ const GalleryByCategory = ({ category }: { category: string }) => {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden lg:block">
-        <div className="grid grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
-          {images.map((image, i) => (
-            <div
-              key={image._id}
-              className="overflow-hidden rounded-lg shadow-lg"
-            >
-              <div className="relative w-full h-[400px]">
-                <Image
-                  src={image.url}
-                  alt={image.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                  priority={i === 0}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
+    {/* Desktop Masonry Layout */}
+<div className="hidden lg:block">
+  <div className="columns-2 xl:columns-3 2xl:columns-4 gap-6 space-y-6">
+    {images.map((image, i) => (
+      <div
+        key={image._id}
+        className="break-inside-avoid overflow-hidden rounded-lg shadow-lg"
+      >
+        <Image
+          src={image.url}
+          alt={image.title}
+          width={600} // or set a fixed width if you prefer
+          height={0}
+          className="w-full h-auto object-cover rounded"
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          priority={i === 0}
+        />
       </div>
+    ))}
+  </div>
+</div>
+
     </div>
   );
 };

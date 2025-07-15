@@ -661,11 +661,11 @@ const Gallery = () => {
                           required
                           className="w-full px-4 py-3 border border-[#154930]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#154930] focus:border-[#154930] text-[#3A4D39] bg-white"
                         >
-                          <option value="">Select category</option>
-                          <option value="Graphite & Charcoal">Graphite</option>
+                          
+                          <option value="Graphite & Charcoal">Graphite & Charcoal</option>
                           <option value="Watercolor">Watercolor</option>
                           <option value="Acrylic">Acrylic</option>
-                          <option value="Pastel">Pastel</option>
+                          
                         </select>
                       </div>
                     </div>

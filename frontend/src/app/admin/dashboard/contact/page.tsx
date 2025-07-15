@@ -91,9 +91,12 @@ const ManageContacts = () => {
     }
   }
 
-  const getInitials = (firstName: string, lastName: string) => {
-    return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase()
-  }
+  const getInitials = (firstName?: string, lastName?: string) => {
+  const firstInitial = firstName?.charAt(0) || "";
+  const lastInitial = lastName?.charAt(0) || "";
+  return `${firstInitial}${lastInitial}`.toUpperCase() || "NA";
+};
+
 
   const handleReply = (email: string) => {
     window.location.href = `mailto:${email}`

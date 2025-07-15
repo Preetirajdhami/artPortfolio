@@ -104,22 +104,22 @@ const Navbar: React.FC = () => {
                 </div>
 
                 {/* Dropdown */}
-                <div className="absolute left-1/2 -translate-x-1/2  hidden group-hover:flex flex-col bg-white shadow-lg rounded-md min-w-[200px] z-50 py-2 transition duration-200 ease-in-out group-hover:transition-delay-300">
+                <div className="absolute left-1/2 -translate-x-1/2  hidden group-hover:flex flex-col bg-white/80 shadow-lg rounded-md min-w-[200px] z-50 py-2 transition duration-200 ease-in-out group-hover:transition-delay-300">
                   <Link
                     href="/gallery/graphite-and-charcoal"
-                    className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white"
                   >
                     Graphite & Charcoal
                   </Link>
                   <Link
                     href="/gallery/watercolor"
-                    className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white"
                   >
                     Watercolor
                   </Link>
                   <Link
                     href="/gallery/acrylic"
-                    className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white"
                   >
                     Acrylic
                   </Link>
