@@ -17,9 +17,14 @@ const GalleryByCategory = ({ category }: { category: string }) => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const formattedCategory = category
-      .replace(/-/g, " ")
-      .replace(/\b\w/g, (l) => l.toUpperCase());
+    const categoryMap: Record<string, string> = {
+      "graphite-and-charcoal": "Graphite & Charcoal",
+      watercolor: "Watercolor",
+      acrylic: "Acrylic",
+      pastel: "Pastel",
+    };
+
+    const formattedCategory = categoryMap[category.toLowerCase()] || category;
 
     const fetchGallery = async () => {
       try {
@@ -97,28 +102,27 @@ const GalleryByCategory = ({ category }: { category: string }) => {
       </div>
 
       {/* Desktop Layout */}
-    {/* Desktop Masonry Layout */}
-<div className="hidden lg:block">
-  <div className="columns-2 xl:columns-3 2xl:columns-4 gap-6 space-y-6">
-    {images.map((image, i) => (
-      <div
-        key={image._id}
-        className="break-inside-avoid overflow-hidden rounded-lg shadow-lg"
-      >
-        <Image
-          src={image.url}
-          alt={image.title}
-          width={600} // or set a fixed width if you prefer
-          height={0}
-          className="w-full h-auto object-cover rounded"
-          sizes="(min-width: 1024px) 50vw, 100vw"
-          priority={i === 0}
-        />
+      {/* Desktop Masonry Layout */}
+      <div className="hidden lg:block">
+        <div className="columns-2 xl:columns-3 2xl:columns-4 gap-6 space-y-6">
+          {images.map((image, i) => (
+            <div
+              key={image._id}
+              className="break-inside-avoid overflow-hidden rounded-lg shadow-lg"
+            >
+              <Image
+                src={image.url}
+                alt={image.title}
+                width={600} // or set a fixed width if you prefer
+                height={0}
+                className="w-full h-auto object-cover rounded"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                priority={i === 0}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    ))}
-  </div>
-</div>
-
     </div>
   );
 };
