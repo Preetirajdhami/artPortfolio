@@ -9,7 +9,6 @@ import {
   MapPin,
   Package,
   User,
-  
   Loader2,
 } from "lucide-react";
 
@@ -25,11 +24,13 @@ interface Commission {
   deadline: string;
   additionalInfo?: string;
   createdAt: string;
+  status: string;
 }
 
 const ManageOrders = () => {
   const [commissions, setCommissions] = useState<Commission[]>([]);
   const [loading, setLoading] = useState(true);
+  const [statusEditId, setStatusEditId] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchCommissions = async () => {
@@ -48,8 +49,10 @@ const ManageOrders = () => {
     fetchCommissions();
   }, []);
 
-  const getInitials = (firstName: string, lastName: string) => {
-    return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+  const getInitials = (firstName?: string, lastName?: string) => {
+    const firstInitial = firstName?.charAt(0) || "";
+    const lastInitial = lastName?.charAt(0) || "";
+    return `${firstInitial}${lastInitial}`.toUpperCase() || "NA";
   };
 
   const formatDate = (dateString: string) => {
@@ -61,12 +64,27 @@ const ManageOrders = () => {
   };
 
   const getSizeBadgeColor = (size: string) => {
-    switch (size.toLowerCase()) {
+    switch (size?.toLowerCase()) {
       case "small":
         return "bg-green-100 text-green-800";
       case "medium":
         return "bg-yellow-100 text-yellow-800";
       case "large":
+        return "bg-red-100 text-red-800";
+      default:
+        return "bg-gray-100 text-gray-800";
+    }
+  };
+
+  const getStatusBadgeColor = (status: string) => {
+    switch (status?.toLowerCase()) {
+      case "pending":
+        return "bg-blue-100 text-blue-800";
+      case "in progress":
+        return "bg-yellow-100 text-yellow-800";
+      case "completed":
+        return "bg-green-100 text-green-800";
+      case "cancelled":
         return "bg-red-100 text-red-800";
       default:
         return "bg-gray-100 text-gray-800";
@@ -79,6 +97,7 @@ const ManageOrders = () => {
         `https://artportfolio-backend.onrender.com/api/comissions/${id}/status`,
         { status }
       );
+
       setCommissions((prev) =>
         prev.map((commission) =>
           commission._id === id ? { ...commission, status } : commission
@@ -144,13 +163,23 @@ const ManageOrders = () => {
                         </div>
                       </div>
                     </div>
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-medium ${getSizeBadgeColor(
-                        commission.size
-                      )}`}
-                    >
-                      {commission.size}
-                    </span>
+                    <div className="flex items-center space-x-2">
+                      <span
+                        className={`px-3 py-1 rounded-full text-xs font-medium ${getSizeBadgeColor(
+                          commission.size
+                        )}`}
+                      >
+                        {commission.size}
+                      </span>
+                      <span
+                        className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusBadgeColor(
+                          commission.status
+                        )}`}
+                      >
+                        {commission.status?.charAt(0).toUpperCase() +
+                          commission.status?.slice(1) || "Unknown"}
+                      </span>
+                    </div>
                   </div>
 
                   {/* Details Grid */}
@@ -223,37 +252,57 @@ const ManageOrders = () => {
                       onClick={() =>
                         window.open(commission.portraitImage, "_blank")
                       }
-                      className="px-4 py-2 border border-[#154930]/20 text-[#154930] hover:bg-[#154930]/5 bg-transparent rounded-lg text-sm font-medium transition-colors"
+                      className={`px-4 py-2 border text-sm font-medium transition-colors rounded-lg ${
+                        commission.status?.toLowerCase() === "cancelled"
+                          ? "border-[#154930]/20 text-[#154930]/50 cursor-not-allowed"
+                          : "border-[#154930]/20 text-[#154930] hover:bg-[#154930]/5"
+                      }`}
+                      disabled={
+                        commission.status?.toLowerCase() === "cancelled"
+                      }
                     >
                       View Image
                     </button>
 
-                    {/* Right: Status Buttons */}
-                    <div className="flex space-x-2">
-                      <button
-                        onClick={() =>
-                          handleStatusUpdate(commission._id, "in progress")
-                        }
-                        className="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg text-sm font-medium transition-colors"
-                      >
-                        In Progress
-                      </button>
-                      <button
-                        onClick={() =>
-                          handleStatusUpdate(commission._id, "completed")
-                        }
-                        className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium transition-colors"
-                      >
-                        Completed
-                      </button>
-                      <button
-                        onClick={() =>
-                          handleStatusUpdate(commission._id, "cancelled")
-                        }
-                        className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-colors"
-                      >
-                        Cancel
-                      </button>
+                    {/* Right: Status or Actions */}
+                    <div className="relative text-right">
+                      {statusEditId === commission._id ? (
+                        <div className="flex flex-col space-y-2">
+                          {[
+                            "pending",
+                            "in progress",
+                            "completed",
+                            "cancelled",
+                          ].map((statusOption) => (
+                            <button
+                              key={statusOption}
+                              onClick={() => {
+                                handleStatusUpdate(
+                                  commission._id,
+                                  statusOption
+                                );
+                                setStatusEditId(null); // close dropdown
+                              }}
+                              className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                                commission.status === statusOption
+                                  ? "bg-gray-300 cursor-not-allowed"
+                                  : "bg-[#154930] text-[#ECE3CE] hover:bg-[#103d2c]"
+                              }`}
+                              disabled={commission.status === statusOption}
+                            >
+                              {statusOption.charAt(0).toUpperCase() +
+                                statusOption.slice(1)}
+                            </button>
+                          ))}
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => setStatusEditId(commission._id)}
+                          className="px-4 py-2 bg-[#154930] text-[#ECE3CE] rounded-lg hover:bg-[#103d2c] transition-colors text-sm font-medium"
+                        >
+                          Edit Status
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
