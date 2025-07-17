@@ -81,9 +81,6 @@ The easiest way to deploy is via [Vercel](https://vercel.com/). See [Next.js dep
 
 Contributions are welcome! Please fork the repo and submit a pull request. For major changes, open an issue first to discuss what you’d like to change.
 
-## License
-
-[Specify your license here, e.g., MIT.]
 
 ## Contact
 
