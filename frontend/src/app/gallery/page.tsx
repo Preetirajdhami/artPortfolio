@@ -58,7 +58,7 @@ const Gallery = () => {
   };
 
   return (
-    <div className="bg-background min-h-screen">
+    <div className="bg-background min-h-screen responsive-padding">
       <div className="mx-auto px-4 py-8">
         {Object.entries(galleryData).map(([category, items]) => (
           <section key={category} className="mb-16">

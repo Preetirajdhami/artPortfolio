@@ -1,8 +1,7 @@
 import GalleryClientWrapper from "./GalleryClientWrapper";
 
-export default async function Page(props: unknown) {
-  // Force cast props to correct shape to bypass type errors:
-  const { params } = props as { params: { category: string } };
+export default async function Page({ params }: { params: Promise<{ category: string }> }) {
+  const { category } = await params; // Await the params to access category
 
-  return <GalleryClientWrapper category={params.category} />;
+  return <GalleryClientWrapper category={category} />;
 }
