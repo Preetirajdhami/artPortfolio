@@ -1,8 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Preeti Arts Portfolio
+
+A modern, full-featured art portfolio built with [Next.js](https://nextjs.org), showcasing the works and commission process of Preeti Arts. This project features a public gallery, commission and contact forms, and an admin dashboard for managing artworks, commissions, and messages.
+
+## Features
+
+- **Beautiful Home Page:** Hero section, About, Skills, Mission & Values, and Testimonials.
+- **Gallery:** Browse artworks by category (Graphite & Charcoal, Watercolor, Acrylic, etc.).
+- **Commission Requests:** Submit custom art commission requests with file upload and details.
+- **Contact Form:** Reach out directly for inquiries.
+- **Admin Dashboard:** Secure login for managing gallery, commissions, and contact messages.
+- **Responsive Design:** Fully responsive and mobile-friendly.
+- **Social Links:** Instagram, Facebook, TikTok, and email.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js (v18+ recommended)
+- npm, yarn, pnpm, or bun
+
+### Installation
+
+```bash
+cd frontend
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+
+### Development
 
 ```bash
 npm run dev
@@ -14,23 +43,55 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [http://localhost:3000](http://localhost:3000) to view the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+### Linting
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run lint
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `src/app/` — Main app pages (home, gallery, commission, contact, admin)
+- `src/app/components/` — UI components (Navbar, Footer, Home sections, Dashboard sidebar, etc.)
+- `src/app/gallery/` — Gallery pages and category filtering
+- `src/app/commission/` — Commission request form and info
+- `src/app/contact/` — Contact form
+- `src/app/admin/` — Admin dashboard, login, and management pages
+- `public/` — Static assets (artwork images, icons, etc.)
 
-## Deploy on Vercel
+## Configuration
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **API Endpoints:** The frontend communicates with a backend API (see code for endpoints like `https://artportfolio-backend.onrender.com/api/...`). If you deploy your own backend, update these URLs accordingly.
+- **No environment variables are required for the frontend by default.**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+The easiest way to deploy is via [Vercel](https://vercel.com/). See [Next.js deployment docs](https://nextjs.org/docs/app/building-your-application/deploying) for more options.
+
+## Contribution
+
+Contributions are welcome! Please fork the repo and submit a pull request. For major changes, open an issue first to discuss what you’d like to change.
+
+## License
+
+[Specify your license here, e.g., MIT.]
+
+## Contact
+
+- **Instagram:** [@_preetiarts](https://www.instagram.com/_preetiarts?igsh=b3l5dHM4aWZvZmVu)
+- **Facebook:** [Your Profile](https://www.facebook.com/your-profile)
+- **TikTok:** [@pretti.rajdhami](https://www.tiktok.com/@pretti.rajdhami?_t=ZS-8xuP7k6Ifbe&_r=1)
+- **Email:** preetirajdhami2@gmail.com
+
+---
+
+© 2025 Preeti Arts. All Rights Reserved.
