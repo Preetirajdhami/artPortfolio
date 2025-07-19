@@ -65,7 +65,7 @@ const Gallery = () => {
             <h2 className="text-3xl font-bold text-primary mb-6">{category}</h2>
 
             {/* Mobile Layout */}
-            <div className="block lg:hidden">
+            <div className="block sm:hidden">
               <div className="relative">
                 <div
                   ref={(el) => {
