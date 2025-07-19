@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { BouncingDots } from "@/app/components/Home/Loader";
 
 type GalleryItem = {
   _id: string;
@@ -14,6 +15,8 @@ const GalleryByCategory = ({ category }: { category: string }) => {
   const [images, setImages] = useState<GalleryItem[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [title, setTitle] = useState("");
+  const [loading, setLoading] = useState(true);
+
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -27,6 +30,7 @@ const GalleryByCategory = ({ category }: { category: string }) => {
     const formattedCategory = categoryMap[category.toLowerCase()] || category;
 
     const fetchGallery = async () => {
+      setLoading(true);
       try {
         const res = await fetch(
           `https://artportfolio-backend.onrender.com/api/gallery`
@@ -41,6 +45,8 @@ const GalleryByCategory = ({ category }: { category: string }) => {
         setTitle(`${formattedCategory} Art`);
       } catch (error) {
         console.error("Failed to fetch images:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -57,7 +63,15 @@ const GalleryByCategory = ({ category }: { category: string }) => {
     }
   };
 
-  if (images.length === 0) {
+  if (loading) {
+   return (
+    <div className="flex items-center justify-center min-h-[60vh]">
+      <BouncingDots size="md" variant="primary" />
+    </div>
+  );
+  }
+
+  if (!loading && images.length === 0) {
     return (
       <div className="text-center p-20 text-xl">
         No images found in this category.
@@ -101,7 +115,6 @@ const GalleryByCategory = ({ category }: { category: string }) => {
         </div>
       </div>
 
-      
       {/* Desktop Masonry Layout */}
       <div className="hidden lg:block">
         <div className="columns-2 xl:columns-3 2xl:columns-4 gap-6 space-y-6">
