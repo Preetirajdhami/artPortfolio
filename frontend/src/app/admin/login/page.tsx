@@ -112,7 +112,7 @@ const AdminLogin = () => {
 
     try {
       const res = await axios.post("https://artportfolio-backend.onrender.com/api/admin/login", formData, {
-        timeout: 10000, // 10 second timeout
+        timeout: 10000, 
       })
 
       localStorage.setItem("adminToken", res.data.token)

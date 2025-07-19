@@ -101,7 +101,7 @@ const GalleryByCategory = ({ category }: { category: string }) => {
         </div>
       </div>
 
-      {/* Desktop Layout */}
+      
       {/* Desktop Masonry Layout */}
       <div className="hidden lg:block">
         <div className="columns-2 xl:columns-3 2xl:columns-4 gap-6 space-y-6">
