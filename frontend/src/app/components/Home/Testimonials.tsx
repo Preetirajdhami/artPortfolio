@@ -51,7 +51,7 @@ const Testimonials: React.FC = () => {
           {/* Left Arrow */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 md:-left-10 z-10 bg-primary text-white p-2 sm:p-3 rounded-full shadow-lg hover:bg-primary transition-all duration-300 transform hover:scale-110 focus:outline-none"
+            className="absolute -left-2 md:-left-10 z-10 bg-primary text-white p-2 sm:p-3 rounded-full shadow-lg hover:bg-primary transition-all duration-300 transform hover:scale-110 focus:outline-none"
             aria-label="Previous testimonial"
           >
             <IoIosArrowBack className="text-xl" />
@@ -157,7 +157,7 @@ const Testimonials: React.FC = () => {
           {/* Right Arrow */}
           <button
             onClick={nextSlide}
-            className="absolute right-0 md:-right-10 z-10 bg-primary text-white p-2 sm:p-3 rounded-full shadow-lg hover:bg-primary transition-all duration-300 transform hover:scale-110 focus:outline-none"
+            className="absolute -right-2  md:-right-10 z-10 bg-primary text-white p-2 sm:p-3 rounded-full shadow-lg hover:bg-primary transition-all duration-300 transform hover:scale-110 focus:outline-none"
             aria-label="Next testimonial"
           >
             <IoIosArrowForward className="text-xl" />
