@@ -1,7 +1,14 @@
+/* Import fonts from Google */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@500;700&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+
+/* Custom utilities */
 @layer utilities {
   .responsive-padding {
     @apply px-8 sm:px-12 md:px-16 lg:px-20 xl:px-24 2xl:px-52;
@@ -17,6 +24,16 @@
   }
 }
 
+/* Global font styles */
+html {
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Scrollbar hiding globally */
 html,
 body {
   overflow-x: hidden;
@@ -30,6 +47,3 @@ html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
 }
-
-
-
