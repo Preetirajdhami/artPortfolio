@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-
+import { BouncingDots } from "@/app/components/Home/Loader";
 
 type GalleryItem = {
   _id: string;
@@ -15,9 +15,11 @@ const Gallery = () => {
   const [galleryData, setGalleryData] = useState<{ [category: string]: GalleryItem[] }>({});
   const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: string]: number }>({});
   const scrollRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchGallery = async () => {
+      setLoading(true);
       try {
         const res = await fetch("https://artportfolio-backend.onrender.com/api/gallery");
         const data: GalleryItem[] = await res.json();
@@ -38,14 +40,14 @@ const Gallery = () => {
         });
         setCurrentImageIndex(initialIndexes);
       } catch (error) {
-        console.error("Failed to fetch gallery:", error);
+        console.error("Failed to fetch images:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchGallery();
   }, []);
-
-  
 
   const handleScroll = (category: string) => {
     const container = scrollRefs.current[category];
@@ -56,6 +58,25 @@ const Gallery = () => {
       setCurrentImageIndex((prev) => ({ ...prev, [category]: currentIndex }));
     }
   };
+
+  // Show loading indicator
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <BouncingDots size="md" variant="primary" />
+      </div>
+    );
+  }
+
+  // Show empty state if no images
+  const isEmpty = Object.keys(galleryData).length === 0;
+  if (!loading && isEmpty) {
+    return (
+      <div className="text-center p-20 text-xl">
+        No images found in this category.
+      </div>
+    );
+  }
 
   return (
     <div className="bg-background min-h-screen responsive-padding">
@@ -92,10 +113,6 @@ const Gallery = () => {
                     </div>
                   ))}
                 </div>
-
-               
-                
-                
 
                 {/* Page Indicator */}
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-60 text-white px-3 py-1 rounded-full text-sm">
