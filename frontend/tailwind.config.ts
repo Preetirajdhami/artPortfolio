@@ -7,15 +7,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'primary': '#154930',// mid green   
-             
-        'background': '#ECE3CE', //light beige
-        'text': '#3A4D39',     // dark green  
+        primary: '#154930',      // Mid green
+        background: '#ECE3CE',   // Light beige
+        text: '#3A4D39',         // Dark green
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],                // For body
+        serif: ['Playfair Display', 'serif'],         // For headings
       },
     },
   },
   plugins: [
-    require('tailwind-scrollbar'), // Add the scrollbar plugin
+    require('tailwind-scrollbar'), // Custom scrollbar plugin
   ],
 };
 
