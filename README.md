@@ -347,7 +347,7 @@ The backend uses JWT tokens for admin authentication:
 
 ## 🚀 Deployment
 
-### **Backend Deployment (Render/Heroku)**
+### **Backend Deployment (Render)**
 1. Set up environment variables in your hosting platform
 2. Configure MongoDB Atlas connection string
 3. Set up Cloudinary environment variables
