@@ -4,9 +4,9 @@ import Image from "next/image";
 const MissionAndValues: React.FC = () => {
   return (
     <div className="flex justify-center items-center h-[500px] px-4 sm:px-6 md:px-8">
-      <div className="bg-green-900 rounded-[30px] sm:rounded-[40px] md:rounded-[50px] p-6 sm:p-8 md:p-12 flex flex-col md:flex-row items-center w-full max-w-[300px] sm:max-w-[600px] md:max-w-[900px] lg:max-w-[1100px]">
+      <div className="bg-primary rounded-[30px] sm:rounded-[40px] md:rounded-[50px] p-6 sm:p-8 md:p-12 flex flex-col lg:flex-row items-center w-full max-w-[300px] sm:max-w-[600px] md:max-w-[900px] lg:max-w-[1100px]">
         <div className="relative w-40 h-40 sm:w-52 sm:h-52 md:w-64 md:h-64 mb-6 md:mb-0">
-          <div className="w-full h-full bg-green-800 rounded-full overflow-hidden">
+          <div className="w-full h-full rounded-full overflow-hidden">
             <Image
               src="/missionGoals/mission.jpg"
               alt="Mission and Values"

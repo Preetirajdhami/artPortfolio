@@ -105,7 +105,7 @@ const Gallery = () => {
             </div>
 
             {/* Desktop Layout */}
-            <div className="hidden lg:block">
+            <div className="hidden md:block">
               <div className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
                 {items.map((image, i) => (
                   <div
