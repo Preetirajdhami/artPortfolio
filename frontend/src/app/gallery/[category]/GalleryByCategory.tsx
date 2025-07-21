@@ -81,7 +81,7 @@ const GalleryByCategory = ({ category }: { category: string }) => {
 
   return (
     <div className="bg-background min-h-screen responsive-padding">
-      <h2 className="text-3xl font-bold text-primary mb-8">{title}</h2>
+      <h2 className="text-3xl font-bold font-serif text-primary mb-8">{title}</h2>
 
       {/* Mobile Layout */}
       <div className="block lg:hidden">
@@ -115,7 +115,6 @@ const GalleryByCategory = ({ category }: { category: string }) => {
         </div>
       </div>
 
-      {/* Desktop Masonry Layout */}
       <div className="hidden lg:block">
         <div className="columns-2 xl:columns-3 2xl:columns-4 gap-6 space-y-6">
           {images.map((image, i) => (

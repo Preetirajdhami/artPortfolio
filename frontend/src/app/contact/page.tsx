@@ -125,7 +125,7 @@ const Contact = () => {
           <div className="absolute inset-0 bg-black bg-opacity-30"></div>
         </div>
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white">
-          <h1 className="text-5xl md:text-6xl font-bold">Contact</h1>
+          <h1 className="text-5xl md:text-6xl font-serif font-bold">Contact</h1>
           <p className="text-xl md:text-2xl mt-4">Get in Touch with Preeti Arts</p>
         </div>
       </div>
@@ -133,7 +133,7 @@ const Contact = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 text-primary">
           <div>
-            <h2 className="text-3xl font-bold mb-6">CONTACT</h2>
+            <h2 className="text-3xl font-bold font-serif mb-6">CONTACT</h2>
             <p className="text-lg mb-6 text-justify">
               Preeti Arts appreciates hearing from people all over the world who enjoy her work and welcomes any
               questions or enquiries.
