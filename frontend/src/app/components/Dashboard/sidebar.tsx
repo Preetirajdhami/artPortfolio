@@ -44,7 +44,7 @@ const AdminSidebar = () => {
   return (
     <>
       {/* Mobile Header */}
-      <div className="lg:hidden fixed w-full top-0 left-0 z-50 flex items-center justify-between px-4 py-3 bg-[#154930] shadow-lg">
+      <div className="lg:hidden fixed w-full top-0 left-0 z-50 flex items-center justify-between px-4 py-3 bg-primary shadow-lg">
         <div className="flex items-center space-x-2">
           <Palette className="h-6 w-6 text-[#ECE3CE]" />
           <h2 className="text-lg font-bold text-[#ECE3CE]">Art Admin</h2>

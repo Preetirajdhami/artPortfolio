@@ -180,15 +180,15 @@ const Commission = () => {
           <h3 className="text-2xl mt-8 mb-4">COMMISSION SUBJECTS</h3>
           <p className="text-lg mb-6">
             Reasons for commissioning an artwork are many and varied. Preeti Arts works closely and collaboratively with
-            clients and collectors to bring their vision to life in his unique aesthetic, recognisable style and
-            interpretation. Commissions focussing on any of the subjects and themes reflected in his repertoire are
+            clients and collectors to bring their vision to life in her unique aesthetic, recognisable style and
+            interpretation. Commissions focussing on any of the subjects and themes reflected in her repertoire are
             welcome.
           </p>
 
           <h3 className="text-2xl mt-8 mb-4">MATERIALS</h3>
           <p className="text-lg mb-6">
             Preeti Arts works exclusively with the finest, professional quality artist&apos;s materials. Black and white
-            works are completed with graphite, charcoal and ink. Colour works are completed with graphite and
+            works are completed with graphite and charcoal. Colour works are completed with graphite and
             watercolor.
           </p>
 
@@ -214,7 +214,7 @@ const Commission = () => {
                 </tr>
                 <tr>
                   <td className="px-4 py-2 border">A4 (29.7 x 42 cm)</td>
-                  <td className="px-4 py-2 border">Rs. 2000</td>
+                  <td className="px-4 py-2 border">Rs. 2500</td>
                 </tr>
                 <tr>
                   <td className="px-4 py-2 border">A3 (42 x 59.4 cm)</td>
@@ -254,7 +254,7 @@ const Commission = () => {
               <p className="text-lg">
                 When ready, please complete and submit the enquiry form below, describing your ideas for the artwork in
                 as much detail as possible and attaching any images (if appropriate). Once this information is received,
-                Preeti Arts will contact you at his earliest convenience to start discussing your commission.
+                Preeti Arts will contact you at her earliest convenience to start discussing your commission.
               </p>
             </div>
 
