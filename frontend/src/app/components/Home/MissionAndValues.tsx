@@ -19,7 +19,7 @@ const MissionAndValues: React.FC = () => {
 
         <div className="md:ml-16 text-white max-w-xl text-center md:text-left">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif mb-4 sm:mb-6">
-            Mission Values & Goal
+            Mission Values and Goal
           </h2>
 
           <p className="mb-6 sm:mb-8 md:mb-10 text-xs sm:text-sm">

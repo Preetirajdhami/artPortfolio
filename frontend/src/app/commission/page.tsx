@@ -162,7 +162,7 @@ const Commission = () => {
 
         {/* Content on top of the image */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white">
-          <h1 className="text-5xl md:text-6xl font-bold">Commission</h1>
+          <h1 className="text-5xl md:text-6xl font-serif font-bold">Commission</h1>
           <p className="text-xl md:text-2xl mt-4">Custom Artwork Tailored to Your Vision</p>
         </div>
       </div>
@@ -170,7 +170,7 @@ const Commission = () => {
       {/* Content Section */}
       <div className="container text-justify mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto text-primary">
-          <h2 className="text-3xl font-bold mb-6">COMMISSION</h2>
+          <h2 className="text-3xl font-bold font-serif mb-6">COMMISSION</h2>
           <p className="text-lg mb-6">
             Commissioning an original artwork is a personal and meaningful experience, and an opportunity to own a
             custom, one-of-a-kind piece of art. Preeti Arts is pleased to be able to share her passion professionally
@@ -180,15 +180,15 @@ const Commission = () => {
           <h3 className="text-2xl mt-8 mb-4">COMMISSION SUBJECTS</h3>
           <p className="text-lg mb-6">
             Reasons for commissioning an artwork are many and varied. Preeti Arts works closely and collaboratively with
-            clients and collectors to bring their vision to life in his unique aesthetic, recognisable style and
-            interpretation. Commissions focussing on any of the subjects and themes reflected in his repertoire are
+            clients and collectors to bring their vision to life in her unique aesthetic, recognisable style and
+            interpretation. Commissions focussing on any of the subjects and themes reflected in her repertoire are
             welcome.
           </p>
 
           <h3 className="text-2xl mt-8 mb-4">MATERIALS</h3>
           <p className="text-lg mb-6">
             Preeti Arts works exclusively with the finest, professional quality artist&apos;s materials. Black and white
-            works are completed with graphite, charcoal and ink. Colour works are completed with graphite and
+            works are completed with graphite and charcoal. Colour works are completed with graphite and
             watercolor.
           </p>
 
@@ -214,7 +214,7 @@ const Commission = () => {
                 </tr>
                 <tr>
                   <td className="px-4 py-2 border">A4 (29.7 x 42 cm)</td>
-                  <td className="px-4 py-2 border">Rs. 2000</td>
+                  <td className="px-4 py-2 border">Rs. 2500</td>
                 </tr>
                 <tr>
                   <td className="px-4 py-2 border">A3 (42 x 59.4 cm)</td>
@@ -254,7 +254,7 @@ const Commission = () => {
               <p className="text-lg">
                 When ready, please complete and submit the enquiry form below, describing your ideas for the artwork in
                 as much detail as possible and attaching any images (if appropriate). Once this information is received,
-                Preeti Arts will contact you at his earliest convenience to start discussing your commission.
+                Preeti Arts will contact you at her earliest convenience to start discussing your commission.
               </p>
             </div>
 

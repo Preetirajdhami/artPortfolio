@@ -1,12 +1,9 @@
-/* Import fonts from Google */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@500;700&display=swap');
-
+/* Import fonts from Google — must be at the top */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
 
 /* Custom utilities */
 @layer utilities {
@@ -26,12 +23,10 @@
 
 /* Global font styles */
 html {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', serif;
-}
+
 
 /* Scrollbar hiding globally */
 html,

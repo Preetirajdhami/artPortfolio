@@ -4,7 +4,7 @@ import Image from "next/image"
 const AboutSection: React.FC = () => {
   return (
     <section className="py-8 sm:py-12 md:py-16 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto mt-16 sm:mt-24 md:mt-36">
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center mb-8 sm:mb-12">About Me</h2>
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-semibold text-center mb-8 sm:mb-12">About Me</h2>
 
       <div className="relative">
         <div className="flex flex-col md:flex-row items-center md:items-stretch">
@@ -25,7 +25,7 @@ const AboutSection: React.FC = () => {
                           mt-4 sm:mt-[-40px] md:mt-0 md:ml-auto"
           >
             <div className="md:pl-[calc(33%-30px)] lg:pl-[calc(33%-10px)]">
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-light mb-4 sm:mb-6 md:mb-8">My Artistic Journey</h3>
+              <h3 className="text-2xl font-serif sm:text-3xl md:text-4xl font-light mb-4 sm:mb-6 md:mb-8">My Artistic Journey</h3>
 
               <div className="space-y-4 sm:space-y-6 md:space-y-8">
                 <div className="flex items-start">

@@ -193,10 +193,10 @@ const AdminDashboard = () => {
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-[#3A4D39] mb-2">
+            <h1 className="text-3xl font-bold text-primary mb-2">
               Dashboard Overview
             </h1>
-            <p className="text-[#3A4D39]/70">
+            <p className="text-text/70">
               Welcome back! Here&apos;s what&apos;s happening with your art
               portfolio.
             </p>
@@ -221,7 +221,7 @@ const AdminDashboard = () => {
                     </div>
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-[#3A4D39] mb-1">
+                    <p className="text-2xl font-bold text-primary mb-1">
                       {card.value}
                     </p>
                     <p className="text-[#3A4D39]/60 text-sm">{card.title}</p>
@@ -237,12 +237,12 @@ const AdminDashboard = () => {
             <div className="lg:col-span-2">
               <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-xl p-6">
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-semibold text-[#3A4D39]">
+                  <h2 className="text-xl font-semibold text-primary">
                     Recent Activity
                   </h2>
                   <Link
                     href="/admin/activities"
-                    className="text-[#154930] hover:text-[#154930]/80 text-sm font-medium flex items-center"
+                    className="text-primary hover:text-primary/80 text-sm font-medium flex items-center"
                   >
                     View All
                     <ArrowUpRight className="h-4 w-4 ml-1" />
@@ -301,13 +301,13 @@ const AdminDashboard = () => {
             <div className="space-y-6">
               {/* Quick Actions */}
               <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-xl p-6">
-                <h2 className="text-xl font-semibold text-[#3A4D39] mb-4">
+                <h2 className="text-xl font-semibold text-primary mb-4">
                   Quick Actions
                 </h2>
                 <div className="space-y-3">
                   <Link href="/admin/dashboard/comission" passHref>
                     <button
-                      className="w-full bg-[#154930] hover:bg-[#154930]/90 text-[#ECE3CE] py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center"
+                      className="w-full bg-primary hover:bg-[#154930]/90 text-[#ECE3CE] py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center"
                       aria-label="Create new commission"
                     >
                       <Package className="h-4 w-4 mr-2" />
@@ -316,7 +316,7 @@ const AdminDashboard = () => {
                   </Link>
                   <Link href="/admin/dashboard/gallery" passHref>
                     <button
-                      className="w-full border border-[#154930]/20 text-[#154930] hover:bg-[#154930]/5 py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center"
+                      className="w-full border border-[#154930]/20 text-primary hover:bg-[#154930]/5 py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center"
                       aria-label="Upload new artwork"
                     >
                       <BarChart3 className="h-4 w-4 mr-2" />
@@ -325,7 +325,7 @@ const AdminDashboard = () => {
                   </Link>
                   <Link href="/admin/dashboard/contact" passHref>
                     <button
-                      className="w-full border border-[#154930]/20 text-[#154930] hover:bg-[#154930]/5 py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center"
+                      className="w-full border border-[#154930]/20 text-primary hover:bg-[#154930]/5 py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center"
                       aria-label="View messages"
                     >
                       <MessageSquare className="h-4 w-4 mr-2" />
